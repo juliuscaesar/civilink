@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  .container
+    br
+    ol.breadcrumb
+      li #[a(href='/events') Events]
+      li.active Demonstration for NEU Adjunct Professors
+
+    .container
+      .row
+        .col-md-8
+          h3 Demonstration for NEU Adjunct Professors
+          p 
+            | Tuesday Feburary 13, 2016
+            br
+            | Centennial Common
+        .col-md-2
+          br
+          a.btn.btn-primary.btn-md(href='#', role='button') Attend event
+      .row
+        .col-md-1
+          center
+            h4
+              | #[a(href='#') 55]
+            small interested
+        .col-md-1
+          center
+            h4
+              | #[a(href='#') 14]
+            small going
+        .col-md-1
+          center
+            h4
+              | #[a(href='#') 85]
+            small invited
+    br
+    ol.breadcrumb
+      li.active Causes: #[a(href='#') education], #[a(href='#') labor]
+
+    hr
+    h4 News

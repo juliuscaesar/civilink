@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .container
+    br
+    ol.breadcrumb
+      li #[a(href='/orgs') Organizations]
+      li.active People Who Read Books To Blind Children
+
+    .container
+      .row
+        .col-md-8
+          h3 People Who Read Books To Blind Children
+          p Boston, MA
+        .col-md-2
+          br
+          a.btn.btn-primary.btn-md(href='#', role='button') Become a supporter
+      .row
+        .col-md-1
+          center
+            h4
+              | #[a(href='#') 1]
+            small members
+        .col-md-1
+          center
+            h4
+              | #[a(href='#') 231k]
+            small supporters
+        .col-md-1
+          center
+            h4
+              | #[a(href='#') 1]
+            small requests
+    br
+    ol.breadcrumb
+      li.active Causes: #[a(href='#') education], #[a(href='#') children], #[a(href='#') disabilities]
+    hr
+    h4 Requests
+
+    hr
+    
+    .row
+      .col-xs-1
+        center
+          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*f_M5ML-WyMaxKedU.jpg')
+      .col-xs-9
+        a(href='/profile') Rob D.
+        small  made a request
+        p
+        p Donate books to my organization by clicking the get involved button! Once you actually do it I will confirm and you'll be rewarded the points!
+        p
+          b Rob is offering 250 points!
+        a.btn.btn-primary.btn-md(href='#', role='button') Get involved
+
+    hr
+    h4 News
