@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET Events page. */
+/* GET Boston page. */
 router.get('/', function(req, res, next) {
-  res.render('events', { title: 'Events - ', user: req.user });
+  res.redirect('/dashboard');
 });
 
 module.exports = router;

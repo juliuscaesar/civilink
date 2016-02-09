@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .container
+    br
+    ol.breadcrumb
+      li #[a(href='/community') Communities]
+      li #[a(href='/community/#{data.id}') #{data.name}]
+      li.active Create Idea
+
+    h4 Create Idea
+    form.form-horizontal(class='form-createidea', action='/idea/create-idea', method='POST')
+      .form-group
+        label.col-sm-2.control-label(for='title') Title
+        .col-sm-4
+          input#title.form-control(type='text', name='title', value='')
+        .col-sm-4
+          input#community.form-control(type='hidden', name='community', value='#{data.id}')
+      .form-group
+        label.col-sm-2.control-label(for='desc') Short description
+        .col-sm-4
+          textarea#desc.form-control(type='text', name='desc',  placeholder='')
+      .form-group
+       .col-sm-offset-2.col-sm-10
+          button.btn.btn-default(type='submit') Save
+
+    #message
+      if message
+        h1.text-center.error-message #{message}

@@ -3,27 +3,17 @@ extends layout
 block content
   .container
     br
-    h4 My Communities
+    h4 All Communities
     hr
-    .row
-      .col-sm-4.col-md-4
-        .thumbnail
-          img(src='...', alt='...')
-          .caption
-            a(href='#')
-              h5 Boston, MA
-            small 29,000 members
 
-      .col-sm-4.col-md-4
-        .thumbnail
-          img(src='...', alt='...')
-          .caption
-            a(href='#')
-              h5 Northeastern University
-            small 1,199 members
-      .col-sm-4.col-md-4
-        .thumbnail
-          .caption
-            h5 Options
-            small
-              a(href='#') Create Community
+    ul
+      each item in data
+        li
+          a(href='/community/#{item.id}') #{item.name}
+    hr
+    h4 Suggested Communities
+    hr
+
+    h4 Options
+    small
+      a(href='/community/create') Create Community

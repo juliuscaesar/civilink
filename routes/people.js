@@ -10,15 +10,10 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET /people/id */
-router.get('/:username', function(req, res, next) {
-  Users.findOne({ 'username' : req.params.username }, function (err, person) {
+router.get('/:id', function(req, res, next) {
+  Users.findById(req.params.id, function (err, post) {
     if (err) return next(err);
-    if (person == null) {
-      res.redirect('/dashboard');
-    }
-    else {
-      res.render('profile', { data: person, user: req.user });
-	}
+    res.json(post);
   });
 });
 

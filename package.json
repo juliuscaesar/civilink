@@ -27,6 +27,8 @@
     "morgan": "~1.6.1",
     "require-dot-file": "^0.4.0",
     "semantic-ui": "semantic-org/Semantic-UI#next",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {

@@ -3,18 +3,30 @@ extends layout
 block content
   .jumbotron
     .container
-      p
-        | Welcome to CiviLink, a social platform for community engagement.
-      p
-        a.btn.btn-primary.btn-lg(href='#', role='button') Sign up!
+      .row
+        .col-sm-9
+          p Welcome to CiviLink, a social platform for community engagement.
+        .col-sm-3
+          div.container
+            div.row
+              div
+                p.text-center.login-title Sign in
+                  div.account-wall
+                    form(class='form-signin', action='/login', method='POST')
+                      input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+                      input(type='password', name='password' class='form-control', placeholder='Password', required)
+                      button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
+                      span.clearfix
+                  br
+                  a(href='/sign-up', class='text-center') Create an account
+                  #message
+                  if message
+                    p.text-center.error-message #{message}
 
   .container
     .row.featurette
       .col-md-7
-        h4
-          | For college students 
         p
-          | Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
       .col-md-5
     
     hr.featurette-divider
@@ -22,19 +34,13 @@ block content
     .row.featurette
       .col-md-5
       .col-md-7
-        h4
-          | For non-profits 
         p
-          | Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
 
     hr.featurette-divider
 
     .row.featurette
       .col-md-7
-        h4
-          | For high school students 
         p
-          | Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
       .col-md-5
     
     hr.featurette-divider
@@ -42,9 +48,6 @@ block content
     .row.featurette
       .col-md-5
       .col-md-7
-        h4
-          | For everyone else
         p
-          | Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
 
     hr.featurette-divider
