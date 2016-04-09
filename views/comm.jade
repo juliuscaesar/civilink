@@ -1,57 +1,64 @@
 extends layout
 
 block content
-  .container
-    br
-    ol.breadcrumb
-      li #[a(href='/community') Communities]
-      li.active #{data.name}
+  br
+  ol.breadcrumb.bar-white
+    li #[a(href='/community') Communities]
+    li.active #{data.name}
+  .content-box
+    h3 #{data.name}
+    p #{data.desc}
+    p #{data.members.length} members
 
     .container
-      .row
-        .col-md-7
-          h3 #{data.name}
-          p #{data.desc}
-        .col-md-5
-          h4 Engagement by cause
-            small  (click to view)       
-      .row
+      if user
+        if ( user.communities.indexOf(data.id) != -1)
+          form.form-horizontal(class='form-leavecommunity', action='/community/#{data.id}/leave', method='POST')
+            .form-group
+              button.btn.btn-danger.btn-sm(type='submit') Leave community
+        else     
+          form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
+            .form-group
+              button.btn.btn-success.btn-sm(type='submit') Join community
+      
+  .content-box
+    h4 Get engaged
+    if user
+      if ( user.communities.indexOf(data.id) == -1)
+        p Join this community if you want to get engaged!
+      else
+        b
+          #[a(href='/community/#{data.id}/create-idea') Start a project] &middot; 
+          #[a(href='/community/#{data.id}/create-org') Create organization] 
+    else
+      p Log in if you want to get engaged!
 
-        .col-md-2
-          center
-            if ( user.communities.indexOf(data.id) != -1)
-              form.form-horizontal(class='form-leavecommunity', action='/community/#{data.id}/leave', method='POST')
-                .form-group
-                  button.btn.btn-danger.btn-sm(type='submit') Leave community
-            else     
-              form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
-                .form-group
-                  button.btn.btn-success.btn-sm(type='submit') Join community
+
         
-    hr
 
-    h4 events
-    
-    p
-      if ( user.communities.indexOf(data.id) != -1)
-        a(href='/community/#{data.id}/create-event') Plan event
-      else
-        p Join this community first in order to get involved and plan events.
-    h4 ideas
-    p
-      if ( user.communities.indexOf(data.id) != -1)
-        a(href='/community/#{data.id}/create-idea') Share idea
-      else
-        p Join this community first in order to share your own ideas.
+  .content-box
+    h4 Projects
+    each item in ideas
+      a(href="/idea/#{item.id}") 
+        b #{item.title}
+      p #{item.desc}
 
-    hr
+  .content-box
+    h4 Organizations
+    each item in orgs
+      a(href="/orgs/#{item.id}") 
+        b #{item.title}
+      p #{item.desc}
 
-    h4 Engagement stats
-    p Monthly requests fulfilled, points, etc. Charts and data!
-    h4 Members
-    h4 Community bulletin board
-    p Sort by causes and tags
-    h4 Get involved
-    p Sort by causes and tags
-    h4 Trending ideas
-    h4 Awesome people
+
+
+
+  //h4 Engagement stats
+  //p Monthly requests fulfilled, points, etc. Charts and data!
+ //h4 Members
+  //h4 Community bulletin board
+  //p Sort by causes and tags
+  //h4 Get involved
+  //p Sort by causes and tags
+  //h4 Trending ideas
+  //h4 Awesome people

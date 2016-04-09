@@ -1,27 +1,28 @@
 extends layout
 
 block content
-  .jumbotron
+  .content-box
     .container
       .row
-        .col-sm-9
-          p Welcome to CiviLink, a social platform for community engagement.
+        .col-sm-7
+          br
+          br
+          h4 Welcome to CiviLink, a social platform for community engagement.
         .col-sm-3
-          div.container
-            div.row
-              div
-                p.text-center.login-title Sign in
-                  div.account-wall
-                    form(class='form-signin', action='/login', method='POST')
-                      input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
-                      input(type='password', name='password' class='form-control', placeholder='Password', required)
-                      button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
-                      span.clearfix
-                  br
-                  a(href='/sign-up', class='text-center') Create an account
-                  #message
-                  if message
-                    p.text-center.error-message #{message}
+          .row
+            div
+              p.text-center.login-title Sign in
+                div.account-wall
+                  form(class='form-signin', action='/login', method='POST')
+                    input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+                    input(type='password', name='password' class='form-control', placeholder='Password', required)
+                    button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
+                    span.clearfix
+                br
+                a(href='/sign-up', class='text-center') Create an account
+                #message
+                if message
+                  p.text-center.error-message #{message}
 
   .container
     .row.featurette

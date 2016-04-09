@@ -1,61 +1,65 @@
 extends layout
 
 block content
-  .container
-    br
-    ol.breadcrumb
-      li #[a(href='/orgs') Organizations]
-      li.active People Who Read Books To Blind Children
+  br
+  ol.breadcrumb
+    li #[a(href='/community/#{OrgCommunity.id}') #{OrgCommunity.name}]
+    li Organizations
+    li.active #{data.title}
 
-    .container
-      .row
-        .col-md-8
-          h3 People Who Read Books To Blind Children
-          p Boston, MA
-        .col-md-2
-          br
-          a.btn.btn-primary.btn-md(href='#', role='button') Become a supporter
-      .row
-        .col-md-1
-          center
-            h4
-              | #[a(href='#') 1]
-            small members
-        .col-md-1
-          center
-            h4
-              | #[a(href='#') 231k]
-            small supporters
-        .col-md-1
-          center
-            h4
-              | #[a(href='#') 1]
-            small requests
-        .col-md-1
-          center
-            h4
-              | #[a(href='#') 0]
-            small awards
-    br
-    ol.breadcrumb
-      li.active Causes: #[a(href='#') education], #[a(href='#') children], #[a(href='#') disabilities]
-    hr
-    h4 Requests
-
-    hr
+  .content-box  
     
     .row
-      .col-xs-1
+      .col-md-8
+        h3 #{data.title}
+        p #{OrgCommunity.name}
+        p #{data.desc}
+    .row
+      .col-xs-2.col-md-1
         center
-          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*f_M5ML-WyMaxKedU.jpg')
-      .col-xs-9
-        a(href='/profile') Rob D.
-        small  made a request
-        p
-        p Donate books to my organization by clicking the get involved button! Once you actually do it I will confirm and you'll be rewarded the points!
-        p
-          b Rob is offering 250 points!
-        a.btn.btn-primary.btn-md(href='#', role='button') Get involved
+          h4
+            | #[a(href='#') #{data.members.length}]
+          small members
+      .col-xs-2.col-md-1
+        center
+          h4
+            | #[a(href='#') #{data.supporters.length}]
+          small supporters
+      .col-xs-2.col-md-1
+        center
+          h4
+            | #[a(href='#') #{data.requests.length}]
+          small requests
+      .col-xs-2.col-md-1
+        center
+          h4
+            | #[a(href='#') #{data.awards.length}]
+          small awards
+      .col-xs-4.col-md-3
+        br
+        if ( typeof user !== 'undefined')
+          if ( data.supporters.indexOf(user.id) != -1)
+            form.form-horizontal(class='form-removeorg', action='/orgs/#{data.id}/remove', method='POST')
+              .form-group
+                button.btn.btn-danger.btn-sm(type='submit') Remove me
+          else
+            form.form-horizontal(class='form-supportorg', action='/orgs/#{data.id}/support', method='POST')
+              .form-group
+                button.btn.btn-success.btn-sm(type='submit') Support
 
-    hr
-    h4 News
+  .content-box
+    h4 Members
+    .row
+      each item in membs
+        .col-sm-4.col-md-4
+          .thumbnail
+            .caption
+              a(href='/profile/#{item.username}') 
+                b #{item.firstName} #{item.lastName}
+
+
+  .content-box
+    h4 Requests
+
+
+// h4 News

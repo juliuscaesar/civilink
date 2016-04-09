@@ -3,6 +3,7 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Users = require('../models/Users.js');
+var Follow = require('../models/Follow.js');
 
 /* GET /people listing. */
 router.get('/', function(req, res, next) {
@@ -17,8 +18,26 @@ router.get('/:username', function(req, res, next) {
       res.redirect('/dashboard');
     }
     else {
-      res.render('profile', { data: person, user: req.user });
+      var userId = Users.find({ "username" : req.params.username})
+      var following = Follow.find({ "follower" : userId });
+      var followers = Follow.find({ "followee" : userId });
+
+      console.log("following: " + following)
+      res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, user: req.user, following: following, followers: followers });
 	}
+  });
+});
+
+/* Handle  POST */
+router.post('/:username/follow/:id', exports.update = function ( req, res ){
+  var newFollow = new Follow({
+    follower: req.user.id,
+    followee: req.params.id
+  })
+  console.log("NEWFOLLOW: " + newFollow)
+
+  newFollow.save( function ( err, user, count ){
+  res.redirect('/profile/' + req.params.username);
   });
 });
 

@@ -1,151 +1,35 @@
 extends layout
 
 block content
-  .container
-    br
-    h4 Welcome, #{user.firstName}!
-    hr
+  br
 
-    .well.well-sm
-      ul.nav.nav-tabs
-        li.active(role='presentation')
-          a(href='#') Write
-        li(role='presentation')
-          a(href='#') Idea
-        li(role='presentation')
-          a(href='#') Poll
-        li(role='presentation')
-          a(href='#') Request
-        li(role='presentation')
-          a(href='#') Event
-        li(role='presentation')
-          a(href='#') Petition
+  //.well.well-sm.bar-white
+  //  ul.nav.nav-tabs
+  //    li.active(role='presentation')
+  //      a(href='#') Write
+  //    li(role='presentation')
+  //      a(href='#') Idea
+  //    li(role='presentation')
+  //      a(href='#') Poll
+  //    li(role='presentation')
+  //      a(href='#') Request
+  //    li(role='presentation')
+  //      a(href='#') Event
+  //    li(role='presentation')
+  //      a(href='#') Petition
+  //
+  //textarea.form-control(rows='3')
+  //p
+  //a.btn.btn-primary.btn-md(href='#', role='button') Post
 
-      textarea.form-control(rows='3')
-      p
-      a.btn.btn-primary.btn-md(href='#', role='button') Post
-
-    hr
-
+  .content-box
     .row
-      .col-xs-1
+      .col-xs-3.col-md-2
         center
           img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*n7EgCvp_PrAR4WMW.jpg')
-      .col-xs-9
+      .col-xs-9.col-md-10
         a(href='/profile') Caesar N.
         small  shared an idea in #[a(href='#') Students at NEU]
         p
         p We should have monthly student flea markets at Centennial Common and give a portion of the profits to local food pantries.
         small #[a(href='/idea') View idea]
-
-    hr
-    
-    .row
-      .col-xs-1
-        center
-          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/1*eplSxfdcVPaTFRMbhXk3HA.jpeg')
-      .col-xs-9
-        a(href='/profile') Hillary C.
-        small  posted a poll in #[a(href='#') MA Democrats]
-        p
-        p You gonna vote for me? Cause I need this... being a grandma is so boring and I'm over it Chelsea's always like watch the baby and I'm like NO I wanna be president.
-        .radio
-          label
-            input#optionsRadios1(type='radio', name='hrcvote', value='yes', checked='')
-            | Yes
-        .radio
-          label
-            input#optionsRadios1(type='radio', name='hrcvote', value='no')
-            | No
-        a.btn.btn-primary.btn-md(href='#', role='button') Submit
-    
-    hr
-    
-    .row
-      .col-xs-1
-        center
-          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*o5IIJAv5kQiScvgv.png')
-      .col-xs-9
-        a(href='/profile') John G.
-        small  shared an event
-        p
-        p Here's an event you should go to.
-        br
-        .row
-          .col-xs-7
-            .thumbnail
-
-              .caption
-                a(href='/events')
-                  h5 Demonstration for NEU adjunct professors
-                small Come voice your support for Northeastern University's adjunct faculty.
-                hr
-                small Friday Jan 15, 2016 at Centennial Common
-
-     hr
-    
-    .row
-      .col-xs-1
-      .col-xs-9
-        h4 Public Opinion
-        p The following public opinion poll was sent to your Congressman #[a(href='#') Bob Smith]
-        br
-        .row
-          .col-xs-7
-            .thumbnail
-              b Should Congress vote to enact stricter gun control laws?
-              p
-              .progress
-                .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%') 40%
-              .progress
-                .progress-bar.progress-bar-danger(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 60%') 60%
-              small 13,000 votes
-
-    hr
-    .row
-      .col-xs-1
-          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*dd0HCakDOdjf95zD.jpeg')
-      .col-xs-9
-        a(href='/profile') Igor V.
-        small  wrote something
-        p
-        h4
-          b My Response to #SOTU
-        p Instead of offering serious solutions to keeping our nation safe and ensuring that every family has access to the American Dream, tonight we heard the political wish list of a lame duck president. I heard a President unconcerned with governing by Executive Order, and who will attempt to…
-        small #[a(href='/article') Read more…]
-
-    hr
-    .row
-      .col-xs-1
-        center
-          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*f_M5ML-WyMaxKedU.jpg')
-      .col-xs-9
-        a(href='/profile') Rob D.
-        small  with #[a(href='/orgs') People Who Read Books To Blind Children] made a request
-        p
-        p Donate books to my organization by clicking the get involved button! Once you actually do it I will confirm and you'll be rewarded the points!
-        p
-          b Rob is offering 250 points!
-        a.btn.btn-primary.btn-md(href='#', role='button') Get involved
-
-    hr
-    .row
-      .col-xs-1
-        center
-          img.img-circle(src='https://cdn-images-1.medium.com/fit/c/65/65/0*GEU_mNU28hDrVKQm.jpg')
-      .col-xs-9
-        a(href='/profile') Sandra K.
-        small  started a petition
-        h4
-          b Recall Governor Baker!
-        small Support:
-        br
-        img.img-circle(src='https://cdn-images-1.medium.com/fit/c/30/30/0*GEU_mNU28hDrVKQm.jpg') 
-        img.img-circle(src='https://cdn-images-1.medium.com/fit/c/30/30/0*dd0HCakDOdjf95zD.jpeg') 
-        img.img-circle(src='https://cdn-images-1.medium.com/fit/c/30/30/0*o5IIJAv5kQiScvgv.png') 
-        img.img-circle(src='https://cdn-images-1.medium.com/fit/c/30/30/0*f_M5ML-WyMaxKedU.jpg')
-        p
-        p 
-          small #[a(href='/petition') View petition…]
-
-        

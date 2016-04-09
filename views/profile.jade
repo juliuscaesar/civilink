@@ -1,60 +1,57 @@
 extends layout
 
 block content
-  .container
-    br
+  .content-box
     .row
       .col-md-3
-        center
-          br
-          br
-          br
-          | AVATAR
-      .col-md-6
+
+      .col-md-9
         h3 #{data.firstName} #{data.lastName}
           small    @#{data.username}
         p #{data.bio}
         p #{data.location} 
           if data.location
             &middot; #{data.occ} at #{data.occplace}
-      .col-md-3
-        h4 Engagement
-        p Pie chart goes here
-    .row
-      .col-md-3
-      .col-md-1
-        center
-          h4
-            | #[a(href='#') #{data.points}]
-          small points
-      .col-md-1
-        center
-          h4
-            | #[a(href='#') #{data.followers}]
-          small followers
-      .col-md-1
-        center
-          h4
-            | #[a(href='#') #{data.following}]
-          small following
-      .col-md-1
-        center
-          h4
-            | #[a(href='#') #{data.communities.length}]
-          small communities
-      .col-md-2
-        br
-        center
-          a.btn.btn-primary.btn-sm(href='#', role='button') Follow
+      
+        .row
+          .col-xs-2.col-md-1
+            center
+              h4
+                | #[a(href='#') #{data.points}]
+              small points
+          .col-xs-2.col-md-1
+            center
+              h4
+                | #[a(href='#') #{followers.length}]
+              small followers
+          .col-xs-2.col-md-1
+            center
+              h4
+                | #[a(href='#') #{following}]
+              small following
+          .col-xs-2.col-md-1
+            center
+              h4
+                | #[a(href='#') #{data.communities.length}]
+              small communities
+          .col-xs-4.col-md-2
+            br
+            center
+              if ( typeof user !== 'undefined' )
+                  form.form-horizontal(class='form-attentevent', action='/profile/#{data.username}/follow/#{data.id}', method='POST')
+                    .form-group
+                      button.btn.btn-success.btn-sm(type='submit') Follow
 
-    br
-    ol.breadcrumb
-      li.active Causes: #{data.causes}
-    h4 Hours Volunteered
-      small  (verified, total)
-    h4 Events Organized
-      small  (also attended)
-    h4 Progress of Ideas
-    h4 Requests feed
-    h4 Articles
-    h4 Most active orgs
+  .content-box
+    h4 Activity
+
+    //ol.breadcrumb
+    //  li.active Causes: #{data.causes}
+    //h4 Hours Volunteered
+    //  small  (verified, total)
+    //h4 Events Organized
+    //  small  (also attended)
+    //h4 Progress of Ideas
+    //h4 Requests feed
+    //h4 Articles
+    //h4 Most active orgs

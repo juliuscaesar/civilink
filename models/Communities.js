@@ -6,7 +6,8 @@ var communitySchema = new Schema({
   name: String,
   creator: {type: Schema.ObjectId, ref: 'Users'},
   members: [{type: Schema.ObjectId, ref: 'Users'}],
-  ideas: [{type: Schema.ObjectId, ref: 'Ideas'}]
+  ideas: [{type: Schema.ObjectId, ref: 'Ideas'}],
+  orgs: [{type: Schema.ObjectId, ref: 'Orgs'}]
 });
 
 

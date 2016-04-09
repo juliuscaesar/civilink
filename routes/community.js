@@ -3,6 +3,9 @@ var router = express.Router();
 
 var Communities = require('../models/Communities.js');
 var Users = require('../models/Users.js');
+var Events = require('../models/Events.js');
+var Ideas = require('../models/Ideas.js');
+var Orgs = require('../models/Orgs.js');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -17,7 +20,7 @@ var isAuthenticated = function (req, res, next) {
 /* GET community page. */
 router.get('/', isAuthenticated, function(req, res, next) {
 	Communities.find({}, function(err, data){
-		res.render('community', { title: 'Community - ', user: req.user, data: data });
+		res.render('community', { title: 'Communities - ', user: req.user, data: data });
 	})
 });
 
@@ -33,6 +36,13 @@ router.get('/:id/create-idea', isAuthenticated, function(req, res, next) {
 	})
 });
 
+/* GET community page. */
+router.get('/:id/create-org', isAuthenticated, function(req, res, next) {
+	Communities.findById(req.params.id, function(err, data){
+		res.render('create-org', { title: 'Create Organization - ', user: req.user, data: data });
+	})
+});
+
 /* GET /community/id */
 router.get('/:id', function(req, res, next) {
 	Communities.findById(req.params.id, function (err, commun) {
@@ -41,7 +51,17 @@ router.get('/:id', function(req, res, next) {
 			res.redirect('/dashboard');
 		}
 		else {
-			res.render('comm', {data: commun, user: req.user });
+
+		  Ideas.find({
+            '_id': { $in: commun.ideas }
+          }, function(err, ideaList){
+            Orgs.find({
+              '_id': { $in: commun.orgs }
+            }, function(err, orgList){
+              res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user, ideas: ideaList, orgs: orgList});
+            });
+          });	
+		    
 		}
 	});
 });
@@ -56,6 +76,15 @@ router.post('/:id/join', exports.update = function ( req, res ){
         	console.log(err);
    		}
 	);
+
+	Communities.findByIdAndUpdate(
+		req.params.id,
+		{ "$addToSet" : { "members" : req.user.id } },
+		{ upsert : true},
+		function(err, model) {
+        	console.log(err);
+   		}
+	);
 	res.redirect('/community/' + req.params.id);
 });
 
@@ -64,6 +93,14 @@ router.post('/:id/leave', exports.update = function ( req, res ){
 	Users.findByIdAndUpdate(
 		req.user.id,
 		{ "$pull" : { "communities" : req.params.id } },
+		function(err, model) {
+        	console.log(err);
+   		}
+	);
+
+	Communities.findByIdAndUpdate(
+		req.params.id,
+		{ "$pull" : { "members" : req.user.id } },
 		function(err, model) {
         	console.log(err);
    		}

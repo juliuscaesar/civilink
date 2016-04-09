@@ -1,22 +1,21 @@
 extends layout
 
 block content
-  .container
-    br
-    h4 Create Community
-    form.form-horizontal(class='form-createcommunity', action='/create-community', method='POST')
-      .form-group
-        label.col-sm-2.control-label(for='name') Name
-        .col-sm-4
-          input#name.form-control(type='text', name='name', value='')
-      .form-group
-        label.col-sm-2.control-label(for='desc') Description
-        .col-sm-4
-          textarea#desc.form-control(type='text', name='desc',  placeholder='')
-      .form-group
-       .col-sm-offset-2.col-sm-10
-          button.btn.btn-default(type='submit') Save
+  br
+  h4 Create Community
+  form.form-horizontal(class='form-createcommunity', action='/create-community', method='POST')
+    .form-group
+      label.col-sm-2.control-label(for='name') Name
+      .col-sm-4
+        input#name.form-control(type='text', name='name', value='')
+    .form-group
+      label.col-sm-2.control-label(for='desc') Description
+      .col-sm-4
+        textarea#desc.form-control(type='text', name='desc',  placeholder='')
+    .form-group
+     .col-sm-offset-2.col-sm-10
+        button.btn.btn-default(type='submit') Save
 
-    #message
-      if message
-        h1.text-center.error-message #{message}
+  #message
+    if message
+      h1.text-center.error-message #{message}

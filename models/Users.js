@@ -13,8 +13,6 @@ var userSchema = new Schema({
   occ: String,
   occplace: String,
   points: { type: Number, default: 0 },
-  followers: { type: Number, default: 0 },
-  following: { type: Number, default: 0 },
   causes: [String],
   communities: [{type: Schema.ObjectId, ref: 'Communities'}],
 });

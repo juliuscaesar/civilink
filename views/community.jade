@@ -1,19 +1,22 @@
 extends layout
 
 block content
-  .container
-    br
-    h4 All Communities
-    hr
+  br
 
-    ul
-      each item in data
-        li
-          a(href='/community/#{item.id}') #{item.name}
-    hr
-    h4 Suggested Communities
-    hr
+  .content-box
+    h4 My Communities
+    each item in data
+      if (user.communities.indexOf(item.id) != -1)
+        a(href='/community/#{item.id}') 
+          b #{item.name}
+        p #{item.desc}
+    if (user.communities.length == 0) 
+      p You aren't in any communities yet... Join one so you can get started!
 
-    h4 Options
-    small
-      a(href='/community/create') Create Community
+  .content-box
+    h4 More Communities
+    each item in data
+      if (user.communities.indexOf(item.id) == -1)
+        a(href='/community/#{item.id}') 
+          b #{item.name}
+        p #{item.desc}

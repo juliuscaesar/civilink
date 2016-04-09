@@ -5,10 +5,10 @@ block content
   ol.breadcrumb
     li #[a(href='/community') Communities]
     li #[a(href='/community/#{data.id}') #{data.name}]
-    li.active Create Idea
+    li.active Create Organization
 
-  h4 Create Idea
-  form.form-horizontal(class='form-createidea', action='/idea/create-idea', method='POST')
+  h4 Create Organization
+  form.form-horizontal(class='form-createorg', action='/orgs/create-org', method='POST')
     .form-group
       label.col-sm-2.control-label(for='title') Title
       .col-sm-4

@@ -1,60 +1,59 @@
 doctype html
 html
-  head
-    title= title + 'CiviLink'
-    script(type='text/javascript', src='/javascripts/jquery.js')
-    script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-    script(type='text/javascript', src='/javascripts/Chart.min.js')
-    link(rel='stylesheet', href='/stylesheets/jumbotron.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet', type='text/css')
-  body
-    nav.navbar.navbar-default.navbar-fixed-top.navbar-red
+  #holder
+    head
+      title=title+'CiviLink'
+      script(type='text/javascript', src='/javascripts/jquery.js')
+      script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+      script(type='text/javascript', src='/javascripts/Chart.min.js')
+      link(rel='stylesheet', href='/stylesheets/jumbotron.css')
+      link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel='stylesheet', href='/stylesheets/landing-page.css')
+      link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet', type='text/css')
+    #body
       .container
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          pull-left
-            a(href='/')
-              img(src='/images/banner.png' height='100%')
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            if user
-              li
-                a(href='/dashboard') Dashboard
-              li
-                a(href='/community') Communities
-              li
-                a(href='/representation') Government
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | #{user.firstName} #{user.lastName} 
-                  span.caret
-                ul.dropdown-menu
-                  li
-                    a(href='/profile/#{user.username}') View Profile
-                  li
-                    a(href='/edit-profile') Edit Profile
-                  li
-                    a(href='#') Something else here
-                  li.divider(role='separator')
-                  li
-                    a(href='/logout') Logout
-            else
-              li
-                a(href='/login') Login
-              li
-                a(href='/sign-up') Register
+        nav.navbar.navbar-default.bar-white
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            
+
+            navbar-brand
+              a(href='/')
+                img(src='/images/banner.png' height='100%')
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              if user
+                li
+                  a(href='/dashboard') Dashboard
+                li
+                  a(href='/community') Communities
+                li
+                  a(href='/representation') Politics
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                    | #{user.firstName} #{user.lastName} 
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/profile/#{user.username}') View Profile
+                    li
+                      a(href='/edit-profile') Edit Profile
+                    li.divider(role='separator')
+                    li
+                      a(href='/logout') Logout
+              else
+                li
+                  a(href='/sign-up') Register
 
 
 
-    block content
+        block content
 
-    hr
-  footer
-    .container
-        small © 2016 CiviLink &middot; #[a(href='/about') About] &middot; #[a(href='/people') People] &middot; #[a(href='/privacy') Privacy] &middot; #[a(href='/terms') Terms] &middot; #[a(href='/support') Support] &middot; #[a(href='/help') Join our team] &middot; #[a(href='/contact') Contact]
+    footer
+      .container
+          p © 2016 CiviLink &middot; #[a(href='/about') About] &middot; #[a(href='/people') People] &middot; #[a(href='/privacy') Privacy] &middot; #[a(href='/terms') Terms] &middot; #[a(href='/support') Support] &middot; #[a(href='/help') Join our team] &middot; #[a(href='/contact') Contact]

@@ -23,6 +23,7 @@ router.get('/', isAuthenticated, function(req, res, next) {
 /* Handle Registration POST */
 router.post('/', jsonParser, exports.update = function ( req, res ){
   Users.findById( req.user.id, function ( err, user ){
+    console.log("New First Name:" + req.body.newFirstName);
     user.firstName = req.body.newFirstName;
     user.lastName = req.body.newLastName;
     user.location = req.body.newLocation;

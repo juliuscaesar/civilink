@@ -6,6 +6,7 @@ var jsonParser = bodyParser.json()
 var mongoose = require('mongoose');
 var Ideas = require('../models/Ideas.js');
 var Users = require('../models/Users.js');
+var Communities = require('../models/Communities.js');
 
 /* GET /idea listing. */
 router.get('/', function(req, res, next) {
@@ -14,28 +15,41 @@ router.get('/', function(req, res, next) {
 
 /* GET /idea/id */
 router.get('/:id', function(req, res, next) {
-  Users.findById(req.params.id, function (err, idea) {
+  Ideas.findById(req.params.id, function (err, idea) {
     if (err) return next(err);
-    if (idea == null) {
+    else if (idea == null) {
       res.json("Idea not found");
     }
     else {
-      res.render('idea', { data: idea, user: req.user });
-	}
+      Communities.findById(idea.community, function(err, comm) {
+        res.render('idea', { title: idea.title + ' - ', data: idea, user: req.user, IdeaCommunity: comm });
+      })
+	   }
   });
 });
 
 /* Handle Registration POST */
 router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
-  var newComm = new Ideas({
+  var newIdea = new Ideas({
     title: req.body.title,
     desc: req.body.desc,
     community: req.body.community,
     user: req.user
   })
 
-  newComm.save( function ( err, user, count ){
-    res.redirect('/idea/#{newComm.id}');
+
+  newIdea.save( function ( err, user, count ){
+    
+    Communities.findByIdAndUpdate(
+      req.body.community,
+      { "$addToSet" : { "ideas" : newIdea.id } },
+      { upsert : true},
+      function(err, model) {
+            console.log(err);
+        }
+    );
+
+    res.redirect('/idea/' + newIdea.id);
   });
 });
 
