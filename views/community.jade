@@ -7,8 +7,7 @@ block content
     h4 My Communities
     each item in data
       if (user.communities.indexOf(item.id) != -1)
-        a(href='/community/#{item.id}') 
-          b #{item.name}
+        a(href='/community/#{item.id}') #{item.name}
         p #{item.desc}
     if (user.communities.length == 0) 
       p You aren't in any communities yet... Join one so you can get started!
@@ -17,6 +16,5 @@ block content
     h4 More Communities
     each item in data
       if (user.communities.indexOf(item.id) == -1)
-        a(href='/community/#{item.id}') 
-          b #{item.name}
+        a(href='/community/#{item.id}') #{item.name}
         p #{item.desc}

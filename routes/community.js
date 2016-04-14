@@ -17,53 +17,55 @@ var isAuthenticated = function (req, res, next) {
 	res.redirect('/');
 }
 
-/* GET community page. */
+/* GET community page. 
+   (Where all of the user's communities are listed)
+   NOTE: currently passes ALL Community documents, this obviously needs
+   to change at some point, but for now it works since there aren't too many.
+   */
 router.get('/', isAuthenticated, function(req, res, next) {
 	Communities.find({}, function(err, data){
 		res.render('community', { title: 'Communities - ', user: req.user, data: data });
 	})
 });
 
-/* GET community page. */
+/* GET Create Community page. */
 router.get('/create', isAuthenticated, function(req, res, next) {
 	res.render('create-community', { title: 'Create Community - ', user: req.user });
 });
 
-/* GET community page. */
+/* GET Create Idea page.
+   :id - the id of the community to create an idea(project) for 
+   */
 router.get('/:id/create-idea', isAuthenticated, function(req, res, next) {
 	Communities.findById(req.params.id, function(err, data){
 		res.render('create-idea', { title: 'Create Idea - ', user: req.user, data: data });
 	})
 });
 
-/* GET community page. */
+/* GET Create Organization page.
+   :id - the id of the community to create an Organization for 
+   */
 router.get('/:id/create-org', isAuthenticated, function(req, res, next) {
 	Communities.findById(req.params.id, function(err, data){
 		res.render('create-org', { title: 'Create Organization - ', user: req.user, data: data });
 	})
 });
 
-/* GET /community/id */
+/* GET Comm (specific community) page.
+   :id - the id of the community to display
+   populates the orgs and ideas fields
+   NOTE: the members fields technically refers to users as well, but
+   is not populated. This is because mongoose has no .contains() method, and in
+   order to check if the user is a supporter we simply keep supporters as user _ids
+   and call .indexOf(me) on it.
+   */
 router.get('/:id', function(req, res, next) {
-	Communities.findById(req.params.id, function (err, commun) {
-		if (err) res.redirect('/dashboard');
-		else if (commun == null) {
-			res.redirect('/dashboard');
-		}
-		else {
-
-		  Ideas.find({
-            '_id': { $in: commun.ideas }
-          }, function(err, ideaList){
-            Orgs.find({
-              '_id': { $in: commun.orgs }
-            }, function(err, orgList){
-              res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user, ideas: ideaList, orgs: orgList});
-            });
-          });	
-		    
-		}
-	});
+	Communities.findById(req.params.id)
+	.populate('orgs ideas')
+    .exec(function(err, commun){
+      if (err) return handleError(err);
+      res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user});
+    });
 });
 
 /* Handle  POST */

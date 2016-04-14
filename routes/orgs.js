@@ -9,31 +9,32 @@ var Orgs = require('../models/Orgs.js');
 var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
 
-/* GET /idea listing. */
+/* Redirect to Dashboard if no org id specified */
 router.get('/', function(req, res, next) {
   res.render('dashboard', { title: 'Dashboard', user: req.user });
 });
 
-/* GET /orgs/id */
+/* GET /orgs/id 
+   Send to Organization page after populating the community,
+   members fields.
+   NOTE: the supporters fields technically refers to users as well, but
+   is not populated. This is because mongoose has no .contains() method, and in
+   order to check if the user is a supporter we simply keep supporters as user _ids
+   and call .indexOf(me) on it.
+  */
 router.get('/:id', function(req, res, next) {
-  Orgs.findById(req.params.id, function (err, org) {
-    if (err) return next(err);
-    if (org == null) {
-      res.json("Organization not found");
-    }
-    else {
-      Communities.findById(org.community, function(err, comm) {
-        Users.find({
-          '_id': { $in: org.members }
-        }, function(err, docs){
-          res.render('orgs', {title: org.title + ' - ', data: org, user: req.user, OrgCommunity: comm, membs: docs});
-        });
-      });
-	}
-  });
+  Orgs.findById(req.params.id)
+    .populate('community members')
+    .exec(function (err, org) {
+      if (err) return handleError(err);
+      res.render('orgs', {title: org.title + ' - ', data: org, user: req.user});
+    });
 });
 
-/* Handle Registration POST */
+/* Handle Create Organization POST
+   set up newOrg variable, save it
+   and add user to members list (done separately but this could change)
+ */
 router.post('/create-org', jsonParser, exports.update = function ( req, res ){
   var newOrg = new Orgs({
     title: req.body.title,
@@ -41,7 +42,7 @@ router.post('/create-org', jsonParser, exports.update = function ( req, res ){
     community: req.body.community,
     user: req.user
   })
-
+  
   newOrg.save( function ( err, user, count ){
     Communities.findByIdAndUpdate(
       req.body.community,
@@ -65,7 +66,7 @@ router.post('/create-org', jsonParser, exports.update = function ( req, res ){
 });
 
 
-/* GET /idea/id/support */
+/* Handle Support Organization POST */
 router.post('/:id/support', exports.update = function ( req, res ){
     Orgs.findByIdAndUpdate(
     req.params.id,
@@ -78,7 +79,9 @@ router.post('/:id/support', exports.update = function ( req, res ){
   res.redirect('/orgs/' + req.params.id);
 });
 
-/* Handle  POST */
+/* Handle Remove me from Organization POST 
+   AKA unsupport Organization
+   */
 router.post('/:id/remove', exports.update = function ( req, res ){
   Orgs.findByIdAndUpdate(
     req.params.id,

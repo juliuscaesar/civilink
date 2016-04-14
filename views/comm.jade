@@ -27,9 +27,8 @@ block content
       if ( user.communities.indexOf(data.id) == -1)
         p Join this community if you want to get engaged!
       else
-        b
-          #[a(href='/community/#{data.id}/create-idea') Start a project] &middot; 
-          #[a(href='/community/#{data.id}/create-org') Create organization] 
+        #[a(href='/community/#{data.id}/create-idea') Start a project] &middot; 
+        #[a(href='/community/#{data.id}/create-org') Create organization] 
     else
       p Log in if you want to get engaged!
 
@@ -38,16 +37,14 @@ block content
 
   .content-box
     h4 Projects
-    each item in ideas
-      a(href="/idea/#{item.id}") 
-        b #{item.title}
+    each item in data.ideas
+      a(href="/idea/#{item.id}") #{item.title}
       p #{item.desc}
 
   .content-box
     h4 Organizations
-    each item in orgs
-      a(href="/orgs/#{item.id}") 
-        b #{item.title}
+    each item in data.orgs
+      a(href="/orgs/#{item.id}") #{item.title}
       p #{item.desc}
 
 

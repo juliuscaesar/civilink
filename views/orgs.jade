@@ -3,7 +3,7 @@ extends layout
 block content
   br
   ol.breadcrumb
-    li #[a(href='/community/#{OrgCommunity.id}') #{OrgCommunity.name}]
+    li #[a(href='/community/#{data.community.id}') #{data.community.name}]
     li Organizations
     li.active #{data.title}
 
@@ -12,7 +12,7 @@ block content
     .row
       .col-md-8
         h3 #{data.title}
-        p #{OrgCommunity.name}
+        p #{data.community.name}
         p #{data.desc}
     .row
       .col-xs-2.col-md-1
@@ -38,7 +38,7 @@ block content
       .col-xs-4.col-md-3
         br
         if ( typeof user !== 'undefined')
-          if ( data.supporters.indexOf(user.id) != -1)
+          if ( data.supporters.indexOf(user._id) != -1)
             form.form-horizontal(class='form-removeorg', action='/orgs/#{data.id}/remove', method='POST')
               .form-group
                 button.btn.btn-danger.btn-sm(type='submit') Remove me
@@ -50,12 +50,11 @@ block content
   .content-box
     h4 Members
     .row
-      each item in membs
+      each item in data.members
         .col-sm-4.col-md-4
           .thumbnail
             .caption
-              a(href='/profile/#{item.username}') 
-                b #{item.firstName} #{item.lastName}
+              a(href='/profile/#{item.username}') #{item.firstName} #{item.lastName}
 
 
   .content-box

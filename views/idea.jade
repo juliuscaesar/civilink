@@ -3,7 +3,7 @@ extends layout
 block content
   br
   ol.breadcrumb.bar-white
-    li #[a(href='/community/#{IdeaCommunity.id}') #{IdeaCommunity.name}]
+    li #[a(href='/community/#{data.community.id}') #{data.community.name}]
     li Projects
     li.active #{data.title}
   

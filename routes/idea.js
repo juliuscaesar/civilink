@@ -13,19 +13,16 @@ router.get('/', function(req, res, next) {
   res.render('dashboard', { title: 'Dashboard', user: req.user });
 });
 
-/* GET /idea/id */
+/* GET /idea/:id 
+   Send to Idea(Project) page after populating the community field
+  */
 router.get('/:id', function(req, res, next) {
-  Ideas.findById(req.params.id, function (err, idea) {
-    if (err) return next(err);
-    else if (idea == null) {
-      res.json("Idea not found");
-    }
-    else {
-      Communities.findById(idea.community, function(err, comm) {
-        res.render('idea', { title: idea.title + ' - ', data: idea, user: req.user, IdeaCommunity: comm });
-      })
-	   }
-  });
+  Ideas.findById(req.params.id)
+    .populate('community')
+    .exec(function (err, idea) {
+      if (err) return handleError(err);
+      res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user});
+    });
 });
 
 /* Handle Registration POST */

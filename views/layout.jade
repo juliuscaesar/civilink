@@ -1,17 +1,20 @@
 doctype html
-html
+html(ng-app='CiviLink')
   #holder
     head
       title=title+'CiviLink'
-      script(type='text/javascript', src='/javascripts/jquery.js')
-      script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-      script(type='text/javascript', src='/javascripts/Chart.min.js')
+
       link(rel='stylesheet', href='/stylesheets/jumbotron.css')
       link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
       link(rel='stylesheet', href='/stylesheets/style.css')
       link(rel='stylesheet', href='/stylesheets/landing-page.css')
       link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet', type='text/css')
-    #body
+
+      script(type='text/javascript', src='/javascripts/jquery.js')
+      script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+      script(type='text/javascript', src='/javascripts/Chart.min.js')
+      script(type='text/javascript', src='/javascripts/angular.js')
+    #body(ng-controller='CLController')
       .container
         nav.navbar.navbar-default.bar-white
           .navbar-header
