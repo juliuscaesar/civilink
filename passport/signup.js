@@ -30,6 +30,9 @@ module.exports = function(passport){
                         newUser.username = username;
                         newUser.password = createHash(password);
                         newUser.email = req.param('email');
+                        newUser.zip = req.param('zip');
+                        newUser.city = req.param('city');
+                        newUser.state = req.param('state');
                         newUser.firstName = req.param('firstName');
                         newUser.lastName = req.param('lastName');
 

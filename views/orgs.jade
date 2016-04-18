@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  br
+  
   ol.breadcrumb
     li #[a(href='/community/#{data.community.id}') #{data.community.name}]
     li Organizations
@@ -17,23 +17,19 @@ block content
     .row
       .col-xs-2.col-md-1
         center
-          h4
-            | #[a(href='#') #{data.members.length}]
+          h4.text-primary #{data.members.length}
           small members
       .col-xs-2.col-md-1
         center
-          h4
-            | #[a(href='#') #{data.supporters.length}]
+          h4.text-primary #{data.supporters.length}
           small supporters
       .col-xs-2.col-md-1
         center
-          h4
-            | #[a(href='#') #{data.requests.length}]
+          h4.text-primary #{data.requests.length}
           small requests
       .col-xs-2.col-md-1
         center
-          h4
-            | #[a(href='#') #{data.awards.length}]
+          h4.text-primary #{data.awards.length}
           small awards
       .col-xs-4.col-md-3
         br
@@ -41,11 +37,11 @@ block content
           if ( data.supporters.indexOf(user._id) != -1)
             form.form-horizontal(class='form-removeorg', action='/orgs/#{data.id}/remove', method='POST')
               .form-group
-                button.btn.btn-danger.btn-sm(type='submit') Remove me
+                button.btn.btn-danger.btn-xs(type='submit') Remove me
           else
             form.form-horizontal(class='form-supportorg', action='/orgs/#{data.id}/support', method='POST')
               .form-group
-                button.btn.btn-success.btn-sm(type='submit') Support
+                button.btn.btn-success.btn-xs(type='submit') Support
 
   .content-box
     h4 Members

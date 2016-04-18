@@ -5,6 +5,7 @@ var jsonParser = bodyParser.json()
 
 var mongoose = require('mongoose');
 var Users = require('../models/Users.js');
+var Tasks = require('../models/Tasks.js');
 
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler 
@@ -17,24 +18,31 @@ var isAuthenticated = function (req, res, next) {
 }
 /* GET Edit-profile page. */
 router.get('/', isAuthenticated, function(req, res, next) {
-  res.render('edit-profile', { title: 'Edit Profile - ', user: req.user });
+  res.render('tasks', { title: 'My Tasks - ', user: req.user });
 });
 
-/* Handle Registration POST */
-router.post('/', jsonParser, exports.update = function ( req, res ){
-  Users.findById( req.user.id, function ( err, user ){
-    console.log("New First Name:" + req.body.newFirstName);
-    user.firstName = req.body.newFirstName;
-    user.lastName = req.body.newLastName;
-    user.city = req.body.newCity;
-    user.state = req.body.newState;
-    user.occ = req.body.newOcc;
-    user.occplace = req.body.newOccplace;
-    user.bio = req.body.newBio;
-    user.save( function ( err, user, count ){
-      res.redirect('/profile/' + req.user.username);
-    });
-  });
+/* Handle Assign me POST */
+router.post('/:id/assign', exports.update = function ( req, res ){
+    Tasks.findByIdAndUpdate(
+    req.params.id,
+    { "$addToSet" : { "assigned" : req.user.id } },
+    { upsert : true},
+    function(err, model) {
+          console.log(err);
+          res.redirect('/idea/' + model.project);
+      }
+  );
+});
+
+router.post('/:id/unassign', exports.update = function ( req, res ){
+  Tasks.findByIdAndUpdate(
+    req.params.id,
+    { "$pull" : { "assigned" : req.user.id } },
+    function(err, model) {
+          console.log(err);
+          res.redirect('/idea/' + model.project);
+      }
+  );  
 });
 
 module.exports = router;

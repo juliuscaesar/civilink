@@ -8,8 +8,12 @@ a {
   color: #3f729b;
 }
 
-body, html {
-  height: 100%;
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
   background-color: #eeeeee;
 }
 
@@ -20,23 +24,13 @@ body, html {
   max-width: 800px; /* or 950px */
 }
 
-#holder{
-    min-height: 100%;
-    position:relative;
-}
 
-#body{
-    background-color: #eeeeee;
-    margin-top: 0px;
-    padding-bottom: 100px;    /* height of footer */
-}
-
-footer{
-    height: 100px; 
-    width:100%;
-    position: absolute;
-    left: 0;
-    bottom: 0; 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
 }
 
 .bar-white {

@@ -6,6 +6,7 @@ var Users = require('../models/Users.js');
 var Events = require('../models/Events.js');
 var Ideas = require('../models/Ideas.js');
 var Orgs = require('../models/Orgs.js');
+var Activity = require('../models/Activity.js');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -70,6 +71,7 @@ router.get('/:id', function(req, res, next) {
 
 /* Handle  POST */
 router.post('/:id/join', exports.update = function ( req, res ){
+	// add community to users
 	Users.findByIdAndUpdate(
 		req.user.id,
 		{ "$addToSet" : { "communities" : req.params.id } },
@@ -79,6 +81,7 @@ router.post('/:id/join', exports.update = function ( req, res ){
    		}
 	);
 
+	// add user to communities
 	Communities.findByIdAndUpdate(
 		req.params.id,
 		{ "$addToSet" : { "members" : req.user.id } },
@@ -87,7 +90,20 @@ router.post('/:id/join', exports.update = function ( req, res ){
         	console.log(err);
    		}
 	);
-	res.redirect('/community/' + req.params.id);
+
+	// add to activity feed
+	var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'community',
+      dest: req.params.id,
+      details: 'join'
+    })
+    console.log("ACTIVITY: " + newActivity)
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+      res.redirect('/community/' + req.params.id);
+    });
 });
 
 /* Handle  POST */

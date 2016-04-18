@@ -7,6 +7,17 @@ var mongoose = require('mongoose');
 var Ideas = require('../models/Ideas.js');
 var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
+var Tasks = require('../models/Tasks.js');
+
+var isAuthenticated = function (req, res, next) {
+  // if user is authenticated in the session, call the next() to call the next request handler 
+  // Passport adds this method to request object. A middleware is allowed to add properties to
+  // request and response objects
+  if (req.isAuthenticated())
+    return next();
+  // if the user is not authenticated then redirect him to the login page
+  res.redirect('/');
+}
 
 /* GET /idea listing. */
 router.get('/', function(req, res, next) {
@@ -21,7 +32,9 @@ router.get('/:id', function(req, res, next) {
     .populate('community')
     .exec(function (err, idea) {
       if (err) return handleError(err);
-      res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user});
+      Tasks.find({ "project" : req.params.id }, function (err, tasks) {
+        res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user, tasks: tasks});
+      });
     });
 });
 
@@ -47,6 +60,34 @@ router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
     );
 
     res.redirect('/idea/' + newIdea.id);
+  });
+});
+
+/* GET Create Task page.
+   :id - the id of the idea/project to create a task for 
+   */
+router.get('/:id/create-task', isAuthenticated, function(req, res, next) {
+  Ideas.findById(req.params.id)
+  .populate('community')
+    .exec(function(err, idea){
+      if (err) return handleError(err);
+      res.render('create-task', { title: 'Create Task - ', data: idea, user: req.user});
+    });
+});
+
+/* Handle Registration POST */
+router.post('/create-task', jsonParser, exports.update = function ( req, res ){
+  var newTask = new Tasks({
+    title: req.body.title,
+    desc: req.body.desc,
+    project: req.body.project,
+    needed: req.body.needed,
+    points: 10
+  })
+  console.log('NEW TASK: ' + newTask)
+  newTask.save( function ( err, user, count ){
+    if (err) console.log(err);
+    res.redirect('/idea/' + newTask.project);
   });
 });
 

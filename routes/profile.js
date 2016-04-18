@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Users = require('../models/Users.js');
 var Follow = require('../models/Follow.js');
+var Activity = require('../models/Activity.js');
 
 /* GET /people listing. */
 router.get('/', function(req, res, next) {
@@ -18,13 +19,22 @@ router.get('/:username', function(req, res, next) {
       res.redirect('/dashboard');
     }
     else {
-      var userId = Users.find({ "username" : req.params.username})
-      var following = Follow.find({ "follower" : userId });
-      var followers = Follow.find({ "followee" : userId });
+      Users.findOne({ "username" : req.params.username}, function (err, userId) {
+        if (err) return console.log(err);
 
-      console.log("following: " + following)
-      res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, user: req.user, following: following, followers: followers });
-	}
+        Follow.find({ "follower" : userId.id}, function (err, following) {
+          if (err) return console.log(err);
+          Follow.find({ "followee" : userId.id }, function (err, followers) {
+            if (err) return console.log(err);
+
+            Activity.find({}, function (err, activityData) {
+              res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, 
+                user: req.user, following: following, followers: followers, feed: activityData });
+            });
+	        });
+        });
+      });
+    }
   });
 });
 
