@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var activitySchema = new Schema({
   timestamp: Date,
-  user: {type: Schema.ObjectId, ref: 'Users', index: { unique: true }},
+  user: {type: Schema.ObjectId, ref: 'Users', index: { unique: false }},
   desttype: String,
-  dest: Schema.ObjectId,
+  dest: { type: Schema.ObjectId, refPath: 'desttype' },
   details: String
 });
 

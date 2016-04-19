@@ -10,7 +10,7 @@ var taskSchema = new Schema({
   points: {type: Number, required: true },
   assigned: [{type: Schema.ObjectId, ref: 'Users' }],
   needed: {type: Number, required: true, default: 1},
-  status: {type: Number, default: 0}
+  status:  [{type: Schema.ObjectId, ref: 'Users' }]
 });
 
 

@@ -5,6 +5,7 @@ var jsonParser = bodyParser.json()
 
 var mongoose = require('mongoose');
 var Communities = require('../models/Communities.js');
+var Activity = require('../models/Activity.js');
 
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler 
@@ -27,6 +28,19 @@ router.post('/', jsonParser, exports.update = function ( req, res ){
   	desc: req.body.desc,
   	creator: req.user
   })
+  
+  // add to activity feed
+  var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'Communities',
+      dest: newComm.id,
+      details: 'created'
+    })
+
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
 
   newComm.save( function ( err, user, count ){
     res.redirect('/community/');

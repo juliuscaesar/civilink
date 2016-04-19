@@ -8,6 +8,7 @@ var Ideas = require('../models/Ideas.js');
 var Orgs = require('../models/Orgs.js');
 var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
+var Activity = require('../models/Activity.js');
 
 /* Redirect to Dashboard if no org id specified */
 router.get('/', function(req, res, next) {
@@ -53,6 +54,19 @@ router.post('/create-org', jsonParser, exports.update = function ( req, res ){
         }
     );
 
+    // add to activity feed
+    var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'Orgs',
+      dest: newOrg.id,
+      details: 'created'
+    })
+
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
+
     Orgs.findByIdAndUpdate(
     newOrg.id,
     { "$addToSet" : { "members" : req.user.id } },
@@ -76,6 +90,19 @@ router.post('/:id/support', exports.update = function ( req, res ){
           console.log(err);
       }
   );
+
+    // add to activity feed
+    var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'Orgs',
+      dest: req.params.id,
+      details: 'began supporting'
+    })
+
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
   res.redirect('/orgs/' + req.params.id);
 });
 
@@ -90,6 +117,20 @@ router.post('/:id/remove', exports.update = function ( req, res ){
           console.log(err);
       }
   );
+
+  // add to activity feed
+  var newActivity = new Activity({
+    user: req.user.id,
+    desttype: 'Orgs',
+    dest: req.params.id,
+    details: 'stopped supporting'
+  })
+
+
+  newActivity.save( function ( err, user, count ){
+    if (err) return console.log(err);
+  });
+
   res.redirect('/orgs/' + req.params.id);
 });
 

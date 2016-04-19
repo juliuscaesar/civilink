@@ -11,8 +11,9 @@ block content
   .content-box
       h3 #{data.title}
       p #{data.desc}
+      p Organizer: #[a(href='/profile/#{data.user.username}') #{data.user.firstName} #{data.user.lastName}]
   if user
-    if (data.user == user.id)
+    if (data.user.id == user.id)
       .content-box
         h4 Manage Project
         p
@@ -23,6 +24,7 @@ block content
     if (tasks.length == 0)
       p There are no tasks for this project yet.
     each item in tasks
+      hr
       .row
         .col-xs-1.col-md-1
           h4
@@ -31,25 +33,49 @@ block content
         .col-xs-8.col-md-7
           b #{item.title}
           p #{item.desc}
-          p Users assigned: #{item.assigned.length}/#{item.needed} &middot; Points offered: #{item.points} 
+          if (item.status.length != item.needed)
+            p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
+
+          if item.assigned.length > 0
+            p Assigned: 
+              each person in item.assigned
+                #[a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}], 
+
+
         .col-xs-2.col-md-1
+          // if logged in
           if user
-            if (item.status != 1)
-              if (data.community.members.indexOf(user.id) != -1)
-                if (item.assigned.length == item.needed && item.assigned.indexOf(user.id) == -1)
-                  form.form-horizontal()
-                    .form-group
-                      button.btn.disabled.btn-sm(type='button') Assignment full
+            // if the task is marked complete
+            if (item.status.length == item.needed)
+              center
+                b.text-success Completed!
+            else
+              // If i'm a member of this community
+              if (data.community.members.toString().indexOf(user.id) != -1)
+                // if I've already completed this task
+                if (item.status.toString().indexOf(user.id) != -1)
+                  center
+                    form.form-horizontal()
+                      .form-group
+                        button.btn.disabled.btn-sm(type='button') Awarded
                 else
-                  if (item.assigned.indexOf(user.id) != -1)
-                    form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
-                      .form-group
-                        button.btn.btn-danger.btn-sm(type='submit') Unassign me
-                  if (item.assigned.indexOf(user.id) == -1)
-                    form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
-                      .form-group
-                        button.btn.btn-success.btn-sm(type='submit') Assign me
-      hr
+                  // if this task is full and i'm NOT assigned.
+                  if (item.assigned.length == item.needed && item.assigned.toString().indexOf(user.id) == -1)
+                    center
+                      form.form-horizontal()
+                        .form-group
+                          button.btn.disabled.btn-sm(type='button') Assignment full
+                  else
+                    if (item.assigned.toString().indexOf(user.id) != -1)
+                      center
+                        form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
+                          .form-group
+                            button.btn.btn-danger.btn-sm(type='submit') Unassign me
+                    else
+                      center
+                        form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
+                          .form-group
+                            button.btn.btn-success.btn-sm(type='submit') Assign me
 
 
 // feedback and discussion/comments

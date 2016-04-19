@@ -27,7 +27,9 @@ router.get('/:username', function(req, res, next) {
           Follow.find({ "followee" : userId.id }, function (err, followers) {
             if (err) return console.log(err);
 
-            Activity.find({}, function (err, activityData) {
+            Activity.find({ "user" : userId.id})
+            .populate('user dest')
+            .exec(function (err, activityData) {
               res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, 
                 user: req.user, following: following, followers: followers, feed: activityData });
             });

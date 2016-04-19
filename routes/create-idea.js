@@ -17,18 +17,5 @@ var isAuthenticated = function (req, res, next) {
   res.redirect('/');
 }
 
-/* Handle Registration POST */
-router.post('/', jsonParser, exports.update = function ( req, res ){
-  var newComm = new Ideas({
-  	title: req.body.title,
-  	desc: req.body.desc,
-  	community: req.body.community,
-    user: req.user
-  })
-
-  newComm.save( function ( err, user, count ){
-    res.redirect('/idea/#{newComm.id}');
-  });
-});
 
 module.exports = router;

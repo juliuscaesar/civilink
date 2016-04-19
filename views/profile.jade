@@ -48,10 +48,19 @@ block content
                       button.btn.btn-danger.btn-xs(type='submit') Unfollow
 
   .content-box
-    h4 Activity
+    h4 Activity Feed
 
-    each item in feed
-      p #{item.user.firstName} #{item.details}ed the #{item.desttype}
+    each item in feed.reverse()
+      hr
+      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the 
+        if (item.desttype == 'Communities')
+          | community #[a(href='/community/#{item.dest.id}') #{item.dest.name}]
+        if (item.desttype == 'Ideas')
+          | project #[a(href='/idea/#{item.dest.id}') #{item.dest.title}]
+        if (item.desttype == 'Tasks')
+          | task #{item.dest.title}
+        if (item.desttype == 'Orgs')
+          | organization #[a(href='/orgs/#{item.dest.id}') #{item.dest.title}]
 
     //ol.breadcrumb
     //  li.active Causes: #{data.causes}

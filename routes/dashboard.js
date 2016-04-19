@@ -20,9 +20,10 @@ var isAuthenticated = function (req, res, next) {
 
 /* GET dashboard page. */
 router.get('/dashboard', isAuthenticated, function(req, res, next) {
-  Activity.find({}, function(err, data) {
-  	console.log("ACTIVITY: " + data)
-    res.render('dashboard', { title: 'Dashboard - ', user: req.user, feed: data });
+  Activity.find({})
+  .populate('user dest')
+  .exec(function (err, activityData) {
+    res.render('dashboard', { title: 'Dashboard - ', user: req.user, feed: activityData });
   });
 });
 

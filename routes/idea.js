@@ -8,6 +8,7 @@ var Ideas = require('../models/Ideas.js');
 var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
 var Tasks = require('../models/Tasks.js');
+var Activity = require('../models/Activity.js');
 
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler 
@@ -29,13 +30,16 @@ router.get('/', function(req, res, next) {
   */
 router.get('/:id', function(req, res, next) {
   Ideas.findById(req.params.id)
-    .populate('community')
+    .populate('community user')
     .exec(function (err, idea) {
       if (err) return handleError(err);
-      Tasks.find({ "project" : req.params.id }, function (err, tasks) {
-        res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user, tasks: tasks});
-      });
-    });
+      Tasks.find({ "project" : req.params.id })
+      .populate('assigned creator')
+      .exec(function(err, tasks){
+        if (err) return handleError(err);
+          res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user, tasks: tasks});
+       });
+    })
 });
 
 /* Handle Registration POST */
@@ -47,6 +51,18 @@ router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
     user: req.user
   })
 
+  // add to activity feed
+  var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'Ideas',
+      dest: newIdea.id,
+      details: 'created'
+    })
+
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
 
   newIdea.save( function ( err, user, count ){
     
@@ -82,9 +98,23 @@ router.post('/create-task', jsonParser, exports.update = function ( req, res ){
     desc: req.body.desc,
     project: req.body.project,
     needed: req.body.needed,
+    creator: req.user.id,
     points: 10
   })
-  console.log('NEW TASK: ' + newTask)
+  
+  // add to activity feed
+  var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'Tasks',
+      dest: newTask.id,
+      details: 'created'
+    })
+
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
+
   newTask.save( function ( err, user, count ){
     if (err) console.log(err);
     res.redirect('/idea/' + newTask.project);

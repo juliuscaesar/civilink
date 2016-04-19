@@ -19,9 +19,10 @@ module.exports = function(passport){
   /* GET login page. */
   router.get('/', function(req, res) {
     if (req.isAuthenticated()) {
-      Activity.find({}, function(err, data) {
-        console.log("ACTIVITY: " + data)
-      res.render('dashboard', { title: 'Dashboard - ', user: req.user, feed: data });
+      Activity.find({})
+      .populate('user dest')
+      .exec(function (err, activityData) {
+        res.render('dashboard', { title: 'Dashboard - ', user: req.user, feed: activityData });
       });
     }
       // Display the Login page with any flash message, if any
@@ -51,7 +52,11 @@ module.exports = function(passport){
 
   /* GET Home Page */
   router.get('/dashboard', isAuthenticated, function(req, res){
-    res.render('dashboard', { title: "Dashboard - ", user: req.user });
+    Activity.find({})
+    .populate('user dest')
+    .exec(function (err, activityData) {
+      res.render('dashboard', { title: "Dashboard - ", user: req.user, feed: activityData });
+    });
   });
 
   /* Handle Logout */

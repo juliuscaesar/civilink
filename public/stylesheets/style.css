@@ -4,7 +4,7 @@ p, a, h4, h3, h5, small, li {
 p, a, li {
   font-size: 14px;
 }
-a {
+a, a:visited {
   color: #3f729b;
 }
 
@@ -14,7 +14,7 @@ html {
 }
 body {
   margin-bottom: 60px;
-  background-color: #eeeeee;
+  background-color: #f3f3f3;
 }
 
 /* set a max-width for horizontal fluid layout and make it centered */

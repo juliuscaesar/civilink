@@ -94,11 +94,11 @@ router.post('/:id/join', exports.update = function ( req, res ){
 	// add to activity feed
 	var newActivity = new Activity({
       user: req.user.id,
-      desttype: 'community',
+      desttype: 'Communities',
       dest: req.params.id,
-      details: 'join'
+      details: 'joined'
     })
-    console.log("ACTIVITY: " + newActivity)
+
 
     newActivity.save( function ( err, user, count ){
       if (err) return console.log(err);
@@ -123,6 +123,20 @@ router.post('/:id/leave', exports.update = function ( req, res ){
         	console.log(err);
    		}
 	);
+
+	// add to activity feed
+	var newActivity = new Activity({
+      user: req.user.id,
+      desttype: 'Communities',
+      dest: req.params.id,
+      details: 'left'
+    })
+
+
+    newActivity.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
+    
 	res.redirect('/community/' + req.params.id);
 });
 
