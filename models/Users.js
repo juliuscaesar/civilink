@@ -3,13 +3,13 @@ var Schema = mongoose.Schema;
 var Communities = require('../models/Communities.js');
 
 var userSchema = new Schema({
-  username:  { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
+  username:  { type: String, required: true, unique: true, minlength: 4, maxlength: 24 },
+  email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  password: { type: String, required: true },
-  bio:   { type: String, default: ''},
-  zip: { type: Number, required: true },
+  password: { type: String, required: true, minlength: 8 },
+  bio:   { type: String, default: '', maxlength: 240 },
+  zip: { type: Number, required: true, max: 99999 },
   city: { type: String, required: true },
   state: { type: String, required: true },
   occ: { type: String, default: ''} ,

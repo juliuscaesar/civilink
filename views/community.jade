@@ -13,7 +13,11 @@ block content
 
   .content-box
     h4 Nearby Communities
+    - var x = 0
     each item in data
       if (user.communities.indexOf(item.id) == -1)
         a(href='/community/#{item.id}') #{item.name}
         p #{item.desc}
+        - x = x+1
+    if (x == 0)
+      p There are no other communities near you.

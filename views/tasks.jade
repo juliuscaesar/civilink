@@ -9,22 +9,22 @@ block content
     each item in assignedTasks
       hr
       .row
-        .col-xs-1.col-md-1
+        .col-xs-1.col-sm-1.col-md-1
           h4
             center
               b #
-        .col-xs-8.col-md-7
+        .col-xs-7.col-sm-8.col-md-9
           b #{item.title}
           small  (#{item.points} points)
           p #{item.desc}
           p Project: 
             a(href='/idea/#{item.project.id}') #{item.project.title}
         if (pendingPoints.toString().indexOf(item.id) != -1)
-          .col-xs-2.col-md-1
+          .col-xs-4.col-sm-3.col-md-2
             center
               button.btn.disabled.btn-sm(type='button') Pending
         else
-          .col-xs-2.col-md-1
+          .col-xs-4.col-sm-3.col-md-2
               center
                 form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
                   .form-group
@@ -41,11 +41,11 @@ block content
     each item in pendingGrants
       hr
       .row
-        .col-xs-1.col-md-1
-        .col-xs-8.col-md-7
+        .col-xs-1.col-sm-1.col-md-1
+        .col-xs-7.col-sm-8.col-md-9
           p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] has completed task: #{item.task.title}
             small  (#{item.task.points} points)
-        .col-xs-2.col-md-1
+        .col-xs-4.col-sm-3.col-md-2
           center
                 form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/award/', method='POST')
                   .form-group

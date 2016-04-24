@@ -5,16 +5,37 @@ p, a, li {
   font-size: 14px;
 }
 a, a:visited {
-  color: #3f729b;
+  color: #6495ed;
 }
 
 html {
   position: relative;
   min-height: 100%;
 }
+
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+
 body {
   margin-bottom: 60px;
   background-color: #f3f3f3;
+}
+
+.top-bar {
+  background-color: #ffffff;
+  margin-top: 0px;
+}
+
+/* set a max-width for horizontal fluid layout and make it centered */
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 950px; /* or 950px */
+}
+
+.navbar-white {
+  background-color: #ffffff;
 }
 
 /* set a max-width for horizontal fluid layout and make it centered */
@@ -36,10 +57,6 @@ body {
 .bar-white {
   background-color: #ffffff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .04),0 1px 5px rgba(0, 0, 0, .1);
-}
-
-.navbar-white {
-  background-color: #ffffff;
 }
 
 a:hover {

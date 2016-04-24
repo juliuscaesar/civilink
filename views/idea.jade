@@ -26,11 +26,11 @@ block content
     each item in tasks
       hr
       .row
-        .col-xs-1.col-md-1
+        .col-xs-1.col-sm-1.col-md-1
           h4
             center
               b #
-        .col-xs-8.col-md-7
+        .col-xs-7.col-sm-8.col-md-9
           b #{item.title}
           p #{item.desc}
           if (item.status.length != item.needed)
@@ -42,7 +42,7 @@ block content
                 #[a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}], 
 
 
-        .col-xs-2.col-md-1
+        .col-xs-4.col-sm-3.col-md-2
           // if logged in
           if user
             // if the task is marked complete

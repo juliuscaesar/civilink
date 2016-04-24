@@ -3,9 +3,9 @@ extends layout
 block content
   .content-box
     .row
-      .col-md-3
+      .col-sm-3.col-md-3
 
-      .col-md-9
+      .col-sm-9.col-md-9
         h3 #{data.firstName} #{data.lastName}
           small    @#{data.username}
         p #{data.bio}
@@ -32,7 +32,7 @@ block content
             center
               h4.text-primary #{data.communities.length}
               small communities
-          .col-xs-4.col-md-2
+          .col-xs-4.col-md-3
             br
             center
               if ( typeof user !== 'undefined' )
@@ -41,11 +41,11 @@ block content
                 else if ( followers.toString().indexOf(user.id) == -1)
                   form.form-horizontal(class='form-follow', action='/profile/#{data.username}/follow/#{data.id}', method='POST')
                     .form-group
-                      button.btn.btn-success.btn-xs(type='submit') Follow
+                      button.btn.btn-success.btn-sm(type='submit') Follow
                 else
                   form.form-horizontal(class='form-unfollow', action='/profile/#{data.username}/unfollow/#{data.id}', method='POST')
                     .form-group
-                      button.btn.btn-danger.btn-xs(type='submit') Unfollow
+                      button.btn.btn-danger.btn-sm(type='submit') Unfollow
 
   .content-box
     h4 Activity Feed
