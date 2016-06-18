@@ -6,13 +6,14 @@ block content
     h4 My Tasks
     if assignedTasks.length == 0
       p You aren't assigned to any tasks yet. Go check out some cool projects going on in your communities and start getting active!
+    - x = 1
     each item in assignedTasks
       hr
       .row
         .col-xs-1.col-sm-1.col-md-1
           h4
             center
-              b #
+              b #{x}
         .col-xs-7.col-sm-8.col-md-9
           b #{item.title}
           small  (#{item.points} points)
@@ -33,6 +34,7 @@ block content
                 form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/complete', method='POST')
                   .form-group
                     button.btn.btn-primary.btn-sm(type='submit') Complete
+      - x = x+1
 
   .content-box
     h4 Organizer Panel

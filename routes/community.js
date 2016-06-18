@@ -63,9 +63,13 @@ router.get('/:id/create-org', isAuthenticated, function(req, res, next) {
 router.get('/:id', function(req, res, next) {
 	Communities.findById(req.params.id)
 	.populate('orgs ideas')
-    .exec(function(err, commun){
-      if (err) return handleError(err);
-      res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user});
+    .exec(function (err, commun) {
+      if (commun == null) {
+      	res.redirect('/dashboard');
+      }
+      else {
+        res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user});
+      }
     });
 });
 
@@ -95,7 +99,7 @@ router.post('/:id/join', exports.update = function ( req, res ){
 	var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Communities',
-      dest: req.params.id,
+      community: req.params.id,
       details: 'joined'
     })
 
@@ -128,7 +132,7 @@ router.post('/:id/leave', exports.update = function ( req, res ){
 	var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Communities',
-      dest: req.params.id,
+      community: req.params.id,
       details: 'left'
     })
 

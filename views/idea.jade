@@ -23,23 +23,29 @@ block content
     h4 Tasks
     if (tasks.length == 0)
       p There are no tasks for this project yet.
+    - var y = 1
     each item in tasks
       hr
       .row
         .col-xs-1.col-sm-1.col-md-1
           h4
             center
-              b #
+              b #{y}
         .col-xs-7.col-sm-8.col-md-9
           b #{item.title}
           p #{item.desc}
           if (item.status.length != item.needed)
             p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
 
+          - var x = 1
           if item.assigned.length > 0
             p Assigned: 
               each person in item.assigned
-                #[a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}], 
+                #[a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}]
+                if x < item.assigned.length
+                  | , 
+                - x = x+1
+        - y = y+1
 
 
         .col-xs-4.col-sm-3.col-md-2

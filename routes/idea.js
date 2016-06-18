@@ -32,13 +32,17 @@ router.get('/:id', function(req, res, next) {
   Ideas.findById(req.params.id)
     .populate('community user')
     .exec(function (err, idea) {
-      if (err) return handleError(err);
-      Tasks.find({ "project" : req.params.id })
-      .populate('assigned creator')
-      .exec(function(err, tasks){
-        if (err) return handleError(err);
-          res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user, tasks: tasks});
-       });
+      if (idea == null) {
+        res.redirect('/dashboard');
+      }
+      else {
+        Tasks.find({ "project" : req.params.id })
+        .populate('assigned creator')
+        .exec(function(err, tasks) {
+          if (err) return handleError(err);
+            res.render('idea', {title: idea.title + ' - ', data: idea, user: req.user, tasks: tasks});
+         });
+      }
     })
 });
 
@@ -55,7 +59,7 @@ router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
   var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Ideas',
-      dest: newIdea.id,
+      idea: newIdea.id,
       details: 'created'
     })
 
@@ -106,7 +110,7 @@ router.post('/create-task', jsonParser, exports.update = function ( req, res ){
   var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Tasks',
-      dest: newTask.id,
+      task: newTask.id,
       details: 'created'
     })
 

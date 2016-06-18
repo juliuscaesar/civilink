@@ -37,11 +37,11 @@ block content
           if ( data.supporters.indexOf(user._id) != -1)
             form.form-horizontal(class='form-removeorg', action='/orgs/#{data.id}/remove', method='POST')
               .form-group
-                button.btn.btn-danger.btn-xs(type='submit') Remove me
+                button.btn.btn-danger.btn-sm(type='submit') Remove me
           else
             form.form-horizontal(class='form-supportorg', action='/orgs/#{data.id}/support', method='POST')
               .form-group
-                button.btn.btn-success.btn-xs(type='submit') Support
+                button.btn.btn-success.btn-sm(type='submit') Support
 
   .content-box
     h4 Members

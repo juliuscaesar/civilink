@@ -20,7 +20,7 @@ module.exports = function(passport){
   router.get('/', function(req, res) {
     if (req.isAuthenticated()) {
       Activity.find({})
-      .populate('user dest')
+      .populate('user community task idea org')
       .exec(function (err, activityData) {
         res.render('dashboard', { title: 'Dashboard - ', user: req.user, feed: activityData });
       });
@@ -53,7 +53,7 @@ module.exports = function(passport){
   /* GET Home Page */
   router.get('/dashboard', isAuthenticated, function(req, res){
     Activity.find({})
-    .populate('user dest')
+    .populate('user community task idea org')
     .exec(function (err, activityData) {
       res.render('dashboard', { title: "Dashboard - ", user: req.user, feed: activityData });
     });

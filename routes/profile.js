@@ -28,7 +28,7 @@ router.get('/:username', function(req, res, next) {
             if (err) return console.log(err);
 
             Activity.find({ "user" : userId.id})
-            .populate('user dest')
+            .populate('user community idea task org')
             .exec(function (err, activityData) {
               res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, 
                 user: req.user, following: following, followers: followers, feed: activityData });
@@ -51,6 +51,13 @@ router.post('/:username/follow/:id', exports.update = function ( req, res ){
   newFollow.save( function ( err, user, count ){
   res.redirect('/profile/' + req.params.username);
   });
+});
+
+/* Handle  POST */
+router.post('/:username/unfollow/:id', exports.update = function ( req, res ){
+  Follow.find( { "follower" : req.user.id, "followee" : req.params.id })
+  .remove().exec();    
+  res.redirect('/profile/' + req.params.username);
 });
 
 module.exports = router;

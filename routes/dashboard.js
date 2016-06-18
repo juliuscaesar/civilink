@@ -21,7 +21,7 @@ var isAuthenticated = function (req, res, next) {
 /* GET dashboard page. */
 router.get('/dashboard', isAuthenticated, function(req, res, next) {
   Activity.find({})
-  .populate('user dest')
+  .populate('user community idea task org')
   .exec(function (err, activityData) {
     res.render('dashboard', { title: 'Dashboard - ', user: req.user, feed: activityData });
   });

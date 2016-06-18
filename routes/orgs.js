@@ -27,8 +27,12 @@ router.get('/:id', function(req, res, next) {
   Orgs.findById(req.params.id)
     .populate('community members')
     .exec(function (err, org) {
-      if (err) return handleError(err);
-      res.render('orgs', {title: org.title + ' - ', data: org, user: req.user});
+      if (org == null) {
+        res.redirect('/dashboard');
+      }
+      else {
+        res.render('orgs', {title: org.title + ' - ', data: org, user: req.user});
+      }
     });
 });
 
@@ -58,7 +62,7 @@ router.post('/create-org', jsonParser, exports.update = function ( req, res ){
     var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Orgs',
-      dest: newOrg.id,
+      org: newOrg.id,
       details: 'created'
     })
 
@@ -95,7 +99,7 @@ router.post('/:id/support', exports.update = function ( req, res ){
     var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Orgs',
-      dest: req.params.id,
+      org: req.params.id,
       details: 'began supporting'
     })
 
@@ -122,7 +126,7 @@ router.post('/:id/remove', exports.update = function ( req, res ){
   var newActivity = new Activity({
     user: req.user.id,
     desttype: 'Orgs',
-    dest: req.params.id,
+    org: req.params.id,
     details: 'stopped supporting'
   })
 

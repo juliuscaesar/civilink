@@ -4,7 +4,8 @@ block content
   .content-box
     .row
       .col-sm-3.col-md-3
-
+        center
+          img(src="https://cdn-images-1.medium.com/fit/c/150/150/0*n7EgCvp_PrAR4WMW.jpg" class='img-circle')
       .col-sm-9.col-md-9
         h3 #{data.firstName} #{data.lastName}
           small    @#{data.username}
@@ -47,20 +48,26 @@ block content
                     .form-group
                       button.btn.btn-danger.btn-sm(type='submit') Unfollow
 
-  .content-box
-    h4 Activity Feed
 
+  .content-box
+    h4 Activity feed
     each item in feed.reverse()
       hr
-      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the 
-        if (item.desttype == 'Communities')
-          | community #[a(href='/community/#{item.dest.id}') #{item.dest.name}]
-        if (item.desttype == 'Ideas')
-          | project #[a(href='/idea/#{item.dest.id}') #{item.dest.title}]
-        if (item.desttype == 'Tasks')
-          | task #{item.dest.title}
-        if (item.desttype == 'Orgs')
-          | organization #[a(href='/orgs/#{item.dest.id}') #{item.dest.title}]
+      .row
+        .col-xs-3.col-sm-2.col-md-1
+          img(src="https://cdn-images-1.medium.com/fit/c/64/64/0*n7EgCvp_PrAR4WMW.jpg" class='img-circle')
+        .col-xs-9.col-sm-10.col-md-11
+          if (item.desttype == 'Communities')
+            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+          else if (item.desttype == 'Ideas')
+            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+          else if (item.desttype == 'Tasks')
+            p 
+              #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+          else if (item.desttype == 'Orgs')
+            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
+          else
+            p hey
 
     //ol.breadcrumb
     //  li.active Causes: #{data.causes}

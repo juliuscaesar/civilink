@@ -2,16 +2,20 @@ extends layout
 
 block content
 
-  .content-box
-    h4 Newsfeed
-    each item in feed.reverse()
-      hr
-      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the 
-        if (item.desttype == 'Communities')
-          | community #[a(href='/community/#{item.dest.id}') #{item.dest.name}]
-        if (item.desttype == 'Ideas')
-          | project #[a(href='/idea/#{item.dest.id}') #{item.dest.title}]
-        if (item.desttype == 'Tasks')
-          | task #{item.dest.title}
-        if (item.desttype == 'Orgs')
-          | organization #[a(href='/orgs/#{item.dest.id}') #{item.dest.title}]
+  each item in feed.reverse()
+    .content-box
+      .row
+        .col-xs-3.col-sm-2.col-md-1
+          img(src="https://cdn-images-1.medium.com/fit/c/64/64/0*n7EgCvp_PrAR4WMW.jpg" class='img-circle')
+        .col-xs-9.col-sm-10.col-md-11
+          if (item.desttype == 'Communities')
+            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+          else if (item.desttype == 'Ideas')
+            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+          else if (item.desttype == 'Tasks')
+            p 
+              #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+          else if (item.desttype == 'Orgs')
+            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
+          else
+            p hey

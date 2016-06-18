@@ -14,48 +14,49 @@ html(ng-app='CiviLink')
     script(type='text/javascript', src='/javascripts/Chart.min.js')
     script(type='text/javascript', src='/javascripts/angular.js')
   body(ng-controller='CLController')
-    .container
-      nav.navbar.navbar-default.bar-white
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          
+    .top-header
+      nav.navbar.navbar-default.navbar-static-top.navbar-white
+        .container
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            
 
-          navbar-brand
-            a(href='/')
-              img(src='/images/banner.png' height='100%')
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            if user
-              li
-                a(href='/dashboard') Dashboard
-              li
-                a(href='/community') Communities
-              li
-                a(href='/tasks') My Tasks
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | #{user.firstName} #{user.lastName} 
-                  span.caret
-                ul.dropdown-menu
-                  li
-                    a(href='/profile/#{user.username}') View Profile
-                  li
-                    a(href='/edit-profile') Edit Profile
-                  li.divider(role='separator')
-                  li
-                    a(href='/logout') Logout
-            else
-              li
-                a(href='/sign-up') Register
+            navbar-brand
+              a(href='/')
+                img(src='/images/banner2.png' height='100%')
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              if user
+                li
+                  a(href='/dashboard') Dashboard
+                li
+                  a(href='/community') Communities
+                li
+                  a(href='/tasks') My Tasks
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                    | #{user.firstName} #{user.lastName} 
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/profile/#{user.username}') View Profile
+                    li
+                      a(href='/edit-profile') Edit Profile
+                    li.divider(role='separator')
+                    li
+                      a(href='/logout') Logout
+              else
+                li
+                  a(href='/sign-up') Register
 
 
-
+    .container.container-body
       block content
 
     .footer
-      .container
+      .container.container-body
           p © 2016 CiviLink

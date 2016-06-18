@@ -5,7 +5,10 @@ var activitySchema = new Schema({
   timestamp: Date,
   user: {type: Schema.ObjectId, ref: 'Users', index: { unique: false }},
   desttype: String,
-  dest: { type: Schema.ObjectId, refPath: 'desttype' },
+  community: { type: Schema.ObjectId, ref: 'Communities' },
+  idea: { type: Schema.ObjectId, ref: 'Ideas' },
+  task: { type: Schema.ObjectId, ref: 'Tasks' },
+  org: { type: Schema.ObjectId, ref: 'Orgs' },
   details: String
 });
 

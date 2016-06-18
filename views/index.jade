@@ -2,28 +2,27 @@ extends layout
 
 block content
   .content-box
-    .container
-      .row
-        .col-sm-7
-          br
-          br
-          h3 Introducing CiviLink
-          h4 a social platform for community engagement.
-        .col-sm-3
-          .row
-            div
-              p.text-center.login-title Sign in
-                div.account-wall
-                  form(class='form-signin', action='/login', method='POST')
-                    input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
-                    input(type='password', name='password' class='form-control', placeholder='Password', required)
-                    button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
-                    span.clearfix
-                br
-                a(href='/sign-up', class='text-center') Create an account
-                #message
-                if message
-                  p.text-center.error-message #{message}
+    .row
+      .col-sm-8
+        br
+        br
+        h3 Introducing CiviLink
+        h4 a social platform for community engagement.
+      .col-sm-3
+        .row
+          div
+            p.text-center.login-title Sign in
+              div.account-wall
+                form(class='form-signin', action='/login', method='POST')
+                  input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+                  input(type='password', name='password' class='form-control', placeholder='Password', required)
+                  button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
+                  span.clearfix
+              br
+              a(href='/sign-up', class='text-center') Create an account
+              #message
+              if message
+                p.text-center.error-message #{message}
 
   .content-box
     h3 How it works

@@ -56,7 +56,7 @@ router.post('/:id/assign', exports.update = function ( req, res ){
       var newActivity = new Activity({
         user: req.user.id,
         desttype: 'Tasks',
-        dest: req.params.id,
+        task: req.params.id,
         details: 'started working on'
       })
 
@@ -81,7 +81,7 @@ router.post('/:id/unassign', exports.update = function ( req, res ){
       var newActivity = new Activity({
         user: req.user.id,
         desttype: 'Tasks',
-        dest: req.params.id,
+        task: req.params.id,
         details: 'stopped working on'
       })
 
@@ -114,7 +114,7 @@ router.post('/:id/complete', jsonParser, exports.update = function ( req, res ){
   var newActivity = new Activity({
     user: req.user.id,
     desttype: 'Tasks',
-    dest: req.params.id,
+    task: req.params.id,
     details: 'completed'
   })
 

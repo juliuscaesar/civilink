@@ -5,12 +5,26 @@ p, a, li {
   font-size: 14px;
 }
 a, a:visited {
-  color: #6495ed;
+  color: #4a86e8;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.img-circle {
+    border-radius: 50%;
 }
 
 html {
   position: relative;
   min-height: 100%;
+}
+
+.top-header {
+  padding-top: 5px;
+  background-color: #ffffff;
 }
 
 .navbar-static-top {
@@ -19,7 +33,8 @@ html {
 
 body {
   margin-bottom: 60px;
-  background-color: #f3f3f3;
+  padding-top: 0px;
+  background-color: #f9f9f9;
 }
 
 .top-bar {
@@ -28,7 +43,7 @@ body {
 }
 
 /* set a max-width for horizontal fluid layout and make it centered */
-.container {
+.container-body {
   margin-right: auto;
   margin-left: auto;
   max-width: 950px; /* or 950px */
@@ -36,6 +51,7 @@ body {
 
 .navbar-white {
   background-color: #ffffff;
+  padding-bottom: 5px;
 }
 
 /* set a max-width for horizontal fluid layout and make it centered */

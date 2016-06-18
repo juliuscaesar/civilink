@@ -33,7 +33,7 @@ router.post('/', jsonParser, exports.update = function ( req, res ){
   var newActivity = new Activity({
       user: req.user.id,
       desttype: 'Communities',
-      dest: newComm.id,
+      community: newComm.id,
       details: 'created'
     })
 
