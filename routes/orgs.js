@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
+var sanitizeHtml = require('sanitize-html');
 
 var mongoose = require('mongoose');
 var Ideas = require('../models/Ideas.js');
@@ -42,9 +43,9 @@ router.get('/:id', function(req, res, next) {
  */
 router.post('/create-org', jsonParser, exports.update = function ( req, res ){
   var newOrg = new Orgs({
-    title: req.body.title,
-    desc: req.body.desc,
-    community: req.body.community,
+    title: sanitizeHtml(req.body.title, { allowedTags: [] }),
+    desc: sanitizeHtml(req.body.desc, { allowedTags: [] }),
+    community: sanitizeHtml(req.body.community, { allowedTags: [] }),
     user: req.user
   })
   

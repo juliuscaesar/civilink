@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var sanitizeHtml = require('sanitize-html');
 
 var Communities = require('../models/Communities.js');
 var Users = require('../models/Users.js');

@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var multer = require('multer');
+var sanitizeHtml = require('sanitize-html');
 
 var mongoose = require('mongoose');
 var Users = require('../models/Users.js');
@@ -24,14 +25,14 @@ router.get('/', isAuthenticated, function(req, res, next) {
 /* Handle Registration POST */
 router.post('/', jsonParser, exports.update = function ( req, res ){
   Users.findById( req.user.id, function ( err, user ){
-    console.log("New First Name:" + req.body.newFirstName);
-    user.firstName = req.body.newFirstName;
-    user.lastName = req.body.newLastName;
-    user.city = req.body.newCity;
-    user.state = req.body.newState;
-    user.occ = req.body.newOcc;
-    user.occplace = req.body.newOccplace;
-    user.bio = req.body.newBio;
+    console.log("New First Name:" + req.body.newFirstName),
+    user.firstName = sanitizeHtml(req.body.newFirstName, { allowedTags: [] }),
+    user.lastName = sanitizeHtml(req.body.newLastName, { allowedTags: [] }),
+    user.city = sanitizeHtml(req.body.newCity, { allowedTags: [] }),
+    user.state = sanitizeHtml(req.body.newState, { allowedTags: [] }),
+    user.occ = sanitizeHtml(req.body.newOcc, { allowedTags: [] }),
+    user.occplace = sanitizeHtml(req.body.newOccplace, { allowedTags: [] }),
+    user.bio = sanitizeHtml(req.body.newBio, { allowedTags: [] })
     user.save( function ( err, user, count ){
       res.redirect('/profile/' + req.user.username);
     });
@@ -55,17 +56,18 @@ router.post('/picture', multer({ dest: './public/images/uploads'}).single('upl')
               path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
               size: 277056 }
    */
-   res.status(204).end();
-   // Add image to user
-   Users.findById( req.user.id, function ( err, user ) {
-     user.avatar = req.file.filename;
-     user.save( function ( err, user, count) {
-        if (err) return console.log(err);
+   if (req.file.mimetype.includes('image/')) {
+     res.status(204).end();
+     // Add image to user
+     Users.findById( req.user.id, function ( err, user ) {
+       user.avatar = req.file.filename;
+       user.save( function ( err, user, count) {
+          if (err) return console.log(err);
+       });
+      if (err) return console.log(err);
      });
-    if (err) return console.log(err);
-   });
-  res.redirect('/profile/' + req.user.username);
-
+    res.redirect('/profile/' + req.user.username);
+  }
 });
 
 module.exports = router;

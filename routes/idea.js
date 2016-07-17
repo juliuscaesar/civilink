@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
+var sanitizeHtml = require('sanitize-html');
 
 var mongoose = require('mongoose');
 var Ideas = require('../models/Ideas.js');
@@ -49,9 +50,9 @@ router.get('/:id', function(req, res, next) {
 /* Handle Registration POST */
 router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
   var newIdea = new Ideas({
-    title: req.body.title,
-    desc: req.body.desc,
-    community: req.body.community,
+    title: sanitizeHtml(req.body.title, { allowedTags: [] }),
+    desc: sanitizeHtml(req.body.desc, { allowedTags: [] }),
+    community: sanitizeHtml(req.body.community, { allowedTags: [] }),
     user: req.user
   })
 
@@ -98,10 +99,10 @@ router.get('/:id/create-task', isAuthenticated, function(req, res, next) {
 /* Handle Registration POST */
 router.post('/create-task', jsonParser, exports.update = function ( req, res ){
   var newTask = new Tasks({
-    title: req.body.title,
-    desc: req.body.desc,
-    project: req.body.project,
-    needed: req.body.needed,
+    title: sanitizeHtml(req.body.title, { allowedTags: [] }),
+    desc: sanitizeHtml(req.body.desc, { allowedTags: [] }),
+    project: sanitizeHtml(req.body.project, { allowedTags: [] }),
+    needed: sanitizeHtml(req.body.needed, { allowedTags: [] }),
     creator: req.user.id,
     points: 10
   })

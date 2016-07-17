@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
+var sanitizeHtml = require('sanitize-html');
 
 var mongoose = require('mongoose');
 var Communities = require('../models/Communities.js');
@@ -16,16 +17,12 @@ var isAuthenticated = function (req, res, next) {
   // if the user is not authenticated then redirect him to the login page
   res.redirect('/');
 }
-/* GET Edit-profile page. */
-router.get('/', isAuthenticated, function(req, res, next) {
-  res.render('create-community', { title: 'Create Community - ', user: req.user });
-});
 
 /* Handle Registration POST */
 router.post('/', jsonParser, exports.update = function ( req, res ){
   var newComm = new Communities({
-  	name: req.body.name,
-  	desc: req.body.desc,
+  	name: sanitizeHtml(req.body.name, { allowedTags: [] }),
+  	desc: sanitizeHtml(req.body.desc, { allowedTags: [] }),
   	creator: req.user
   })
   

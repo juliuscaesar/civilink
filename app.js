@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var multer = require('multer');
+var sanitizeHtml = require('sanitize-html');
 
 var app = express();
 
