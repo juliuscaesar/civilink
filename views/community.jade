@@ -3,7 +3,8 @@ extends layout
 block content
 
   .content-box
-    h4 My Communities
+    h3 My Communities
+    hr
     each item in data
       if (user.communities.indexOf(item.id) != -1)
         a(href='/community/#{item.id}') #{item.name}
@@ -12,7 +13,8 @@ block content
       p You aren't in any communities yet... Join one so you can get started!
 
   .content-box
-    h4 Nearby Communities
+    h3 Nearby Communities
+    hr
     - var x = 0
     each item in data
       if (user.communities.indexOf(item.id) == -1)

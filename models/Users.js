@@ -4,9 +4,10 @@ var Communities = require('../models/Communities.js');
 
 var userSchema = new Schema({
   username:  { type: String, required: true, unique: true, minlength: 4, maxlength: 24 },
+  avatar: String,
   email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  firstName: { type: String, required: true, maxlength: 35 },
+  lastName: { type: String, required: true, maxlength: 35 },
   password: { type: String, required: true, minlength: 8 },
   bio:   { type: String, default: '', maxlength: 240 },
   zip: { type: Number, required: true, max: 99999 },

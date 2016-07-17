@@ -11,7 +11,7 @@ block content
     
     .row
       .col-md-8
-        h3 #{data.title}
+        h2 #{data.title}
         p #{data.community.name}
         p #{data.desc}
     .row
@@ -47,10 +47,17 @@ block content
     h4 Members
     .row
       each item in data.members
-        .col-sm-4.col-md-4
+        .col-sm-3.col-md-3
           .thumbnail
             .caption
-              a(href='/profile/#{item.username}') #{item.firstName} #{item.lastName}
+              center
+                if item.avatar
+                  img(src="/images/uploads/#{item.avatar}" class='img-circle' height='64px' width='64px')
+                else
+                  img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                br
+                a(href='/profile/#{item.username}') #{item.firstName} #{item.lastName}
+                small   @#{item.username}
 
 
   .content-box

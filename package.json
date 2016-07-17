@@ -1,6 +1,6 @@
 {
-  "name": "nodeapp",
-  "version": "0.0.0",
+  "name": "civilink",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -25,13 +25,27 @@
     "mongodb": "~2.0.33",
     "monk": "~1.0.1",
     "morgan": "~1.6.1",
-    "require-dot-file": "^0.4.0",
-    "semantic-ui": "semantic-org/Semantic-UI#next",
+    "multer": "^1.1.0",
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
-    "serve-favicon": "~2.3.0"
+    "require-dot-file": "^0.4.0",
+    "semantic-ui": "github:semantic-org/Semantic-UI#next",
+    "serve-favicon": "~2.3.0",
+    "transloadit": "^1.5.3"
   },
   "devDependencies": {
     "gulp": "^3.9.0"
-  }
+  },
+  "description": "civilink node app",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliuscaesar/civilink.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliuscaesar/civilink/issues"
+  },
+  "homepage": "https://github.com/juliuscaesar/civilink#readme"
 }

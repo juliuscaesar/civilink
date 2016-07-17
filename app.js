@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var multer = require('multer');
 
 var app = express();
 
@@ -59,6 +60,7 @@ var signup = require('./routes/sign-up');
 var createcommunity = require('./routes/create-community');
 
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -76,6 +78,9 @@ var expressSession = require('express-session');
 app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+var multer = require('multer');
+var upload = multer({ dest: './public/images/uploads' });
 
 var routes = require('./routes/index')(passport);
 app.use('/', routes);

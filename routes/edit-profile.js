@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
+var multer = require('multer');
 
 var mongoose = require('mongoose');
 var Users = require('../models/Users.js');
@@ -35,6 +36,36 @@ router.post('/', jsonParser, exports.update = function ( req, res ){
       res.redirect('/profile/' + req.user.username);
     });
   });
+});
+
+/* Handle Registration POST */
+router.post('/picture', multer({ dest: './public/images/uploads'}).single('upl'), function(req,res){
+  console.log(req.body); //form fields
+  /* example output:
+  { title: 'abc' }
+   */
+  console.log(req.file); //form files
+  /* example output:
+            { fieldname: 'upl',
+              originalname: 'grumpy.png',
+              encoding: '7bit',
+              mimetype: 'image/png',
+              destination: './uploads/',
+              filename: '436ec561793aa4dc475a88e84776b1b9',
+              path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
+              size: 277056 }
+   */
+   res.status(204).end();
+   // Add image to user
+   Users.findById( req.user.id, function ( err, user ) {
+     user.avatar = req.file.filename;
+     user.save( function ( err, user, count) {
+        if (err) return console.log(err);
+     });
+    if (err) return console.log(err);
+   });
+  res.redirect('/profile/' + req.user.username);
+
 });
 
 module.exports = router;

@@ -5,14 +5,16 @@ block content
     .row
       .col-sm-3.col-md-3
         center
-          img(src="https://cdn-images-1.medium.com/fit/c/150/150/0*n7EgCvp_PrAR4WMW.jpg" class='img-circle')
+          if data.avatar
+            img(src="/images/uploads/#{data.avatar}" class='img-circle' height='150px' width='150px')
+          else
+            img(src="/images/anon.gif" class='img-circle' height='150px' width='150px')
       .col-sm-9.col-md-9
-        h3 #{data.firstName} #{data.lastName}
+        h2 #{data.firstName} #{data.lastName}
           small    @#{data.username}
         p #{data.bio}
         if data.state
-          h4
-            small #{data.city}, #{data.state} 
+          p #{data.city}, #{data.state} 
               if data.occ
                 &middot; #{data.occ} at #{data.occplace}
       
@@ -55,7 +57,10 @@ block content
       hr
       .row
         .col-xs-3.col-sm-2.col-md-1
-          img(src="https://cdn-images-1.medium.com/fit/c/64/64/0*n7EgCvp_PrAR4WMW.jpg" class='img-circle')
+          if data.avatar
+            img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
+          else
+            img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
         .col-xs-9.col-sm-10.col-md-11
           if (item.desttype == 'Communities')
             p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]

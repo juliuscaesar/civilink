@@ -7,7 +7,8 @@ html(ng-app='CiviLink')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/landing-page.css')
-    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Roboto', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Raleway', rel='stylesheet', type='text/css')
 
     script(type='text/javascript', src='/javascripts/jquery.js')
     script(type='text/javascript', src='/javascripts/bootstrap.min.js')
@@ -15,7 +16,7 @@ html(ng-app='CiviLink')
     script(type='text/javascript', src='/javascripts/angular.js')
   body(ng-controller='CLController')
     .top-header
-      nav.navbar.navbar-default.navbar-static-top.navbar-white
+      nav.navbar.navbar-default.navbar-fixed-top.navbar-white
         .container
           .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -26,29 +27,29 @@ html(ng-app='CiviLink')
             
 
             navbar-brand
-              a(href='/')
-                img(src='/images/banner2.png' height='100%')
+              a(href='/' class='navbar-brand') CiviLink
+                
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
               if user
                 li
-                  a(href='/dashboard') Dashboard
+                  a.navlink(href='/dashboard') Dashboard
                 li
-                  a(href='/community') Communities
+                  a.navlink(href='/community') Communities
                 li
-                  a(href='/tasks') My Tasks
+                  a.navlink(href='/tasks') My Tasks
                 li.dropdown
-                  a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  a.navlink.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                     | #{user.firstName} #{user.lastName} 
                     span.caret
                   ul.dropdown-menu
                     li
-                      a(href='/profile/#{user.username}') View Profile
+                      a.navlink(href='/profile/#{user.username}') View Profile
                     li
                       a(href='/edit-profile') Edit Profile
                     li.divider(role='separator')
                     li
-                      a(href='/logout') Logout
+                      a.navlink(href='/logout') Logout
               else
                 li
                   a(href='/sign-up') Register

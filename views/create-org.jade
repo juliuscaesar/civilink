@@ -7,22 +7,24 @@ block content
     li #[a(href='/community/#{data.id}') #{data.name}]
     li.active Create Organization
 
-  h4 Create Organization
-  form.form-horizontal(class='form-createorg', action='/orgs/create-org', method='POST')
-    .form-group
-      label.col-sm-2.control-label(for='title') Title
-      .col-sm-4
-        input#title.form-control(type='text', name='title', value='')
-      .col-sm-4
-        input#community.form-control(type='hidden', name='community', value='#{data.id}')
-    .form-group
-      label.col-sm-2.control-label(for='desc') Short description
-      .col-sm-4
-        textarea#desc.form-control(type='text', name='desc',  placeholder='')
-    .form-group
-     .col-sm-offset-2.col-sm-10
-        button.btn.btn-default(type='submit') Save
+  .content-box
+    h3 Create Organization
+    hr
+    form.form-horizontal(class='form-createorg', action='/orgs/create-org', method='POST')
+      .form-group
+        label.col-sm-2.control-label(for='title') Title
+        .col-sm-4
+          input#title.form-control(type='text', name='title', value='')
+        .col-sm-4
+          input#community.form-control(type='hidden', name='community', value='#{data.id}')
+      .form-group
+        label.col-sm-2.control-label(for='desc') Short description
+        .col-sm-4
+          textarea#desc.form-control(type='text', name='desc',  placeholder='')
+      .form-group
+       .col-sm-offset-2.col-sm-10
+          button.btn.btn-default(type='submit') Save
 
-  #message
-    if message
-      h1.text-center.error-message #{message}
+    #message
+      if message
+        h1.text-center.error-message #{message}
