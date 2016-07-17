@@ -279,3 +279,13 @@ a:hover {
     background-color: #ffffff;
     color:#000000;
 }
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+  background-color: #e8e8e8;
+}
+ 
+.navbar .nav > li.dropdown.open > a {
+   color: #fff;
+   background-color: #4a86e8;
+   border-color: #fff;
+}
