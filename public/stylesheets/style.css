@@ -50,6 +50,30 @@ h3 {
   font-family: 'Roboto', sans-serif;
 }
 
+.outline {
+  background: none;
+  padding: 12px 22px;
+  border: 2px solid #4a86e8;
+  font-size: 18px;
+  text-decoration: none;
+  color: #4a86e8;
+}
+
+.outline:hover, .outline:focus, .outline:active, .outline.active, .open > .dropdown-toggle.btn-primary {
+  font-size: 18px;
+  text-decoration: none;
+  color: #33a6cc;
+  border-color: #33a6cc;
+}
+
+.outline:active, .outline.active {
+  border-color: #007299;
+  font-size: 18px;
+  text-decoration: none;
+  color: #007299;
+  box-shadow: none;
+}
+
 
 .navlink {
   font-family: 'Raleway', sans-serif;
