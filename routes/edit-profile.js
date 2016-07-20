@@ -56,7 +56,7 @@ router.post('/picture', multer({ dest: './public/images/uploads'}).single('upl')
               path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
               size: 277056 }
    */
-   if (req.file.mimetype.toString().includes('image/')) {
+   //if (req.file.mimetype.toString().includes('image/')) {
      res.status(204).end();
      // Add image to user
      Users.findById( req.user.id, function ( err, user ) {
@@ -67,7 +67,7 @@ router.post('/picture', multer({ dest: './public/images/uploads'}).single('upl')
       if (err) return console.log(err);
      });
     res.redirect('/profile/' + req.user.username);
-  }
+  //}
 });
 
 module.exports = router;
