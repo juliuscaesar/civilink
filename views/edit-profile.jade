@@ -2,7 +2,7 @@ extends layout
 
 block content
   .content-box
-    h3 Edit Profile 
+    .headertext2 Edit Profile 
       small  Logged in as #{user.firstName} #{user.lastName} (@#{user.username})
     hr
     form.form-horizontal(class='form-editprofile', action='/edit-profile', method='POST')

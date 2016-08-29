@@ -5,9 +5,10 @@ block content
     li #[a(href='/community') Communities]
     li.active #{data.name}
   .content-box
-    h2 #{data.name}
+    .headertext1 #{data.name}
     p #{data.desc}
-    p #{data.members.length} members
+    p 
+      a(href='/members') #{data.members.length} members
 
     .container
       if user
@@ -21,7 +22,8 @@ block content
               button.btn.btn-success.btn-sm(type='submit') Join community
       
   .content-box
-    h4 Get engaged
+    .headertext2 Get engaged
+    hr
     if user
       if ( user.communities.indexOf(data.id) == -1)
         p Join this community if you want to get engaged!
@@ -34,7 +36,7 @@ block content
         
 
   .content-box
-    h4 Projects
+    .headertext2 Projects
     each item in data.ideas
       a(href="/idea/#{item.id}") #{item.title}
       p #{item.desc}

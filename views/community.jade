@@ -3,7 +3,7 @@ extends layout
 block content
 
   .content-box
-    h3 My Communities
+    .headertext My Communities
     hr
     each item in data
       if (user.communities.indexOf(item.id) != -1)
@@ -13,7 +13,7 @@ block content
       p You aren't in any communities yet... Join one so you can get started!
 
   .content-box
-    h3 Nearby Communities
+    .headertext Nearby Communities
     hr
     - var x = 0
     each item in data

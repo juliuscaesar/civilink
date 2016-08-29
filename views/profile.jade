@@ -10,7 +10,7 @@ block content
           else
             img(src="/images/anon.gif" class='img-circle' height='150px' width='150px')
       .col-sm-9.col-md-9
-        h2 #{data.firstName} #{data.lastName}
+        .headertext1 #{data.firstName} #{data.lastName}
           small    @#{data.username}
         p #{data.bio}
         if data.state
@@ -52,7 +52,7 @@ block content
 
 
   .content-box
-    h4 Activity feed
+    .headertext2 Activity feed
     each item in feed.reverse()
       hr
       .row

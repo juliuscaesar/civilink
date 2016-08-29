@@ -9,18 +9,19 @@ block content
   
 
   .content-box
-      h3 #{data.title}
+      .headertext1 #{data.title}
       p #{data.desc}
       p Organizer: #[a(href='/profile/#{data.user.username}') #{data.user.firstName} #{data.user.lastName}]
   if user
     if (data.user.id == user.id)
       .content-box
-        h4 Manage Project
+        .headertext2 Manage Project
+        hr
         p
           a(href='/idea/#{data.id}/create-task') Create Task
 
   .content-box
-    h4 Tasks
+    .headertext2 Tasks
     if (tasks.length == 0)
       p There are no tasks for this project yet.
     - var y = 1
