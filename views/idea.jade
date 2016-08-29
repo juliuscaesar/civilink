@@ -23,6 +23,7 @@ block content
   .content-box
     .headertext2 Tasks
     if (tasks.length == 0)
+      hr
       p There are no tasks for this project yet.
     - var y = 1
     each item in tasks

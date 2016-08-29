@@ -5,6 +5,7 @@ block content
   .content-box
     .headertext My Tasks
     if assignedTasks.length == 0
+      hr
       p You aren't assigned to any tasks yet. Go check out some cool projects going on in your communities and start getting active!
     - x = 1
     each item in assignedTasks
@@ -39,6 +40,7 @@ block content
   .content-box
     .headertext Organizer Panel
     if pendingGrants.length == 0
+      hr
       p When you create a project in one of your communities and add tasks to it, you'll be in charge of rewarding points after users complete them.
     each item in pendingGrants
       hr
