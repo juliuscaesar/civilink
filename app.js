@@ -106,9 +106,12 @@ app.use('/create-community', createcommunity);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  res.status(404);
+
+  if (req.accepts('html')) {
+    res.render('index', { title: "", message: req.flash('message'), user: req.user });
+    return;
+  }
 });
 
 // error handlers
