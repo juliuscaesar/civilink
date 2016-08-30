@@ -7,8 +7,6 @@ block content
   .content-box
     .headertext1 #{data.name}
     p #{data.desc}
-    p 
-      a(href='/members') #{data.members.length} members
 
     .container
       if user
@@ -20,23 +18,32 @@ block content
           form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
             .form-group
               button.btn.btn-success.btn-sm(type='submit') Join community
-      
+
   .content-box
-    .headertext2 Get engaged
+    .headertext2 Members
+      small  (#{members.length})
     hr
-    if user
-      if ( user.communities.indexOf(data.id) == -1)
-        p Join this community if you want to get engaged!
-      else
-        #[a(href='/community/#{data.id}/create-idea') Start a project]
-    else
-      p Log in if you want to get engaged!
-
-
+    .row
+      each item in members
+        .col-xs-4.col-sm-2.col-md-2
+          .thumbnail
+            .caption
+              center
+                if item.user.avatar
+                  img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                else
+                  img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                br
+                a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
+                br
+                small   @#{item.user.username}
         
 
   .content-box
-    .headertext2 Projects
+    .headertext2 Projects 
+      small (
+        a(href='/community/#{data.id}/create-idea') create new
+        | )
     hr
     if ( data.ideas.length == 0 )
       p No one has started any projects in this community yet.

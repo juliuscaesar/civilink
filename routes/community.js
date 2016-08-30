@@ -5,6 +5,7 @@ var sanitizeHtml = require('sanitize-html');
 var Communities = require('../models/Communities.js');
 var Users = require('../models/Users.js');
 var Events = require('../models/Events.js');
+var Memberships = require('../models/Memberships.js');
 var Ideas = require('../models/Ideas.js');
 var Orgs = require('../models/Orgs.js');
 var Activity = require('../models/Activity.js');
@@ -69,27 +70,32 @@ router.get('/:id', function(req, res, next) {
       	res.redirect('/dashboard');
       }
       else {
-        res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user});
+      	Memberships.find({ "community" : req.params.id })
+      	.populate('user')
+      	.exec(function (err, memberships) {
+      	  res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user, members: memberships});
+      	});
       }
     });
 });
 
 /* Handle  POST */
 router.post('/:id/join', exports.update = function ( req, res ){
-	// add community to users
+	// create new membership
+	var newMembership = new Memberships({
+      user: req.user.id,
+      community: req.params.id
+    })
+    console.log("NEWMEMBERSHIP: " + newMembership)
+
+    newMembership.save( function ( err, user, count ){
+      if (err) return console.log(err);
+    });
+
+    // add community to users
 	Users.findByIdAndUpdate(
 		req.user.id,
 		{ "$addToSet" : { "communities" : req.params.id } },
-		{ upsert : true},
-		function(err, model) {
-        	console.log(err);
-   		}
-	);
-
-	// add user to communities
-	Communities.findByIdAndUpdate(
-		req.params.id,
-		{ "$addToSet" : { "members" : req.user.id } },
 		{ upsert : true},
 		function(err, model) {
         	console.log(err);
@@ -121,13 +127,7 @@ router.post('/:id/leave', exports.update = function ( req, res ){
    		}
 	);
 
-	Communities.findByIdAndUpdate(
-		req.params.id,
-		{ "$pull" : { "members" : req.user.id } },
-		function(err, model) {
-        	console.log(err);
-   		}
-	);
+	Memberships.find( { "user" : req.user.id, "community" : req.params.id }).remove().exec();    
 
 	// add to activity feed
 	var newActivity = new Activity({

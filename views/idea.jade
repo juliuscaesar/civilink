@@ -29,30 +29,12 @@ block content
     each item in tasks
       hr
       .row
-        .col-xs-1.col-sm-1.col-md-1
-          h4
-            center
-              b #{y}
-        .col-xs-7.col-sm-8.col-md-9
+        
+        .col-xs-8.col-sm-9.col-md-10
           h4 #{item.title}
           p #{item.desc}
           if (item.status.length != item.needed)
             p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
-
-          if item.assigned.length > 0
-            each person in item.assigned
-              .col-sm-3.col-md-3
-                .thumbnail
-                  .caption
-                    center
-                      if person.avatar
-                        img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
-                      else
-                        img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                      br
-                      a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
-                      br
-                      small   @#{person.username}
 
         .col-xs-4.col-sm-3.col-md-2
           // if logged in
@@ -63,7 +45,7 @@ block content
                 b.text-success Completed!
             else
               // If i'm a member of this community
-              if (data.community.members.toString().indexOf(user.id) != -1)
+              if (user.communities.indexOf(data.community.id) != -1)
                 // if I've already completed this task
                 if (item.status.toString().indexOf(user.id) != -1)
                   center
@@ -88,6 +70,23 @@ block content
                         form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
                           .form-group
                             button.btn.btn-success.btn-sm(type='submit') Assign me
+        if item.assigned.length > 0
+          .row
+            .col-xs-8.col-sm-9.col-md-10
+              each person in item.assigned
+                .col-xs-6.col-sm-4.col-md-3
+                  .thumbnail
+                    .caption
+                      center
+                        if person.avatar
+                          img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
+                        else
+                          img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                        br
+                        a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
+                        br
+                        small   @#{person.username}
+      - y=y + 1
 
 
 // feedback and discussion/comments

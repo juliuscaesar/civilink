@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Users = require('../models/Users.js');
 var Follow = require('../models/Follow.js');
+var Memberships = require('../models/Memberships.js');
 var Activity = require('../models/Activity.js');
 
 /* GET /people listing. */
@@ -27,11 +28,14 @@ router.get('/:username', function(req, res, next) {
           Follow.find({ "followee" : userId.id }, function (err, followers) {
             if (err) return console.log(err);
 
-            Activity.find({ "user" : userId.id})
-            .populate('user community idea task org')
-            .exec(function (err, activityData) {
-              res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, 
-                user: req.user, following: following, followers: followers, feed: activityData });
+            Memberships.find({ "user" : userId.id }, function (err, memberships) {
+
+              Activity.find({ "user" : userId.id})
+              .populate('user community idea task org')
+              .exec(function (err, activityData) {
+                res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, 
+                  user: req.user, following: following, followers: followers, feed: activityData, communities: memberships });
+              });
             });
 	        });
         });
