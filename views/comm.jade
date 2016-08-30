@@ -38,13 +38,12 @@ block content
   .content-box
     .headertext2 Projects
     hr
-    if user
-      if ( data.ideas.length == 0)
-        p No one has started any projects in this community yet. Start one now!
-      else
-        each item in data.ideas
-          a(href="/idea/#{item.id}") #{item.title}
-          p #{item.desc}
+    if ( data.ideas.length == 0 )
+      p No one has started any projects in this community yet.
+    else
+      each item in data.ideas
+        a(href="/idea/#{item.id}") #{item.title}
+        p #{item.desc}
 
 
 
