@@ -23,20 +23,23 @@ block content
     .headertext2 Members
       small  (#{members.length})
     hr
-    .row
-      each item in members
-        .col-xs-4.col-sm-2.col-md-2
-          .thumbnail
-            .caption
-              center
-                if item.user.avatar
-                  img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-                else
-                  img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                br
-                a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
-                br
-                small   @#{item.user.username}
+    if members.length == 0
+      p No one is a member of this community yet.
+    else
+      .row
+        each item in members
+          .col-xs-4.col-sm-2.col-md-2
+            .thumbnail
+              .caption
+                center
+                  if item.user.avatar
+                    img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                  else
+                    img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                  br
+                  a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
+                  br
+                  small   @#{item.user.username}
         
 
   .content-box
