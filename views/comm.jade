@@ -28,18 +28,19 @@ block content
     else
       .row
         each item in members
-          .col-xs-4.col-sm-2.col-md-2
+          .col-xs-6.col-sm-3.col-md-3
             .thumbnail
               .caption
-                center
-                  if item.user.avatar
-                    img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-                  else
-                    img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                  br
-                  a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
-                  br
-                  small   @#{item.user.username}
+                .row
+                  .col-xs-6.col-sm-6.col-md-5
+                    if item.user.avatar
+                      img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                    else
+                      img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                  .col-xs-6.col-sm-6.col-md-7
+                    a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
+                    br
+                    small   @#{item.user.username}
         
 
   .content-box

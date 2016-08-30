@@ -72,20 +72,21 @@ block content
                             button.btn.btn-success.btn-sm(type='submit') Assign me
         if item.assigned.length > 0
           .row
-            .col-xs-8.col-sm-9.col-md-10
+            .col-xs-12.col-sm-12.col-md-12
               each person in item.assigned
                 .col-xs-6.col-sm-4.col-md-3
                   .thumbnail
                     .caption
-                      center
-                        if person.avatar
-                          img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
-                        else
-                          img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                        br
-                        a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
-                        br
-                        small   @#{person.username}
+                      .row
+                        .col-xs-6.col-sm-6.col-md-5
+                          if person.avatar
+                            img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
+                          else
+                            img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                        .col-xs-6.col-sm-6.col-md-7
+                          a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
+                          br
+                          small   @#{person.username}
       - y=y + 1
 
 
