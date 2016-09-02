@@ -24,6 +24,56 @@ h4, .headertext2 {
 }
 
 
+.donate_sm {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  padding: 10px 18px;
+  margin: 0;
+  background: #D62126;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.donate_lg {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  padding: 28px 32px;
+  margin: 0;
+  background: #D62126;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.outline {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  padding: 10px 18px;
+  margin: 0;
+  background: #4a86e8;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  
+}
+
+.outline:hover{ background: #319AFA; }
+
+.donate_sm:hover, .donate_lg:hover{ background: #FF282E; }
+
 h2, .headertext1 {
   font-size: 22px;
   font-weight: bold;
@@ -34,6 +84,14 @@ h3, .headertext {
   font-size: 18px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
+}
+
+
+.white-section {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 15px;
+  border: 0px;
 }
 
 .error-message {
@@ -62,31 +120,6 @@ h3, .headertext {
   font-size: 36px;
   font-family: 'Roboto', sans-serif;
 }
-
-.outline {
-  background: none;
-  padding: 12px 22px;
-  border: 2px solid #4a86e8;
-  font-size: 18px;
-  text-decoration: none;
-  color: #4a86e8;
-}
-
-.outline:hover, .outline:focus, .outline:active, .outline.active, .open > .dropdown-toggle.btn-primary {
-  font-size: 18px;
-  text-decoration: none;
-  color: #33a6cc;
-  border-color: #33a6cc;
-}
-
-.outline:active, .outline.active {
-  border-color: #007299;
-  font-size: 18px;
-  text-decoration: none;
-  color: #007299;
-  box-shadow: none;
-}
-
 
 .navlink {
   font-family: 'Raleway', sans-serif;

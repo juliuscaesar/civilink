@@ -56,7 +56,7 @@ var orgs = require('./routes/orgs');
 var article = require('./routes/article');
 var petition = require('./routes/petition');
 var comm = require('./routes/comm');
-var people = require('./routes/people');
+var donate = require('./routes/donate');
 var signup = require('./routes/sign-up');
 var createcommunity = require('./routes/create-community');
 
@@ -100,7 +100,7 @@ app.use('/orgs', orgs);
 app.use('/article', article);
 app.use('/petition', petition);
 app.use('/comm', comm);
-app.use('/people', people);
+app.use('/donate', donate);
 app.use('/edit-profile', editprofile);
 app.use('/sign-up', signup);
 app.use('/create-community', createcommunity);
