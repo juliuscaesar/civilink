@@ -11,6 +11,19 @@ h4, .headertext2 {
   font-family: 'Roboto', sans-serif;
 }
 
+.landingpage {
+  font-size: 52px;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+}
+
+.landingpagesub {
+  font-size: 28px;
+  color: #666666;
+  font-family: 'Raleway', sans-serif;
+}
+
+
 h2, .headertext1 {
   font-size: 22px;
   font-weight: bold;
