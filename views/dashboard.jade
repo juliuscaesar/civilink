@@ -8,10 +8,11 @@ block content
       hr
       .row
         .col-xs-3.col-sm-2.col-md-1
-          if item.user.avatar
-            img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-          else
-            img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
+          center
+            if item.user.avatar
+              img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+            else
+              img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
         .col-xs-9.col-sm-10.col-md-11
           if (item.desttype == 'Communities')
             p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]

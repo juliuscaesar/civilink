@@ -19,23 +19,23 @@ block content
                 &middot; #{data.occ} at #{data.occplace}
       
         .row
-          .col-xs-2.col-md-1
+          .col-xs-2.col-sm-2.col-md-1
             center
               h4.text-primary #{data.points}
               small points
-          .col-xs-2.col-md-1
+          .col-xs-2.col-sm-2.col-md-1
             center
               h4.text-primary #{followers.length}
               small followers
-          .col-xs-2.col-md-1
+          .col-xs-2.col-sm-2.col-md-1
             center
               h4.text-primary #{following.length}
               small following
-          .col-xs-2.col-md-1
+          .col-xs-2.col-sm-2.col-md-1
             center
               h4.text-primary #{communities.length}
               small communities
-          .col-xs-4.col-md-3
+          .col-xs-4.col-sm-2.col-md-3
             br
             center
               if ( typeof user !== 'undefined' )
@@ -57,10 +57,11 @@ block content
       hr
       .row
         .col-xs-3.col-sm-2.col-md-1
-          if data.avatar
-            img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
-          else
-            img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+          center
+            if data.avatar
+              img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
+            else
+              img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
         .col-xs-9.col-sm-10.col-md-11
           if (item.desttype == 'Communities')
             p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
