@@ -5,6 +5,10 @@ p, a, li {
   font-size: 14px;
 }
 
+.comm-number {
+  font-size: 16px;
+}
+
 h4, .headertext2 {
   font-size: 16px;
   font-weight: bold;
@@ -101,24 +105,26 @@ h3, .headertext {
   color: red;
 }
 
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:10px !important; 
+    padding-bottom:0 !important;
+    height: 36px;
+}
+
 .navbar-default .navbar-brand {
   color: #ffffff;
-  font-size: 36px;
+  font-size: 32px;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
 }
+
+.navbar {min-height:36px !important;}
 
 .navbar-default .navbar-brand:hover {
   color: #e8e8e8;
-  font-size: 36px;
+  font-size: 32px;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-}
-
-.navbar-default .navbar-brand > a:hover {
-  color: #ffffff;
-  font-size: 36px;
-  font-family: 'Roboto', sans-serif;
 }
 
 .navlink {
@@ -126,11 +132,15 @@ h3, .headertext {
 }
 
 .nav.navbar-nav.navbar-right li a {
+  font-size: 13px;
+  font-weight: bold;
   color: #e8e8e8;
 }
 
 .nav.navbar-nav.navbar-right li a:hover {
   color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
 }
 
 h5 {
