@@ -229,6 +229,11 @@ body {
   max-width: 800px; /* or 950px */
 }
 
+.container-shrink {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 950px; /* or 950px */
+}
 
 .footer {
   position: absolute;
