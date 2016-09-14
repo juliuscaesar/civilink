@@ -31,19 +31,17 @@ block content
               else
                 .row
                   each item in members
-                    .col-xs-12.col-sm-12.col-md-12
-                      .thumbnail
-                        .caption
-                          .row
-                            .col-xs-6.col-sm-6.col-md-5
-                              if item.user.avatar
-                                img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-                              else
-                                img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                            .col-xs-6.col-sm-6.col-md-7
-                              a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
-                              br
-                              small   @#{item.user.username}
+                    .col-xs-4.col-sm-4.col-md-4
+                      center
+                        if item.user.avatar
+                          img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='45px' width='45px')
+                        else
+                          img(src="/images/anon.gif" class='img-circle' height='45px' width='45px')
+                        br
+                        a(href='/profile/#{item.user.username}') 
+                          small #{item.user.firstName}
+                        br
+                        br
                 
           .col-sm-8.col-md-8
             .content-box
