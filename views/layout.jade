@@ -15,6 +15,8 @@ html(ng-app='CiviLink')
     script(type='text/javascript', src='/javascripts/bootstrap.min.js')
     script(type='text/javascript', src='/javascripts/Chart.min.js')
     script(type='text/javascript', src='/javascripts/angular.js')
+
+
   body(ng-controller='CLController')
     .top-header
       nav.navbar.navbar-default.navbar-fixed-top.navbar-white
@@ -47,9 +49,16 @@ html(ng-app='CiviLink')
                       a.navlink(href='/profile/#{user.username}') View Profile
                     li
                       a(href='/edit-profile') Edit Profile
-                    li.divider(role='separator')
+                    li.divider(role='seperator')
                     li
                       a.navlink(href='/logout') Logout
+                  li.divider.visible-xs-block(role='separator')
+                  li.visible-xs-block
+                    a(href='/dashboard') Activity Feed
+                  li.visible-xs-block
+                    a(href='/communities') Communities
+                  li.visible-xs-block
+                    a(href='/tasks') My Tasks
               else
                 li
                   a(href='/sign-up') Create an account

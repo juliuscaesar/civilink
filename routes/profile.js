@@ -28,7 +28,9 @@ router.get('/:username', function(req, res, next) {
           Follow.find({ "followee" : userId.id }, function (err, followers) {
             if (err) return console.log(err);
 
-            Memberships.find({ "user" : userId.id }, function (err, memberships) {
+            Memberships.find({ "user" : userId.id })
+            .populate('community')
+            .exec(function (err, memberships) {
 
               Activity.find({ "user" : userId.id})
               .populate('user community idea task org')
@@ -37,7 +39,7 @@ router.get('/:username', function(req, res, next) {
                   user: req.user, following: following, followers: followers, feed: activityData, communities: memberships });
               });
             });
-	        });
+          });
         });
       });
     }

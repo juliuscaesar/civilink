@@ -3,90 +3,109 @@ extends layout
 block content
   .container-body
     .row
-      .col-sm-2
+      .col-sm-2.hidden-xs
         include sidebar
       .col-sm-10
-        .content-box
-          .row
-            .col-sm-3.col-md-3
+        .row
+          .col-sm-4.col-md-4
+            .content-box
+              .headertext #{data.firstName} #{data.lastName}
+                small    @#{data.username}
+
+              hr
+
               center
                 if data.avatar
                   img(src="/images/uploads/#{data.avatar}" class='img-circle' height='150px' width='150px')
                 else
                   img(src="/images/anon.gif" class='img-circle' height='150px' width='150px')
-            .col-sm-9.col-md-9
-              .headertext1 #{data.firstName} #{data.lastName}
-                small    @#{data.username}
-              p #{data.bio}
+
+                br
+                br
+                if ( typeof user !== 'undefined' )
+                  if (data.id == user.id) 
+                    // This user
+                  else if ( followers.toString().indexOf(user.id) == -1)
+                    form.form-horizontal(class='form-follow', action='/profile/#{data.username}/follow/#{data.id}', method='POST')
+                      .form-group
+                        button.btn.btn-success.btn-sm.btn-full(type='submit') Follow
+                    hr
+                  else
+                    form.form-horizontal(class='form-unfollow', action='/profile/#{data.username}/unfollow/#{data.id}', method='POST')
+                      .form-group
+                        button.btn.btn-danger.btn-sm.btn-full(type='submit') Unfollow
+                    hr
+                if data.bio
+                  p #{data.bio}
+                  hr
               if data.state
-                p #{data.city}, #{data.state} 
-                    if data.occ
-                      &middot; #{data.occ} at #{data.occplace}
-            
+                small #{data.city}, #{data.state} 
+                br
+              if data.occ
+                small #{data.occ} at #{data.occplace}
+
+
+          
+              hr
               .row
-                .col-xs-2.col-sm-2.col-md-1
+                .col-xs-4.col-sm-4.col-md-4
                   center
                     h4.text-primary #{data.points}
                     small points
-                .col-xs-2.col-sm-2.col-md-1
+                .col-xs-4.col-sm-4.col-md-4
                   center
                     h4.text-primary #{followers.length}
                     small followers
-                .col-xs-2.col-sm-2.col-md-1
+                .col-xs-4.col-sm-4.col-md-4
                   center
                     h4.text-primary #{following.length}
                     small following
-                .col-xs-2.col-sm-2.col-md-1
-                  center
-                    h4.text-primary #{communities.length}
-                    small communities
-                .col-xs-4.col-sm-2.col-md-3
-                  br
-                  center
-                    if ( typeof user !== 'undefined' )
-                      if (data.id == user.id) 
-                        // This user
-                      else if ( followers.toString().indexOf(user.id) == -1)
-                        form.form-horizontal(class='form-follow', action='/profile/#{data.username}/follow/#{data.id}', method='POST')
-                          .form-group
-                            button.btn.btn-success.btn-sm(type='submit') Follow
+
+            .content-box
+              .headertext2 Communities (#{communities.length})
+              hr
+              .row
+                each item in communities
+                  .col-xs-12.col-sm-12.col-md-12
+                      .thumbnail
+                        .caption
+                          center
+                            a(href='/community/#{item.community.id}')
+                              .headertext2 #{item.community.name}
+                
+          .col-sm-8.col-md-8
+
+            .content-box
+              .headertext2 Activity feed
+              each item in feed.reverse()
+                hr
+                .row
+                  .col-xs-3.col-sm-3.col-md-2
+                    center
+                      if data.avatar
+                        img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
                       else
-                        form.form-horizontal(class='form-unfollow', action='/profile/#{data.username}/unfollow/#{data.id}', method='POST')
-                          .form-group
-                            button.btn.btn-danger.btn-sm(type='submit') Unfollow
+                        img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                  .col-xs-9.col-sm-9.col-md-10
+                    if (item.desttype == 'Communities')
+                      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+                    else if (item.desttype == 'Ideas')
+                      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+                    else if (item.desttype == 'Tasks')
+                      p 
+                        #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+                    else if (item.desttype == 'Orgs')
+                      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
+                    else
+                      p hey
 
-
-        .content-box
-          .headertext2 Activity feed
-          each item in feed.reverse()
-            hr
-            .row
-              .col-xs-2.col-sm-2.col-md-1
-                center
-                  if data.avatar
-                    img(src="/images/uploads/#{data.avatar}" class='img-circle' height='50px' width='50px')
-                  else
-                    img(src="/images/anon.gif" class='img-circle' height='50px' width='50px')
-              .col-xs-10.col-sm-10.col-md-11
-                if (item.desttype == 'Communities')
-                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
-                else if (item.desttype == 'Ideas')
-                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
-                else if (item.desttype == 'Tasks')
-                  p 
-                    #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
-                else if (item.desttype == 'Orgs')
-                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
-                else
-                  p hey
-
-          //ol.breadcrumb
-          //  li.active Causes: #{data.causes}
-          //h4 Hours Volunteered
-          //  small  (verified, total)
-          //h4 Events Organized
-          //  small  (also attended)
-          //h4 Progress of Ideas
-          //h4 Requests feed
-          //h4 Articles
-          //h4 Most active orgs
+              //ol.breadcrumb
+              //  li.active Causes: #{data.causes}
+              //h4 Hours Volunteered
+              //  small  (verified, total)
+              //h4 Events Organized
+              //  small  (also attended)
+              //h4 Progress of Ideas
+              //h4 Requests feed
+              //h4 Articles
+              //h4 Most active orgs

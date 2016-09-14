@@ -351,6 +351,10 @@ a:hover {
   background-color: #fff;
 }
 
+.btn-full {
+  width: 90%;
+}
+
 .has-feedback .form-control-feedback {
   top: 0;
   left: 0;
