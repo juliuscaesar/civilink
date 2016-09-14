@@ -1,94 +1,90 @@
 extends layout
 
 block content
-  
-  ol.breadcrumb.bar-white
-    li #[a(href='/community/#{data.community.id}') #{data.community.name}]
-    li Projects
-    li.active #{data.title}
-  
+  .container-body
+    .row
+      .col-sm-2
+        include sidebar
+      .col-sm-10
+        .content-box
+            .headertext1 #{data.title}
+            p #{data.desc}
+            p Organizer: #[a(href='/profile/#{data.user.username}') #{data.user.firstName} #{data.user.lastName}]
 
-  .content-box
-      .headertext1 #{data.title}
-      p #{data.desc}
-      p Organizer: #[a(href='/profile/#{data.user.username}') #{data.user.firstName} #{data.user.lastName}]
-  if user
-    if (data.user.id == user.id)
-      .content-box
-        .headertext2 Manage Project
-        hr
-        p
-          a(href='/idea/#{data.id}/create-task') Create Task
+        .content-box
+          .headertext2 Tasks 
+            if user
+              if (data.user.id == user.id)
+                small (
+                  a(href='/idea/#{data.id}/create-task') create new
+                  | )
+          if (tasks.length == 0)
+            hr
+            p There are no tasks for this project yet.
+          - var y = 1
+          each item in tasks
+            hr
+            .row
+              
+              .col-xs-8.col-sm-9.col-md-10
+                h4 #{item.title}
+                p #{item.desc}
+                if (item.status.length != item.needed)
+                  p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
 
-  .content-box
-    .headertext2 Tasks
-    if (tasks.length == 0)
-      hr
-      p There are no tasks for this project yet.
-    - var y = 1
-    each item in tasks
-      hr
-      .row
-        
-        .col-xs-8.col-sm-9.col-md-10
-          h4 #{item.title}
-          p #{item.desc}
-          if (item.status.length != item.needed)
-            p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
-
-        .col-xs-4.col-sm-3.col-md-2
-          // if logged in
-          if user
-            // if the task is marked complete
-            if (item.status.length == item.needed)
-              center
-                b.text-success Completed!
-            else
-              // If i'm a member of this community
-              if (user.communities.indexOf(data.community.id) != -1)
-                // if I've already completed this task
-                if (item.status.toString().indexOf(user.id) != -1)
-                  center
-                    form.form-horizontal()
-                      .form-group
-                        button.btn.disabled.btn-sm(type='button') Awarded
-                else
-                  // if this task is full and i'm NOT assigned.
-                  if (item.assigned.length == item.needed && item.assigned.toString().indexOf(user.id) == -1)
+              .col-xs-4.col-sm-3.col-md-2
+                // if logged in
+                if user
+                  // if the task is marked complete
+                  if (item.status.length == item.needed)
                     center
-                      form.form-horizontal()
-                        .form-group
-                          button.btn.disabled.btn-sm(type='button') Assignment full
+                      b.text-success Completed!
                   else
-                    if (item.assigned.toString().indexOf(user.id) != -1)
-                      center
-                        form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
-                          .form-group
-                            button.btn.btn-danger.btn-sm(type='submit') Unassign me
-                    else
-                      center
-                        form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
-                          .form-group
-                            button.btn.btn-success.btn-sm(type='submit') Assign me
-        if item.assigned.length > 0
-          .row
-            .col-xs-12.col-sm-12.col-md-12
-              each person in item.assigned
-                .col-xs-6.col-sm-4.col-md-3
-                  .thumbnail
-                    .caption
-                      .row
-                        .col-xs-6.col-sm-6.col-md-5
-                          if person.avatar
-                            img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
+                    // If i'm a member of this community
+                    if (user.communities.indexOf(data.community.id) != -1)
+                      // if I've already completed this task
+                      if (item.status.toString().indexOf(user.id) != -1)
+                        center
+                          form.form-horizontal()
+                            .form-group
+                              button.btn.disabled.btn-sm(type='button') Awarded
+                      else
+                        // if this task is full and i'm NOT assigned.
+                        if (item.assigned.length == item.needed && item.assigned.toString().indexOf(user.id) == -1)
+                          center
+                            form.form-horizontal()
+                              .form-group
+                                button.btn.disabled.btn-sm(type='button') Assignment full
+                        else
+                          if (item.assigned.toString().indexOf(user.id) != -1)
+                            center
+                              form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
+                                .form-group
+                                  button.btn.btn-danger.btn-sm(type='submit') Unassign me
                           else
-                            img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                        .col-xs-6.col-sm-6.col-md-7
-                          a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
-                          br
-                          small   @#{person.username}
-      - y=y + 1
+                            center
+                              form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
+                                .form-group
+                                  button.btn.btn-success.btn-sm(type='submit') Assign me
+              if item.assigned.length > 0
+                .row
+                  .col-xs-12.col-sm-12.col-md-12
+                    each person in item.assigned
+                      .col-xs-6.col-sm-4.col-md-3
+                        .thumbnail
+                          .caption
+                            .row
+                              .col-xs-6.col-sm-6.col-md-5
+                                if person.avatar
+                                  img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
+                                else
+                                  img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                              .col-xs-6.col-sm-6.col-md-7
+                                a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
+                                br
+                                small   @#{person.username}
+            - y=y + 1
 
 
-// feedback and discussion/comments
-// updates from admins
+      // feedback and discussion/comments
+      // updates from admins

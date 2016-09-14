@@ -73,7 +73,11 @@ router.get('/:id', function(req, res, next) {
       	Memberships.find({ "community" : req.params.id })
       	.populate('user')
       	.exec(function (err, memberships) {
-      	  res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user, members: memberships});
+          Activity.find({ "community" : req.params.id })
+          .populate('user community idea task org')
+          .exec(function (err, activityData) {
+      	    res.render('comm', { title: commun.name + ' - ', data: commun, user: req.user, members: memberships, feed: activityData});
+          });
       	});
       }
     });

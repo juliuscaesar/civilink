@@ -1,111 +1,116 @@
 extends layout
 
 block content
-  .content-box
-    .headertext2 Edit Profile 
-      small  Logged in as #{user.firstName} #{user.lastName} (@#{user.username})
-    hr
-    form.form-horizontal(class='form-editprofile', action='/edit-profile', method='POST')
-      .form-group
-        label.col-sm-2.control-label(for='newFirstName') First Name
-        .col-sm-4
-          input#newFirstName.form-control(type='text', name='newFirstName', value='#{user.firstName}')
-      .form-group
-        label.col-sm-2.control-label(for='newLastName') Last Name
-        .col-sm-4
-          input#newLastName.form-control(type='text', name='newLastName',  value='#{user.lastName}')
-      .form-group
-        label.col-sm-2.control-label(for='newCity') City
-        .col-sm-4
-          input#newCity.form-control(type='text', name='newCity',  value='#{user.city}')
-      .form-group
-        label.col-sm-2.control-label(for='newState') State
-        .col-sm-4
-          select#newState.form-control(name='newState')
-            option(value='#{user.state}', selected='selected') #{user.state}
-            option(value='AK') Alaska
-            option(value='AL') Alabama
-            option(value='AR') Arkansas
-            option(value='AZ') Arizona
-            option(value='CA') California
-            option(value='CO') Colorado
-            option(value='CT') Connecticut
-            option(value='DC') District of Columbia
-            option(value='DE') Delaware
-            option(value='FL') Florida
-            option(value='GA') Georgia
-            option(value='HI') Hawaii
-            option(value='IA') Iowa
-            option(value='ID') Idaho
-            option(value='IL') Illinois
-            option(value='IN') Indiana
-            option(value='KS') Kansas
-            option(value='KY') Kentucky
-            option(value='LA') Louisiana
-            option(value='MA') Massachusetts
-            option(value='MD') Maryland
-            option(value='ME') Maine
-            option(value='MI') Michigan
-            option(value='MN') Minnesota
-            option(value='MO') Missouri
-            option(value='MS') Mississippi
-            option(value='MT') Montana
-            option(value='NC') North Carolina
-            option(value='ND') North Dakota
-            option(value='NE') Nebraska
-            option(value='NH') New Hampshire
-            option(value='NJ') New Jersey
-            option(value='NM') New Mexico
-            option(value='NV') Nevada
-            option(value='NY') New York
-            option(value='OH') Ohio
-            option(value='OK') Oklahoma
-            option(value='OR') Oregon
-            option(value='PA') Pennsylvania
-            option(value='PR') Puerto Rico
-            option(value='RI') Rhode Island
-            option(value='SC') South Carolina
-            option(value='SD') South Dakota
-            option(value='TN') Tennessee
-            option(value='TX') Texas
-            option(value='UT') Utah
-            option(value='VA') Virginia
-            option(value='VT') Vermont
-            option(value='WA') Washington
-            option(value='WI') Wisconsin
-            option(value='WV') West Virginia
-            option(value='WY') Wyoming
-      .form-group
-        label.col-sm-2.control-label(for='newOcc') Occupation
-        .col-sm-4
-          input#newOcc.form-control(type='text', name='newOcc',  value='#{user.occ}')
-      .form-group
-        label.col-sm-2.control-label(for='newOccplace') Place of occupation/study
-        .col-sm-4
-          input#newOccplace.form-control(type='text', name='newOccplace',  value='#{user.occplace}')
-      .form-group
-        label.col-sm-2.control-label(for='newBio') Bio
-        .col-sm-4
-          textarea#newBio.form-control(type='text', name='newBio') #{user.bio}
-      .form-group
-        .col-sm-offset-2.col-sm-10
-          button.btn.btn-default(type='submit') Save
+  .container-body
+    .row
+      .col-sm-2
+        include sidebar
+      .col-sm-10
+        .content-box
+          .headertext2 Edit Profile 
+            small  Logged in as #{user.firstName} #{user.lastName} (@#{user.username})
+          hr
+          form.form-horizontal(class='form-editprofile', action='/edit-profile', method='POST')
+            .form-group
+              label.col-sm-2.control-label(for='newFirstName') First Name
+              .col-sm-4
+                input#newFirstName.form-control(type='text', name='newFirstName', value='#{user.firstName}')
+            .form-group
+              label.col-sm-2.control-label(for='newLastName') Last Name
+              .col-sm-4
+                input#newLastName.form-control(type='text', name='newLastName',  value='#{user.lastName}')
+            .form-group
+              label.col-sm-2.control-label(for='newCity') City
+              .col-sm-4
+                input#newCity.form-control(type='text', name='newCity',  value='#{user.city}')
+            .form-group
+              label.col-sm-2.control-label(for='newState') State
+              .col-sm-4
+                select#newState.form-control(name='newState')
+                  option(value='#{user.state}', selected='selected') #{user.state}
+                  option(value='AK') Alaska
+                  option(value='AL') Alabama
+                  option(value='AR') Arkansas
+                  option(value='AZ') Arizona
+                  option(value='CA') California
+                  option(value='CO') Colorado
+                  option(value='CT') Connecticut
+                  option(value='DC') District of Columbia
+                  option(value='DE') Delaware
+                  option(value='FL') Florida
+                  option(value='GA') Georgia
+                  option(value='HI') Hawaii
+                  option(value='IA') Iowa
+                  option(value='ID') Idaho
+                  option(value='IL') Illinois
+                  option(value='IN') Indiana
+                  option(value='KS') Kansas
+                  option(value='KY') Kentucky
+                  option(value='LA') Louisiana
+                  option(value='MA') Massachusetts
+                  option(value='MD') Maryland
+                  option(value='ME') Maine
+                  option(value='MI') Michigan
+                  option(value='MN') Minnesota
+                  option(value='MO') Missouri
+                  option(value='MS') Mississippi
+                  option(value='MT') Montana
+                  option(value='NC') North Carolina
+                  option(value='ND') North Dakota
+                  option(value='NE') Nebraska
+                  option(value='NH') New Hampshire
+                  option(value='NJ') New Jersey
+                  option(value='NM') New Mexico
+                  option(value='NV') Nevada
+                  option(value='NY') New York
+                  option(value='OH') Ohio
+                  option(value='OK') Oklahoma
+                  option(value='OR') Oregon
+                  option(value='PA') Pennsylvania
+                  option(value='PR') Puerto Rico
+                  option(value='RI') Rhode Island
+                  option(value='SC') South Carolina
+                  option(value='SD') South Dakota
+                  option(value='TN') Tennessee
+                  option(value='TX') Texas
+                  option(value='UT') Utah
+                  option(value='VA') Virginia
+                  option(value='VT') Vermont
+                  option(value='WA') Washington
+                  option(value='WI') Wisconsin
+                  option(value='WV') West Virginia
+                  option(value='WY') Wyoming
+            .form-group
+              label.col-sm-2.control-label(for='newOcc') Occupation
+              .col-sm-4
+                input#newOcc.form-control(type='text', name='newOcc',  value='#{user.occ}')
+            .form-group
+              label.col-sm-2.control-label(for='newOccplace') Place of occupation/study
+              .col-sm-4
+                input#newOccplace.form-control(type='text', name='newOccplace',  value='#{user.occplace}')
+            .form-group
+              label.col-sm-2.control-label(for='newBio') Bio
+              .col-sm-4
+                textarea#newBio.form-control(type='text', name='newBio') #{user.bio}
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default(type='submit') Save
 
-    #message
-      if message
-        h1.text-center.error-message #{message}
+          #message
+            if message
+              h1.text-center.error-message #{message}
 
-    h3 Profile picture
-    hr
-    if user.avatar
-      img(src="images/uploads/#{user.avatar}" class='img-circle' height='64px' width='64px')
-    else
-      img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
-    p
-    form(method="post",enctype="multipart/form-data",action="/edit-profile/picture")
-      p
-        input(type="text",name="title",placeholder="title")
-      p
-        input(type="file",name="upl",accept="image/*")
-      p
-        input(type="submit")
+          h3 Profile picture
+          hr
+          if user.avatar
+            img(src="images/uploads/#{user.avatar}" class='img-circle' height='64px' width='64px')
+          else
+            img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
+          p
+          form(method="post",enctype="multipart/form-data",action="/edit-profile/picture")
+            p
+              input(type="text",name="title",placeholder="title")
+            p
+              input(type="file",name="upl",accept="image/*")
+            p
+              input(type="submit")

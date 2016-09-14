@@ -1,60 +1,64 @@
 extends layout
 
 block content
+  .container-body
+    .row
+      .col-sm-2
+        include sidebar
+      .col-sm-10
+        .content-box
+          .headertext My Tasks
+          if assignedTasks.length == 0
+            hr
+            p You aren't assigned to any tasks yet. Go check out some cool projects going on in your communities and start getting active!
+          - x = 1
+          each item in assignedTasks
+            hr
+            .row
+              .col-xs-1.col-sm-1.col-md-1
+                h4
+                  center
+                    b #{x}
+              .col-xs-7.col-sm-8.col-md-9
+                b #{item.title}
+                small  (#{item.points} points)
+                p #{item.desc}
+                p Project: 
+                  a(href='/idea/#{item.project.id}') #{item.project.title}
+              if (pendingPoints.toString().indexOf(item.id) != -1)
+                .col-xs-4.col-sm-3.col-md-2
+                  center
+                    button.btn.disabled.btn-sm(type='button') Pending
+              else
+                .col-xs-4.col-sm-3.col-md-2
+                    center
+                      form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
+                        .form-group
+                          button.btn.btn-danger.btn-sm(type='submit') Unassign
 
-  .content-box
-    .headertext My Tasks
-    if assignedTasks.length == 0
-      hr
-      p You aren't assigned to any tasks yet. Go check out some cool projects going on in your communities and start getting active!
-    - x = 1
-    each item in assignedTasks
-      hr
-      .row
-        .col-xs-1.col-sm-1.col-md-1
-          h4
-            center
-              b #{x}
-        .col-xs-7.col-sm-8.col-md-9
-          b #{item.title}
-          small  (#{item.points} points)
-          p #{item.desc}
-          p Project: 
-            a(href='/idea/#{item.project.id}') #{item.project.title}
-        if (pendingPoints.toString().indexOf(item.id) != -1)
-          .col-xs-4.col-sm-3.col-md-2
-            center
-              button.btn.disabled.btn-sm(type='button') Pending
-        else
-          .col-xs-4.col-sm-3.col-md-2
-              center
-                form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
-                  .form-group
-                    button.btn.btn-danger.btn-sm(type='submit') Unassign
+                      form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/complete', method='POST')
+                        .form-group
+                          button.btn.btn-primary.btn-sm(type='submit') Complete
+            - x = x+1
 
-                form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/complete', method='POST')
-                  .form-group
-                    button.btn.btn-primary.btn-sm(type='submit') Complete
-      - x = x+1
-
-  .content-box
-    .headertext Organizer Panel
-    if pendingGrants.length == 0
-      hr
-      p When you create a project in one of your communities and add tasks to it, you'll be in charge of rewarding points after users complete them.
-    each item in pendingGrants
-      hr
-      .row
-        .col-xs-1.col-sm-1.col-md-1
-          if item.user.avatar
-            img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-          else
-            img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
-        .col-xs-7.col-sm-8.col-md-9
-          p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] has completed task: #{item.task.title}
-            small  (#{item.task.points} points)
-        .col-xs-4.col-sm-3.col-md-2
-          center
-                form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/award/', method='POST')
-                  .form-group
-                    button.btn.btn-warning.btn-sm(type='submit') Award points
+        .content-box
+          .headertext Organizer Panel
+          if pendingGrants.length == 0
+            hr
+            p When you create a project in one of your communities and add tasks to it, you'll be in charge of rewarding points after users complete them.
+          each item in pendingGrants
+            hr
+            .row
+              .col-xs-1.col-sm-1.col-md-1
+                if item.user.avatar
+                  img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                else
+                  img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
+              .col-xs-7.col-sm-8.col-md-9
+                p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] has completed task: #{item.task.title}
+                  small  (#{item.task.points} points)
+              .col-xs-4.col-sm-3.col-md-2
+                center
+                      form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/award/', method='POST')
+                        .form-group
+                          button.btn.btn-warning.btn-sm(type='submit') Award points

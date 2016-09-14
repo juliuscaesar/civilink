@@ -1,76 +1,85 @@
 extends layout
 
 block content
-  .row
-    .col-sm-8
-      br
-      br
-      .landingpage Welcome to CiviLink
-      br 
-      .landingpagesub a social platform for community engagement.
-    .col-sm-4
+  .about
+
+  .odd
+    .container-body
       .row
-        .content-box
-          div
-            p.text-center.login-title Sign in
-              div.account-wall
-                form(class='form-signin', action='/login', method='POST')
-                  input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
-                  input(type='password', name='password' class='form-control', placeholder='Password', required)
-                  button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
-                  span.clearfix
-              #message
-              if message
-                br
-                p.text-center.error-message #{message}
-                br
+        .col-sm-8
+          br
+          br
+          .landingpage Welcome to CiviLink
+          br 
+          .landingpagesub a social platform for community engagement.
+        .col-sm-4
+          .row
+            .content-box
+              div
+                p.text-center.login-title Sign in
+                  div.account-wall
+                    form(class='form-signin', action='/login', method='POST')
+                      input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+                      input(type='password', name='password' class='form-control', placeholder='Password', required)
+                      button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
+                      span.clearfix
+                  #message
+                  if message
+                    br
+                    p.text-center.error-message #{message}
+                    br
 
-              a(href='/sign-up', class='text-center') Create an account
-
-
-  center
-    hr
-    h1 How it works
+                  a(href='/sign-up', class='text-center') Create an account
     br
 
-    .row
-      .col-sm-3
-        center
-          h2 Join a community
-            br
-            small Whether it's your city, school, or other organization you're a member of.
-      .col-sm-3
-        center
-          h2 Share an idea
-            br
-            small Tell other people how you want to improve the community.
-      .col-sm-3
-        center
-          h2 Complete tasks
-            br
-            small Help turn good ideas for your community into a reality by completing tasks whenever.
-      .col-sm-3
-        center
-          h2 Get points
-            br
-            small The more you do for your community, the more points you gain.
-    
-    br
-    hr
-    h1 Like the idea?
-    
-    .row
-      .col-sm-6
-        h2 Donate
-        p Help us make it reality.
+  .container-body
+    center
+      h1 How it works
+      br
 
-        a(href='/donate')
-          .donate_sm Donate now!
+      .row
+        .col-sm-3
+          center
+            h2 Join a community
+              br
+              small Whether it's your city, school, or other organization you're a member of.
+        .col-sm-3
+          center
+            h2 Share an idea
+              br
+              small Tell other people how you want to improve the community.
+        .col-sm-3
+          center
+            h2 Complete tasks
+              br
+              small Help turn good ideas for your community into a reality by completing tasks whenever.
+        .col-sm-3
+          center
+            h2 Get points
+              br
+              small The more you do for your community, the more points you gain.
+      br
+      br
 
-      .col-sm-6
-        h2 Sign up
-        p Get involved today!
-
-        a(href='/sign-up')
-          .outline Sign up now!
+  .odd  
+    .container-body 
+      center
+        h1 Like the idea?
         
+        .row
+          .col-sm-6
+            h2 Donate
+            p Help us make it reality.
+
+            a(href='/donate')
+              .donate_sm Donate now!
+
+          .col-sm-6
+            h2 Sign up
+            p Get involved today!
+
+            a(href='/sign-up')
+              .outline Sign up now!
+    br
+    br
+            

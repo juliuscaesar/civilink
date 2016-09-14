@@ -57,6 +57,7 @@ var article = require('./routes/article');
 var petition = require('./routes/petition');
 var comm = require('./routes/comm');
 var donate = require('./routes/donate');
+var about = require('./routes/about');
 var signup = require('./routes/sign-up');
 var createcommunity = require('./routes/create-community');
 
@@ -104,6 +105,7 @@ app.use('/donate', donate);
 app.use('/edit-profile', editprofile);
 app.use('/sign-up', signup);
 app.use('/create-community', createcommunity);
+app.use('/about', about);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

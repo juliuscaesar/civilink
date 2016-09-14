@@ -1,70 +1,102 @@
 extends layout
 
 block content
-  ol.breadcrumb.bar-white
-    li #[a(href='/community') Communities]
-    li.active #{data.name}
-  .content-box
-    .headertext1 #{data.name}
-    p #{data.desc}
+  .container-body
+    .row
+      .col-sm-2
+        include sidebar
+      .col-sm-10
+        .content-box
+          .headertext1 #{data.name}
 
-    .container
-      if user
-        if ( user.communities.indexOf(data.id) != -1)
-          form.form-horizontal(class='form-leavecommunity', action='/community/#{data.id}/leave', method='POST')
-            .form-group
-              button.btn.btn-danger.btn-sm(type='submit') Leave community
-        else     
-          form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
-            .form-group
-              button.btn.btn-success.btn-sm(type='submit') Join community
+          p
+          br
 
-  .content-box
-    .headertext2 Members
-      small  (#{members.length})
-    hr
-    if members.length == 0
-      p No one is a member of this community yet.
-    else
-      .row
-        each item in members
-          .col-xs-6.col-sm-3.col-md-3
-            .thumbnail
-              .caption
-                .row
-                  .col-xs-6.col-sm-6.col-md-5
-                    if item.user.avatar
-                      img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-                    else
-                      img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                  .col-xs-6.col-sm-6.col-md-7
-                    a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
-                    br
-                    small   @#{item.user.username}
-        
+          .container
+            if user
+              if ( user.communities.indexOf(data.id) != -1)
+                form.form-horizontal(class='form-leavecommunity', action='/community/#{data.id}/leave', method='POST')
+                  .form-group
+                    button.btn.btn-danger.btn-sm(type='submit') Leave community
+              else     
+                form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
+                  .form-group
+                    button.btn.btn-success.btn-sm(type='submit') Join community
 
-  .content-box
-    .headertext2 Projects 
-      small (
-        a(href='/community/#{data.id}/create-idea') create new
-        | )
-    hr
-    if ( data.ideas.length == 0 )
-      p No one has started any projects in this community yet.
-    else
-      each item in data.ideas
-        a(href="/idea/#{item.id}") #{item.title}
-        p #{item.desc}
+        .content-box
+          .headertext2 Members
+            small  (#{members.length})
+          hr
+          if members.length == 0
+            p No one is a member of this community yet.
+          else
+            .row
+              each item in members
+                .col-xs-6.col-sm-3.col-md-3
+                  .thumbnail
+                    .caption
+                      .row
+                        .col-xs-6.col-sm-6.col-md-5
+                          if item.user.avatar
+                            img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                          else
+                            img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                        .col-xs-6.col-sm-6.col-md-7
+                          a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}
+                          br
+                          small   @#{item.user.username}
+              
+
+        .content-box
+          .headertext2 Projects 
+            if user
+
+              small (
+                a(href='/community/#{data.id}/create-idea') create new
+                | )
+          if ( data.ideas.length == 0 )
+            hr
+            p No one has started any projects in this community yet.
+          else
+            each item in data.ideas
+              hr
+              a(href="/idea/#{item.id}") 
+                .headertext2 #{item.title}
+              p #{item.desc}
+
+        .content-box
+          .headertext Activity Feed
+          each item in feed.reverse()
+            hr
+            .row
+              .col-xs-2.col-sm-2.col-md-1
+                center
+                  if item.user.avatar
+                    img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='50px' width='50px')
+                  else
+                    img(src="/images/anon.gif" class='img-circle' height='50px' width='50px')
+              .col-xs-10.col-sm-10.col-md-11
+                if (item.desttype == 'Communities')
+                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+                else if (item.desttype == 'Ideas')
+                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+                else if (item.desttype == 'Tasks')
+                  p 
+                    #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+                else if (item.desttype == 'Orgs')
+                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
+                else
+                  p hey
 
 
 
 
-  //h4 Engagement stats
-  //p Monthly requests fulfilled, points, etc. Charts and data!
-  //h4 Members
-  //h4 Community bulletin board
-  //p Sort by causes and tags
-  //h4 Get involved
-  //p Sort by causes and tags
-  //h4 Trending ideas
-  //h4 Awesome people
+        //h4 Engagement stats
+        //p Monthly requests fulfilled, points, etc. Charts and data!
+        //h4 Members
+        //h4 Community bulletin board
+        //p Sort by causes and tags
+        //h4 Get involved
+        //p Sort by causes and tags
+        //h4 Trending ideas
+        //h4 Awesome people

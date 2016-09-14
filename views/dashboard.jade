@@ -1,27 +1,31 @@
 extends layout
 
 block content
-
-  .content-box
-    .headertext Activity Feed
-    each item in feed.reverse()
-      hr
-      .row
-        .col-xs-3.col-sm-2.col-md-1
-          center
-            if item.user.avatar
-              img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
-            else
-              img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
-        .col-xs-9.col-sm-10.col-md-11
-          if (item.desttype == 'Communities')
-            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
-          else if (item.desttype == 'Ideas')
-            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
-          else if (item.desttype == 'Tasks')
-            p 
-              #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
-          else if (item.desttype == 'Orgs')
-            p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
-          else
-            p hey
+  .container-body
+    .row
+      .col-sm-2
+        include sidebar
+      .col-sm-10
+        .content-box
+          .headertext Activity Feed
+          each item in feed.reverse()
+            hr
+            .row
+              .col-xs-2.col-sm-2.col-md-1
+                center
+                  if item.user.avatar
+                    img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='50px' width='50px')
+                  else
+                    img(src="images/anon.gif" class='img-circle' height='50px' width='50px')
+              .col-xs-10.col-sm-10.col-md-11
+                if (item.desttype == 'Communities')
+                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+                else if (item.desttype == 'Ideas')
+                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+                else if (item.desttype == 'Tasks')
+                  p 
+                    #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+                else if (item.desttype == 'Orgs')
+                  p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
+                else
+                  p hey
