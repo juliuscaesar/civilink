@@ -77,27 +77,31 @@ block content
 
             .content-box
               .headertext2 Activity feed
-              each item in feed.reverse()
+              if ( feed.length == 0 )
                 hr
-                .row
-                  .col-xs-3.col-sm-3.col-md-2
-                    center
-                      if data.avatar
-                        img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
+                p #{data.firstName} hasn't done anything yet.
+              else
+                each item in feed.reverse()
+                  hr
+                  .row
+                    .col-xs-3.col-sm-3.col-md-2
+                      center
+                        if data.avatar
+                          img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
+                        else
+                          img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                    .col-xs-9.col-sm-9.col-md-10
+                      if (item.desttype == 'Communities')
+                        p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+                      else if (item.desttype == 'Ideas')
+                        p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+                      else if (item.desttype == 'Tasks')
+                        p 
+                          #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+                      else if (item.desttype == 'Orgs')
+                        p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
                       else
-                        img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                  .col-xs-9.col-sm-9.col-md-10
-                    if (item.desttype == 'Communities')
-                      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
-                    else if (item.desttype == 'Ideas')
-                      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
-                    else if (item.desttype == 'Tasks')
-                      p 
-                        #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
-                    else if (item.desttype == 'Orgs')
-                      p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
-                    else
-                      p hey
+                        p hey
 
               //ol.breadcrumb
               //  li.active Causes: #{data.causes}
