@@ -67,14 +67,17 @@ block content
             .content-box
               .headertext2 Communities (#{communities.length})
               hr
-              .row
-                each item in communities
-                  .col-xs-12.col-sm-12.col-md-12
-                      .thumbnail
-                        .caption
-                          center
-                            a(href='/community/#{item.community.id}')
-                              .headertext2 #{item.community.name}
+              if ( communities.length == 0 )
+                p #{data.firstName} hasn't joined any communities yet.
+              else
+                .row
+                  each item in communities
+                    .col-xs-12.col-sm-12.col-md-12
+                        .thumbnail
+                          .caption
+                            center
+                              a(href='/community/#{item.community.id}')
+                                .headertext2 #{item.community.name}
                 
           .col-sm-8.col-md-8
 
