@@ -17,6 +17,11 @@ var userSchema = new Schema({
   occ: { type: String, default: ''} ,
   occplace: { type: String, default: ''},
   points: { type: Number, default: 0 },
+  homepage: String,
+  facebook: String,
+  linkedin: String,
+  twitter: String,
+  instagram: String,
   causes: [String],
   communities: [{type: Schema.ObjectId, ref: 'Communities'}],
 });

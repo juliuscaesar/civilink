@@ -22,9 +22,10 @@ block content
                     img(src="/images/anon.gif" class='img-circle' height='150px' width='150px')
                   else
                     img(src="/images/femaleanon.png" class='img-circle' height='150px' width='150px')
+                br
+                br
 
-                br
-                br
+
                 if ( typeof user !== 'undefined' )
                   if (data.id == user.id) 
                     // This user
@@ -41,14 +42,37 @@ block content
                 if data.bio
                   p #{data.bio}
                   hr
+              
+              if ( data.homepage || data.facebook || data.linkedin || data.twitter || data.instagram )
+                center
+                  .social
+                    ul
+                      if data.homepage
+                        li
+                          a(href='#{data.homepage}' target='_blank')
+                            i.fa.fa-lg.fa-globe
+                      if data.facebook
+                      li
+                        a(href='https://facebook.com/#{data.facebook}' target='_blank')
+                          i.fa.fa-lg.fa-facebook
+                      if data.linkedin
+                        li
+                          a(href='#{data.linkedin}' target='_blank')
+                            i.fa.fa-lg.fa-linkedin
+                      if data.twitter
+                        li
+                          a(href='https://twitter.com/#{data.twitter}' target='_blank')
+                            i.fa.fa-lg.fa-twitter
+                      if data.instagram
+                        li
+                          a(href='https://instagram.com/#{data.instagram}' target='_blank')
+                            i.fa.fa-lg.fa-instagram
               if data.state
                 small #{data.city}, #{data.state} 
                 br
               if data.occ
                 small #{data.occ} at #{data.occplace}
 
-
-          
               hr
               .row
                 .col-xs-4.col-sm-4.col-md-4

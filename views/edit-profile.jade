@@ -107,6 +107,26 @@ block content
               .col-sm-4
                 textarea#newBio.form-control(type='text', name='newBio') #{user.bio}
             .form-group
+              label.col-sm-2.control-label(for='newHomepage') Website
+              .col-sm-4
+                input#newHomepage.form-control(type='text', name='newHomepage', value='#{user.homepage}')
+            .form-group
+              label.col-sm-2.control-label(for='newLinkedin') LinkedIn
+              .col-sm-4
+                input#newLinkedin.form-control(type='text', name='newLinkedin', value='#{user.linkedin}')
+            .form-group
+              label.col-sm-2.control-label(for='newFacebook') facebook.com/
+              .col-sm-4
+                input#newFacebook.form-control(type='text', name='newFacebook', value='#{user.facebook}')
+            .form-group
+              label.col-sm-2.control-label(for='newTwitter') twitter.com/
+              .col-sm-4
+                input#newTwitter.form-control(type='text', name='newTwitter', value='#{user.twitter}')
+            .form-group
+              label.col-sm-2.control-label(for='newInstagram') instagram.com/
+              .col-sm-4
+                input#newInstagram.form-control(type='text', name='newInstagram', value='#{user.instagram}')
+            .form-group
               .col-sm-offset-2.col-sm-10
                 button.btn.btn-default(type='submit') Save
 
