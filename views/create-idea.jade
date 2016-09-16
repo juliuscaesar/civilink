@@ -6,24 +6,43 @@ block content
       .col-sm-2.hidden-xs
         include sidebar
       .col-sm-10
-        .content-box
-          h3 Create Project
-          hr
-          form.form-horizontal(class='form-createidea', action='/idea/create-idea', method='POST')
-            .form-group
-              label.col-sm-2.control-label(for='title') Title
-              .col-sm-4
-                input#title.form-control(type='text', name='title', value='', required)
-              .col-sm-4
-                input#community.form-control(type='hidden', name='community', value='#{data.id}')
-            .form-group
-              label.col-sm-2.control-label(for='desc') Short description
-              .col-sm-4
-                textarea#desc.form-control(type='text', name='desc',  placeholder='', required)
-            .form-group
-             .col-sm-offset-2.col-sm-10
-                button.btn.btn-default(type='submit') Save
+        .row
+          .col-sm-4.col-md-4
+            .content-box
+              .headertext #{data.name}
+              hr
+              center
+                if user
+                  if ( user.communities.indexOf(data.id) != -1)
+                    form.form-horizontal(class='form-leavecommunity', action='/community/#{data.id}/leave', method='POST')
+                      .form-group
+                        button.btn.btn-danger.btn-sm.btn-full(type='submit') Leave community
+                  else     
+                    form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
+                      .form-group
+                        button.btn.btn-success.btn-sm.btn-full(type='submit') Join community
+            .content-box
+              a(href='/community/#{data.id}') <  Return to community
+                
+          .col-sm-8.col-md-8
+            .content-box
+              h3 Create Project
+              hr
+              form.form-horizontal(class='form-createidea', action='/idea/create-idea', method='POST')
+                .form-group
+                  label.col-sm-4.control-label(for='title') Title
+                  .col-sm-6
+                    input#title.form-control(type='text', name='title', value='', required)
+                  .col-sm-4
+                    input#community.form-control(type='hidden', name='community', value='#{data.id}')
+                .form-group
+                  label.col-sm-4.control-label(for='desc') Short description
+                  .col-sm-6
+                    textarea#desc.form-control(type='text', name='desc',  placeholder='', required)
+                .form-group
+                 .col-sm-offset-4.col-sm-10
+                    button.btn.btn-default(type='submit') Save
 
-          #message
-            if message
-              h1.text-center.error-message #{message}
+              #message
+                if message
+                  h1.text-center.error-message #{message}
