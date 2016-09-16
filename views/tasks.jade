@@ -51,15 +51,15 @@ block content
             .row
               .col-xs-1.col-sm-1.col-md-1
                 if item.user.avatar
-                  a(href='profile/#{item.user.username}')
-                    img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                  a(href='/profile/#{item.user.username}')
+                    img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
                 else
                   if (item.user.gender == 'm')
-                    a(href='profile/#{item.user.username}')
-                      img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
+                    a(href='/profile/#{item.user.username}')
+                      img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
                   else
-                    a(href='profile/#{item.user.username}')
-                      img(src="images/femaleanon.png" class='img-circle' height='64px' width='64px')
+                    a(href='/profile/#{item.user.username}')
+                      img(src="/images/femaleanon.png" class='img-circle' height='64px' width='64px')
               .col-xs-7.col-sm-8.col-md-9
                 p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] has completed task: #{item.task.title}
                   small  (#{item.task.points} points)

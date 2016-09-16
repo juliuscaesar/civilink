@@ -33,14 +33,14 @@ block content
                   label.col-sm-4.control-label(for='title') Title
                   .col-sm-6
                     input#title.form-control(type='text', name='title', value='', required)
-                  .col-sm-4
+                  .col-sm-6
                     input#community.form-control(type='hidden', name='community', value='#{data.id}')
                 .form-group
                   label.col-sm-4.control-label(for='desc') Short description
                   .col-sm-6
                     textarea#desc.form-control(type='text', name='desc',  placeholder='', required)
                 .form-group
-                 .col-sm-offset-4.col-sm-10
+                 .col-sm-offset-4.col-sm-8
                     button.btn.btn-default(type='submit') Save
 
               #message

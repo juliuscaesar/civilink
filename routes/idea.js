@@ -89,7 +89,7 @@ router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
    */
 router.get('/:id/create-task', isAuthenticated, function(req, res, next) {
   Ideas.findById(req.params.id)
-  .populate('community')
+  .populate('community user')
     .exec(function(err, idea){
       if (err) return handleError(err);
       res.render('create-task', { title: 'Create Task - ', data: idea, user: req.user});

@@ -6,88 +6,145 @@ block content
       .col-sm-2.hidden-xs
         include sidebar
       .col-sm-10
-        .content-box
-            .headertext1 #{data.title}
-            p #{data.desc}
-            p Organizer: #[a(href='/profile/#{data.user.username}') #{data.user.firstName} #{data.user.lastName}]
-
-        .content-box
-          .headertext2 Tasks 
-            if user
-              if (data.user.id == user.id)
-                small (
-                  a(href='/idea/#{data.id}/create-task') create new
-                  | )
-          if (tasks.length == 0)
-            hr
-            p There are no tasks for this project yet.
-          - var y = 1
-          each item in tasks
-            hr
-            .row
-              
-              .col-xs-8.col-sm-9.col-md-10
-                h4 #{item.title}
-                p #{item.desc}
-                if (item.status.length != item.needed)
-                  p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
-
-              .col-xs-4.col-sm-3.col-md-2
-                // if logged in
+        .row
+          .col-sm-4.col-md-4
+            .content-box
+              .headertext #{data.community.name}
+              hr
+              center
                 if user
-                  // if the task is marked complete
-                  if (item.status.length == item.needed)
-                    center
-                      b.text-success Completed!
+                  if ( user.communities.indexOf(data.community.id) != -1)
+                    form.form-horizontal(class='form-leavecommunity', action='/community/#{data.community.id}/leave', method='POST')
+                      .form-group
+                        button.btn.btn-danger.btn-sm.btn-full(type='submit') Leave community
+                  else     
+                    form.form-horizontal(class='form-joincommunity', action='/community/#{data.community.id}/join', method='POST')
+                      .form-group
+                        button.btn.btn-success.btn-sm.btn-full(type='submit') Join community
+
+            .content-box
+              a(href='/community/#{data.community.id}') <  Return to community
+
+            .content-box
+              .headertext Progress
+              hr
+              center
+                - var points = 0
+                - var total = 0
+                each task in tasks
+                  - points = points + (task.points*task.status.length)
+                  - total = total + (task.points*task.needed)
+                  
+                - var percent = Math.ceil((points/total)*100)
+                h1 
+                  if ( isNaN(percent))
+                    .text-danger 0%
                   else
-                    // If i'm a member of this community
-                    if (user.communities.indexOf(data.community.id) != -1)
-                      // if I've already completed this task
-                      if (item.status.toString().indexOf(user.id) != -1)
+                    if ( percent < 40 )
+                      .text-danger #{percent}%
+                    else if ( percent < 65 )
+                      .text-warning #{percent}%
+                    else if ( percent == 100 )
+                      .text-success #{percent}%
+                    else
+                      .text-primary #{percent}%
+                h4 complete
+                hr
+                h1 
+                  if ( points == 0 )
+                    .text-danger #{points}
+                  else
+                    .text-primary #{points}
+                h4 points generated
+          
+          .col-sm-8.col-md-8
+            .content-box
+              .headertext #{data.title}
+              hr
+              p #{data.desc}
+              p Organizer: #[a(href='/profile/#{data.user.username}') #{data.user.firstName} #{data.user.lastName}]
+
+            .content-box
+              .headertext2 Tasks 
+                if user
+                  if (data.user.id == user.id)
+                    small (
+                      a(href='/idea/#{data.id}/create-task') create new
+                      | )
+              if (tasks.length == 0)
+                hr
+                p There are no tasks for this project yet.
+              - var y = 1
+              each item in tasks
+                hr
+                .row
+                  
+                  .col-xs-8.col-sm-9.col-md-9
+                    h4 #{item.title}
+
+                  .col-xs-4.col-sm-3.col-md-3
+                    // if logged in
+                    if user
+                      // if the task is marked complete
+                      if (item.status.length == item.needed)
                         center
-                          form.form-horizontal()
-                            .form-group
-                              button.btn.disabled.btn-sm(type='button') Awarded
+                          b.text-success Completed!
                       else
-                        // if this task is full and i'm NOT assigned.
-                        if (item.assigned.length == item.needed && item.assigned.toString().indexOf(user.id) == -1)
-                          center
-                            form.form-horizontal()
-                              .form-group
-                                button.btn.disabled.btn-sm(type='button') Assignment full
-                        else
-                          if (item.assigned.toString().indexOf(user.id) != -1)
+                        // If i'm a member of this community
+                        if (user.communities.indexOf(data.community.id) != -1)
+                          // if I've already completed this task
+                          if (item.status.toString().indexOf(user.id) != -1)
                             center
-                              form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
+                              form.form-horizontal()
                                 .form-group
-                                  button.btn.btn-danger.btn-sm(type='submit') Unassign me
+                                  button.btn.disabled.btn-sm(type='button') Awarded
                           else
-                            center
-                              form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
-                                .form-group
-                                  button.btn.btn-success.btn-sm(type='submit') Assign me
-              if item.assigned.length > 0
+                            // if this task is full and i'm NOT assigned.
+                            if (item.assigned.length == item.needed && item.assigned.toString().indexOf(user.id) == -1)
+                              center
+                                form.form-horizontal()
+                                  .form-group
+                                    button.btn.disabled.btn-sm(type='button') Assignment full
+                            else
+                              if (item.assigned.toString().indexOf(user.id) != -1)
+                                center
+                                  form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/unassign', method='POST')
+                                    .form-group
+                                      button.btn.btn-danger.btn-sm(type='submit') Unassign me
+                              else
+                                center
+                                  form.form-horizontal(class='form-supportidea', action='/tasks/#{item.id}/assign', method='POST')
+                                    .form-group
+                                      button.btn.btn-success.btn-sm(type='submit') Assign me
                 .row
                   .col-xs-12.col-sm-12.col-md-12
-                    each person in item.assigned
-                      .col-xs-6.col-sm-4.col-md-3
-                        .thumbnail
-                          .caption
-                            .row
-                              .col-xs-6.col-sm-6.col-md-5
-                                if person.avatar
-                                  img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
-                                else
-                                  if ( person.gender == 'm' )
-                                    img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                                  else
-                                    img(src="/images/femaleanon.png" class='img-circle' height='64px' width='64px')
-                              .col-xs-6.col-sm-6.col-md-7
-                                a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
-                                br
-                                small   @#{person.username}
-            - y=y + 1
+                    p #{item.desc}
+                    if (item.status.length != item.needed)
+                      p Users assigned: #{item.assigned.length+item.status.length}/#{item.needed} &middot; Points offered: #{item.points}
+
+                if item.assigned.length > 0
+                  .row
+                    .col-xs-12.col-sm-12.col-md-12
+                      each person in item.assigned
+                        .col-xs-2.col-sm-2.col-md-2
+                          center
+                            if person.avatar
+                              a(href='/profile/#{person.username}')
+                                img(src="/images/uploads/#{person.avatar}" class='img-circle' height='45px' width='45px')
+                            else
+                              if (person.gender == 'm')
+                                a(href='/profile/#{person.username}')
+                                  img(src="/images/anon.gif" class='img-circle' height='45px' width='45px')
+                              else
+                                a(href='/profile/#{person.username}')
+                                  img(src="/images/femaleanon.png" class='img-circle' height='45px' width='45px')
+                            br
+                            a(href='/profile/#{person.username}') 
+                              small #{person.firstName}
+                            br
+                            br
+                - y=y + 1
 
 
-      // feedback and discussion/comments
-      // updates from admins
+          // feedback and discussion/comments
+          // updates from admins
