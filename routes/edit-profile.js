@@ -30,6 +30,7 @@ router.post('/', jsonParser, exports.update = function ( req, res ){
     user.lastName = sanitizeHtml(req.body.newLastName, { allowedTags: [] }),
     user.city = sanitizeHtml(req.body.newCity, { allowedTags: [] }),
     user.state = sanitizeHtml(req.body.newState, { allowedTags: [] }),
+    user.gender = sanitizeHtml(req.body.newGender, { allowedTags: [] }),
     user.occ = sanitizeHtml(req.body.newOcc, { allowedTags: [] }),
     user.occplace = sanitizeHtml(req.body.newOccplace, { allowedTags: [] }),
     user.bio = sanitizeHtml(req.body.newBio, { allowedTags: [] })

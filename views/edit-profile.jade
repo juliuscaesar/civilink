@@ -24,6 +24,20 @@ block content
               .col-sm-4
                 input#newCity.form-control(type='text', name='newCity',  value='#{user.city}')
             .form-group
+              label.col-sm-2.control-label(for='newGender') Gender
+              .col-sm-4
+                select#newGender.form-control(name='newGender')
+                  if user.gender
+                    if (user.gender == 'm')
+                      option(value='m', selected='selected') Male
+                      option(value='f') Female
+                    else
+                      option(value='f' selected='selected') Female
+                      option(value='m') Male
+                  else
+                    option(value='m') Male
+                    option(value='f') Female
+            .form-group
               label.col-sm-2.control-label(for='newState') State
               .col-sm-4
                 select#newState.form-control(name='newState')
@@ -105,7 +119,10 @@ block content
           if user.avatar
             img(src="images/uploads/#{user.avatar}" class='img-circle' height='64px' width='64px')
           else
-            img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
+            if (user.gender == 'm')
+              img(src="images/anon.gif" class='img-circle' height='64px' width='64px')
+            else
+              img(src="images/femaleanon.png" class='img-circle' height='64px' width='64px')
           p
           form(method="post",enctype="multipart/form-data",action="/edit-profile/picture")
             p

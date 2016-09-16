@@ -78,7 +78,10 @@ block content
                                 if person.avatar
                                   img(src="/images/uploads/#{person.avatar}" class='img-circle' height='64px' width='64px')
                                 else
-                                  img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                                  if ( person.gender == 'm' )
+                                    img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                                  else
+                                    img(src="/images/femaleanon.png" class='img-circle' height='64px' width='64px')
                               .col-xs-6.col-sm-6.col-md-7
                                 a(href='/profile/#{person.username}') #{person.firstName} #{person.lastName}
                                 br

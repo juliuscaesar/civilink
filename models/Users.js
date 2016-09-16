@@ -8,6 +8,7 @@ var userSchema = new Schema({
   email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
   firstName: { type: String, required: true, maxlength: 35 },
   lastName: { type: String, required: true, maxlength: 35 },
+  gender: String,
   password: { type: String, required: true, minlength: 8 },
   bio:   { type: String, default: '', maxlength: 240 },
   zip: { type: Number, required: true, max: 99999 },

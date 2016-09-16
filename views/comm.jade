@@ -36,7 +36,10 @@ block content
                         if item.user.avatar
                           img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='45px' width='45px')
                         else
-                          img(src="/images/anon.gif" class='img-circle' height='45px' width='45px')
+                          if (item.user.gender == 'm')
+                            img(src="/images/anon.gif" class='img-circle' height='45px' width='45px')
+                          else
+                            img(src="/images/femaleanon.png" class='img-circle' height='45px' width='45px')
                         br
                         a(href='/profile/#{item.user.username}') 
                           small #{item.user.firstName}
@@ -70,7 +73,10 @@ block content
                       if item.user.avatar
                         img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
                       else
-                        img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                        if (item.user.gender == 'm')
+                          img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
+                        else
+                          img(src="/images/femaleanon.png" class='img-circle' height='64px' width='64px')
                   .col-xs-9.col-sm-9.col-md-10
                     if (item.desttype == 'Communities')
                       p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]

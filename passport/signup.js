@@ -33,6 +33,7 @@ module.exports = function(passport){
                         newUser.zip = req.param('zip');
                         newUser.city = req.param('city');
                         newUser.state = req.param('state');
+                        newUser.gender = req.param('gender');
                         newUser.firstName = req.param('firstName');
                         newUser.lastName = req.param('lastName');
 

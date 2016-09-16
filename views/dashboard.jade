@@ -11,13 +11,16 @@ block content
           each item in feed.reverse()
             hr
             .row
-              .col-xs-2.col-sm-2.col-md-1
+              .col-xs-2.col-sm-1.col-md-1
                 center
                   if item.user.avatar
                     img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='50px' width='50px')
                   else
-                    img(src="images/anon.gif" class='img-circle' height='50px' width='50px')
-              .col-xs-10.col-sm-10.col-md-11
+                    if (item.user.gender == 'm')
+                      img(src="images/anon.gif" class='img-circle' height='50px' width='50px')
+                    else
+                      img(src="images/femaleanon.png" class='img-circle' height='50px' width='50px')
+              .col-xs-10.col-sm-11.col-md-11
                 if (item.desttype == 'Communities')
                   p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
                 else if (item.desttype == 'Ideas')
