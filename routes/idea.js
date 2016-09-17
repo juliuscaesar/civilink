@@ -70,15 +70,6 @@ router.post('/create-idea', jsonParser, exports.update = function ( req, res ){
     });
 
   newIdea.save( function ( err, user, count ){
-    
-    Communities.findByIdAndUpdate(
-      req.body.community,
-      { "$addToSet" : { "ideas" : newIdea.id } },
-      { upsert : true},
-      function(err, model) {
-            console.log(err);
-        }
-    );
 
     res.redirect('/idea/' + newIdea.id);
   });

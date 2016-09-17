@@ -57,11 +57,11 @@ block content
                   small (
                     a(href='/community/#{data.id}/create-idea') create new
                     | )
-              if ( data.ideas.length == 0 )
+              if ( projects.length == 0 )
                 hr
                 p No one has started any projects in this community yet.
               else
-                each item in data.ideas
+                each item in projects
                   hr
                   a(href="/idea/#{item.id}") #{item.title}
                   p #{item.desc}
