@@ -21,7 +21,7 @@ module.exports = function(passport){
               console.log('Invalid zipcode');
               return done(null, false, req.flash('message','Invalid Zipcode'));
             }
-            else if (req.param('password').length < 9) {
+            else if (req.param('password').length < 8) {
               console.log('Password too short: ');
               return done(null, false, req.flash('message','Password not long enough'));
             }
@@ -33,7 +33,7 @@ module.exports = function(passport){
 
             findOrCreateUser = function(){
                 // find a user in Mongo with provided username
-                User.findOne( { $or: [ { 'username' :  username }, { 'email' :  req.param('email') } ] }, function(err, user) {
+                User.findOne( { $or: [ { 'username' :  username.toLowerCase() }, { 'email' :  req.param('email') } ] }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err){
                         console.log('Error in SignUp: '+err);
@@ -49,7 +49,7 @@ module.exports = function(passport){
                         var newUser = new User();
 
                         // set the user's local credentials
-                        newUser.username = username;
+                        newUser.username = username.toLowerCase();
                         newUser.password = createHash(password);
                         newUser.email = req.param('email');
                         newUser.zip = req.param('zip');
