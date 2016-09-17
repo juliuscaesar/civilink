@@ -9,9 +9,31 @@ module.exports = function(passport){
         },
         function(req, username, password, done) {
 
+            if (username.length < 4) {
+              console.log('Username too short: '+username);
+              return done(null, false, req.flash('message','Username too short'));
+            }
+            else if (username.length > 24) {
+              console.log('Username too long: '+username);
+              return done(null, false, req.flash('message','Username too long'));
+            }
+            else if (req.param('zip').length != 5) {
+              console.log('Invalid zipcode');
+              return done(null, false, req.flash('message','Invalid Zipcode'));
+            }
+            else if (req.param('password').length < 9) {
+              console.log('Password too short: ');
+              return done(null, false, req.flash('message','Password not long enough'));
+            }
+
+            checkEmail = function() {
+                // find a user in Mongo with provided email
+                
+            }
+
             findOrCreateUser = function(){
                 // find a user in Mongo with provided username
-                User.findOne({ 'username' :  username }, function(err, user) {
+                User.findOne( { $or: [ { 'username' :  username }, { 'email' :  req.param('email') } ] }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err){
                         console.log('Error in SignUp: '+err);
