@@ -53,10 +53,10 @@ block content
             .content-box
               .headertext2 Projects 
                 if user
-
-                  small (
-                    a(href='/community/#{data.id}/create-idea') create new
-                    | )
+                  if (members.toString().indexOf(user.id) != -1)
+                    small (
+                      a(href='/community/#{data.id}/create-idea') create new
+                      | )
               if ( projects.length == 0 )
                 hr
                 p No one has started any projects in this community yet.
