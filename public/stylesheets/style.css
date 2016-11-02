@@ -1,5 +1,5 @@
 p, a, small, li {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Lato';
 }
 p, a, li {
   font-size: 14px;
@@ -22,37 +22,37 @@ h4, .headertext2 {
 .landingpage {
   font-size: 52px;
   font-weight: bold;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .landingpagesub {
   font-size: 28px;
   color: #666666;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .grayed {
   font-size: 12px;
   color: #666666;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 a.grayed:link {
   font-size: 12px;
   color: #999999;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 a.grayed:visited {
   font-size: 12px;
   color: #999999;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 a.grayed:hover {
   font-size: 12px;
   color: #888888;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 
@@ -128,7 +128,7 @@ h3, .headertext {
 
 .error-message {
   font-size: 16px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: bold;
   color: red;
 }
@@ -142,7 +142,7 @@ h3, .headertext {
 .navbar-default .navbar-brand {
   color: #ffffff;
   font-size: 32px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
 }
 
@@ -151,28 +151,26 @@ h3, .headertext {
 .navbar-default .navbar-brand:hover {
   color: #e8e8e8;
   font-size: 32px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
 }
 
 .navlink {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .nav.navbar-nav.navbar-right li a {
   font-size: 13px;
-  font-weight: bold;
   color: #e8e8e8;
 }
 
 .nav.navbar-nav.navbar-right li a:hover {
   color: #ffffff;
-  font-weight: bold;
   font-size: 13px;
 }
 
 h5 {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 a, a:visited {
