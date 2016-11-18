@@ -14,7 +14,7 @@ html(ng-app='CiviLink')
 
   body(ng-controller='CLController')
     .top-header
-      nav.navbar.navbar-default.navbar-fixed-top.navbar-white
+      nav.navbar.navbar-default.navbar-static-top.navbar-white
         .container-shrink
           .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -32,14 +32,13 @@ html(ng-app='CiviLink')
               if user
                 li.dropdown
                   a.navlink.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                    | #{user.firstName} #{user.lastName}&nbsp;&nbsp;&nbsp;
                     if user.avatar
-                      img(src='/images/uploads/#{user.avatar}' class='img-circle' height='25px' width='25px')
+                      img(src='/images/uploads/#{user.avatar}' class='img-circle' height='30px' width='30px')
                     else
                       if (user.gender == 'm')
-                        img(src="/images/anon.gif" class='img-circle' height='25px' width='25px')
+                        img(src="/images/anon.gif" class='img-circle' height='30px' width='30px')
                       else
-                        img(src="/images/femaleanon.png" class='img-circle' height='25px' width='25px')
+                        img(src="/images/femaleanon.png" class='img-circle' height='30px' width='30px')
                     | &nbsp;&nbsp;
                     span.caret
                   ul.dropdown-menu
@@ -57,9 +56,6 @@ html(ng-app='CiviLink')
                     a(href='/communities') Communities
                   li.visible-xs-block
                     a(href='/tasks') My Tasks
-              else
-                li
-                  a(href='/sign-up') Create an account
 
     block content
 

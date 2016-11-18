@@ -2,8 +2,7 @@ extends layout
 
 block content
   .about
-
-  .odd
+    br
     .container-body
       .row
         .col-sm-8
@@ -30,13 +29,13 @@ block content
                     br
                     p.text-center.error-message #{message}
                     br
-
-                  a(href='/sign-up', class='text-center') Create an account
+                  center
+                    a(href='/sign-up', class='text-center') Create an account!
     br
 
   .container-body
       center
-
+        br
         h2.text-primary We are a non-profit organization based in Boston that launched in September 2016.
         
         br
@@ -58,6 +57,7 @@ block content
   .odd
     .container-body
       center
+        br
         h1 How it works
         br
 
@@ -93,6 +93,5 @@ block content
       br
       a(href='/sign-up')
         .outline Sign up now!
-  br
-  br
-            
+      br
+      br      
