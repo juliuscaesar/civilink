@@ -4,21 +4,33 @@ block content
   .container-body
     .content-box
       .row
-        .col-sm-6.col-md-4.col-md-offset-4
+        .col-xs-10.col-sm-6.col-md-6.col-md-offset-3.col-sm-offset-3.col-xs-offset-1
           h1.text-center.login-title Sign up
+          #message
+            if message
+              h1.text-center.error-message #{message}
           br
           .signup-wall
             form(class='form-signin', action='/signup', method='POST')
+              label Username
               input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)
+              label Password
               input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
+              label Email
               input(type='email', name='email', class='form-control', placeholder='Email',required)
+              label First Name
               input(type='text', name='firstName', class='form-control', placeholder='First Name',required)
+              label Last Name
               input(type='text', name='lastName', class='form-control', placeholder='Last Name',required)
+              label Gender
               select#state.form-control(name='gender',required)
                 option(value='m') Male
                 option(value='f') Female
+              label Zip Code
               input(type='number', name='zip', class='form-control', placeholder='Zip Code',required)
+              label City
               input(type='text', name='city', class='form-control', placeholder='City',required)
+              label State
               select#state.form-control(name='state',required)
                 option(value='AK') Alaska
                 option(value='AL') Alabama
@@ -72,10 +84,6 @@ block content
                 option(value='WI') Wisconsin
                 option(value='WV') West Virginia
                 option(value='WY') Wyoming
-
+              br
               button(class='btn btn-lg btn-primary btn-block', type='submit') Register
               span.clearfix
-          br
-          #message
-            if message
-              h1.text-center.error-message #{message}

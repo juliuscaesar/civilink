@@ -11,19 +11,19 @@ module.exports = function(passport){
 
             if (username.length < 4) {
               console.log('Username too short: '+username);
-              return done(null, false, req.flash('message','Username too short'));
+              return done(null, false, req.flash('message','Error: Username too short'));
             }
             else if (username.length > 24) {
               console.log('Username too long: '+username);
-              return done(null, false, req.flash('message','Username too long'));
+              return done(null, false, req.flash('message','Error: Username too long'));
             }
             else if (req.param('zip').length != 5) {
               console.log('Invalid zipcode');
-              return done(null, false, req.flash('message','Invalid Zipcode'));
+              return done(null, false, req.flash('message','Error: Invalid Zipcode'));
             }
             else if (req.param('password').length < 8) {
               console.log('Password too short: ');
-              return done(null, false, req.flash('message','Password not long enough'));
+              return done(null, false, req.flash('message','Error: Password not long enough'));
             }
 
             checkEmail = function() {
@@ -42,7 +42,7 @@ module.exports = function(passport){
                     // already exists
                     if (user) {
                         console.log('User already exists with username: '+username);
-                        return done(null, false, req.flash('message','User Already Exists'));
+                        return done(null, false, req.flash('message','Error: User Already Exists'));
                     } else {
                         // if there is no user with that email
                         // create the user
