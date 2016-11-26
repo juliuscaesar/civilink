@@ -56,8 +56,9 @@ html(ng-app='CiviLink')
                     a(href='/communities') Communities
                   li.visible-xs-block
                     a(href='/tasks') My Tasks
-    if user
-      .mobile-header.hidden-sm.hidden-md.hidden-lg.hidden-xl
+    
+    .mobile-header.hidden-sm.hidden-md.hidden-lg.hidden-xl
+      if user
         .row
           .col-xs-3
             center
@@ -77,6 +78,14 @@ html(ng-app='CiviLink')
             center
               a(href='/profile/#{user.username}')
                 i.fa.fa-user(aria-hidden='true')
+      else
+        .row
+          .col-xs-6
+            center
+              a(href='/') Sign in
+          .col-xs-6
+            center
+              a(href='/sign-up') Register
 
     block content
 

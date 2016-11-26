@@ -11,10 +11,12 @@ block content
             .content-box
               .headertext #{data.firstName} #{data.lastName}
                 small    @#{data.username}
-              p.hidden-sm.hidden-md.hidden-lg.hidden-xl
-                a(href='/edit-profile') Edit Profile
-                | &nbsp; 
-                a(href='/logout') Logout
+              if user
+                if user.username == data.username  
+                  p.hidden-sm.hidden-md.hidden-lg.hidden-xl
+                    a(href='/edit-profile') Edit Profile
+                    | &nbsp; 
+                    a(href='/logout') Logout
               hr
 
               center
