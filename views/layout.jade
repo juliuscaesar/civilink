@@ -14,7 +14,7 @@ html(ng-app='CiviLink')
 
   body(ng-controller='CLController')
     .top-header
-      nav.navbar.navbar-default.navbar-static-top.navbar-white
+      nav.navbar.navbar-default.navbar-static-top.navbar-white.hidden-xs
         .container-shrink
           .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -56,6 +56,27 @@ html(ng-app='CiviLink')
                     a(href='/communities') Communities
                   li.visible-xs-block
                     a(href='/tasks') My Tasks
+    if user
+      .mobile-header.hidden-sm.hidden-md.hidden-lg.hidden-xl
+        .row
+          .col-xs-3
+            center
+              a(href='/dashboard') 
+                i.fa.fa-home(aria-hidden='true')
+
+          .col-xs-3
+            center
+              a(href='/community')
+                i.fa.fa-users(aria-hidden='true')
+
+          .col-xs-3
+            center
+              a(href='/tasks')
+                i.fa.fa-check-square(aria-hidden='true')
+          .col-xs-3
+            center
+              a(href='/profile/#{user.username}')
+                i.fa.fa-user(aria-hidden='true')
 
     block content
 

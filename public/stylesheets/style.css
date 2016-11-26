@@ -300,6 +300,21 @@ body {
   padding-bottom: 5px;
 }
 
+.mobile-header {
+  padding-top: 5px;
+  background-color: #4a86e8;
+  height: 50px;
+  border-color: #234F8E;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.mobile-header a {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+}
 /* set a max-width for horizontal fluid layout and make it centered */
 .container-fluid {
   margin-right: auto;

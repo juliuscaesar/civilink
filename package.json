@@ -30,7 +30,6 @@
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
     "require-dot-file": "^0.4.0",
-    "semantic-ui": "github:semantic-org/Semantic-UI#next",
     "serve-favicon": "~2.3.0",
     "transloadit": "^1.5.3"
   },
