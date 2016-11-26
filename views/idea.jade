@@ -119,12 +119,8 @@ block content
                               a(href='/profile/#{person.username}')
                                 img(src="/images/uploads/#{person.avatar}" class='img-circle' height='45px' width='45px')
                             else
-                              if (person.gender == 'm')
-                                a(href='/profile/#{person.username}')
-                                  img(src="/images/anon.gif" class='img-circle' height='45px' width='45px')
-                              else
-                                a(href='/profile/#{person.username}')
-                                  img(src="/images/femaleanon.png" class='img-circle' height='45px' width='45px')
+                              a(href='/profile/#{person.username}')
+                                img(src="/images/user.png" class='img-circle' height='45px' width='45px')
                             br
                             a(href='/profile/#{person.username}') 
                               small #{person.firstName}

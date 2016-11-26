@@ -17,12 +17,8 @@ block content
                     a(href='/profile/#{item.user.username}')
                       img(src="images/uploads/#{item.user.avatar}" class='img-circle' height='50px' width='50px')
                   else
-                    if (item.user.gender == 'm')
-                      a(href='/profile/#{item.user.username}')
-                        img(src="images/anon.gif" class='img-circle' height='50px' width='50px')
-                    else
-                      a(href='/profile/#{item.user.username}')
-                        img(src="images/femaleanon.png" class='img-circle' height='50px' width='50px')
+                    a(href='/profile/#{item.user.username}')
+                      img(src="images/user.png" class='img-circle' height='50px' width='50px')
               .col-xs-10.col-sm-11.col-md-11
                 if (item.desttype == 'Communities')
                   p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]

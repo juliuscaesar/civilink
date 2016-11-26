@@ -17,10 +17,6 @@ module.exports = function(passport){
               console.log('Username too long: '+username);
               return done(null, false, req.flash('message','Error: Username too long'));
             }
-            else if (req.param('zip').length != 5) {
-              console.log('Invalid zipcode');
-              return done(null, false, req.flash('message','Error: Invalid Zipcode'));
-            }
             else if (req.param('password').length < 8) {
               console.log('Password too short: ');
               return done(null, false, req.flash('message','Error: Password not long enough'));
@@ -42,7 +38,7 @@ module.exports = function(passport){
                     // already exists
                     if (user) {
                         console.log('User already exists with username: '+username);
-                        return done(null, false, req.flash('message','Error: User Already Exists'));
+                        return done(null, false, req.flash('message','Error: Username and/or email already in use'));
                     } else {
                         // if there is no user with that email
                         // create the user
@@ -52,10 +48,8 @@ module.exports = function(passport){
                         newUser.username = username.toLowerCase();
                         newUser.password = createHash(password);
                         newUser.email = req.param('email');
-                        newUser.zip = req.param('zip');
                         newUser.city = req.param('city');
                         newUser.state = req.param('state');
-                        newUser.gender = req.param('gender');
                         newUser.firstName = req.param('firstName');
                         newUser.lastName = req.param('lastName');
 

@@ -35,10 +35,7 @@ html(ng-app='CiviLink')
                     if user.avatar
                       img(src='/images/uploads/#{user.avatar}' class='img-circle' height='30px' width='30px')
                     else
-                      if (user.gender == 'm')
-                        img(src="/images/anon.gif" class='img-circle' height='30px' width='30px')
-                      else
-                        img(src="/images/femaleanon.png" class='img-circle' height='30px' width='30px')
+                      img(src="/images/user.png" class='img-circle' height='30px' width='30px')
                     | &nbsp;&nbsp;
                     span.caret
                   ul.dropdown-menu

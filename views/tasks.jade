@@ -49,18 +49,14 @@ block content
           each item in pendingGrants
             hr
             .row
-              .col-xs-1.col-sm-1.col-md-1
+              .col-xs-2.col-sm-1.col-md-1
                 if item.user.avatar
                   a(href='/profile/#{item.user.username}')
-                    img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='64px' width='64px')
+                    img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='50px' width='50px')
                 else
-                  if (item.user.gender == 'm')
-                    a(href='/profile/#{item.user.username}')
-                      img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                  else
-                    a(href='/profile/#{item.user.username}')
-                      img(src="/images/femaleanon.png" class='img-circle' height='64px' width='64px')
-              .col-xs-7.col-sm-8.col-md-9
+                  a(href='/profile/#{item.user.username}')
+                      img(src="/images/user.png" class='img-circle' height='50px' width='50px')
+              .col-xs-6.col-sm-8.col-md-9
                 p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] has completed task: #{item.task.title}
                   small  (#{item.task.points} points)
               .col-xs-4.col-sm-3.col-md-2

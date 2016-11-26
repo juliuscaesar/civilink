@@ -23,10 +23,7 @@ block content
                 if data.avatar
                   img(src="/images/uploads/#{data.avatar}" class='img-circle' height='150px' width='150px')
                 else
-                  if (data.gender == 'm')
-                    img(src="/images/anon.gif" class='img-circle' height='150px' width='150px')
-                  else
-                    img(src="/images/femaleanon.png" class='img-circle' height='150px' width='150px')
+                  img(src="/images/user.png" class='img-circle' height='150px' width='150px')
                 br
                 br
 
@@ -124,10 +121,7 @@ block content
                         if data.avatar
                           img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
                         else
-                          if (data.gender == 'm')
-                            img(src="/images/anon.gif" class='img-circle' height='64px' width='64px')
-                          else
-                            img(src="/images/femaleanon.png" class='img-circle' height='64px' width='64px')
+                          img(src="/images/user.png" class='img-circle' height='64px' width='64px')
                     .col-xs-9.col-sm-9.col-md-10
                       if (item.desttype == 'Communities')
                         p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
