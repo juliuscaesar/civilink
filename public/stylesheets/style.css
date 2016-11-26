@@ -115,13 +115,11 @@ a.grayed:hover {
 
 h2, .headertext1 {
   font-size: 24px;
-  font-family: 'Roboto', sans-serif;
 }
 
 h3, .headertext {
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Roboto', sans-serif;
 }
 
 
@@ -201,7 +199,7 @@ a:hover {
 
 .bannertext {
   font-size: 38px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
 }
 
@@ -222,6 +220,8 @@ html {
   height: 600px;
   margin-top: -20px;
   margin-bottom: -25px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .bottom {

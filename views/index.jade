@@ -5,17 +5,17 @@ block content
     br
     .container-body
       .row
-        .col-sm-8
+        .col-sm-8.col-md-8
+          br
+          center
+            .landingpage Welcome to CiviLink
+            br 
+            .landingpagesub a social platform for community engagement.
           br
           br
-          .landingpage Welcome to CiviLink
-          br 
-          .landingpagesub a social platform for community engagement.
-          br
-          br
-        .col-sm-4
+        .col-sm-4.col-md-4
           .row
-            .content-box
+            .content-box.hidden-xs
               div
                 p.text-center.login-title Sign in
                   div.account-wall
@@ -32,6 +32,22 @@ block content
                   center
                     a(href='/sign-up', class='text-center') Create an account!
     br
+  .content-box.hidden-sm.hidden-md.hidden-lg.hidden-xl
+    div
+      p.text-center.login-title Sign in
+        div.account-wall
+          form(class='form-signin', action='/login', method='POST')
+            input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+            input(type='password', name='password' class='form-control', placeholder='Password', required)
+            button(class='btn btn-md btn-primary btn-block', type='submit') Sign in
+            span.clearfix
+        #message
+        if message
+          br
+          p.text-center.error-message #{message}
+          br
+        center
+          a(href='/sign-up', class='text-center') Create an account!
 
   .container-body
       center
