@@ -13,10 +13,16 @@ h1, h2, h3, h4 {
   font-family: 'Open Sans', sans-serif;
 }
 
+h2, .headertext1 {
+  font-size: 24px;
+}
+
+h3, .headertext {
+  font-size: 20px;
+}
+
 h4, .headertext2 {
   font-size: 18px;
-  font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
 }
 
 label {
@@ -112,16 +118,6 @@ a.grayed:hover {
 .outline:hover{ background: #319AFA; }
 
 .donate_sm:hover, .donate_lg:hover{ background: #FF282E; }
-
-h2, .headertext1 {
-  font-size: 24px;
-}
-
-h3, .headertext {
-  font-size: 20px;
-  font-weight: bold;
-}
-
 
 .white-section {
   background-color: #ffffff;
