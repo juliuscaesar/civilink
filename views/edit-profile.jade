@@ -48,19 +48,6 @@ block content
                   label(for='newCity') City
                   input#newCity.form-control(type='text', name='newCity',  value='#{user.city}')
                 .form-group
-                  label(for='newGender') Gender
-                  select#newGender.form-control(name='newGender')
-                    if user.gender
-                      if (user.gender == 'm')
-                        option(value='m', selected='selected') Male
-                        option(value='f') Female
-                      else
-                        option(value='f' selected='selected') Female
-                        option(value='m') Male
-                    else
-                      option(value='m') Male
-                      option(value='f') Female
-                .form-group
                   label(for='newState') State
                   select#newState.form-control(name='newState')
                     option(value='#{user.state}', selected='selected') #{user.state}
