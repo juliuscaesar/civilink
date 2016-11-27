@@ -16,11 +16,11 @@ block content
                   if ( user.communities.indexOf(data.id) != -1)
                     form.form-horizontal(class='form-leavecommunity', action='/community/#{data.id}/leave', method='POST')
                       .form-group
-                        button.btn.btn-danger.btn-sm.btn-full(type='submit') Leave community
+                        button.btn.btn-danger.btn-full(type='submit') Leave community
                   else     
                     form.form-horizontal(class='form-joincommunity', action='/community/#{data.id}/join', method='POST')
                       .form-group
-                        button.btn.btn-success.btn-sm.btn-full(type='submit') Join community
+                        button.btn.btn-success.btn-full(type='submit') Join community
             .content-box
               a(href='/community/#{data.id}') <  Return to community
                 
