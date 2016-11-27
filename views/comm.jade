@@ -59,8 +59,12 @@ block content
               else
                 each item in projects
                   hr
-                  a(href="/idea/#{item.id}") #{item.title}
+                  a(href="/idea/#{item.id}") #{item.title} 
                   p #{item.desc}
+                  small 
+                    | Organized by 
+                    a(href='/profile/#{item.user.username}') 
+                      small #{item.user.firstName} #{item.user.lastName}
 
             .content-box
               .headertext2 Activity Feed
