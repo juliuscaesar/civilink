@@ -208,6 +208,9 @@ html {
   min-height: 100%;
 }
 
+body, html {
+  overflow-x: hidden;
+}
 .about {
   background: #ffffff url("/images/bg_bottom.png") no-repeat;
   background-position: bottom right;
