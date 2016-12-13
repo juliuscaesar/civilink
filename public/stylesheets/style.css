@@ -38,6 +38,10 @@ label {
   font-family: 'Londrina+Solid', sans-serif;
 }
 
+.no-left-padding {
+  padding-left: 0;
+}
+
 .landingpagesub {
   font-size: 28px;
   color: #666666;
@@ -318,7 +322,7 @@ body {
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  max-width: 800px; /* or 950px */
+  max-width: 950px; /* or 950px */
 }
 
 .container-shrink {

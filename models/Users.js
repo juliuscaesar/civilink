@@ -11,7 +11,7 @@ var userSchema = new Schema({
   gender: { type: String, default: ''} ,
   password: { type: String, required: true, minlength: 8 },
   bio:   { type: String, default: '', maxlength: 240 },
-  zip: { type: Number, required: true, max: 99999 },
+  zip: { type: Number, max: 99999 },
   city: { type: String, required: true },
   state: { type: String, required: true },
   occ: { type: String, default: ''} ,

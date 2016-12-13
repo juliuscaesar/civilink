@@ -31,17 +31,16 @@ block content
               else
                 .row
                   each item in members
-                    .col-xs-4.col-sm-4.col-md-4
+                    .col-xs-3.col-sm-4.col-md-4
                       center
                         if item.user.avatar
                           a(href='/profile/#{item.user.username}')
-                            img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='45px' width='45px')
+                            img(src="/images/uploads/#{item.user.avatar}" class='img-circle' height='50px' width='50px')
                         else
                           a(href='/profile/#{item.user.username}')
-                            img(src="/images/user.png" class='img-circle' height='45px' width='45px')
+                            img(src="/images/user.png" class='img-circle' height='50px' width='50px')
                         br
-                        a(href='/profile/#{item.user.username}') 
-                          small #{item.user.firstName}
+                        a(href='/profile/#{item.user.username}') #{item.user.firstName}
                         br
                         br
                 
