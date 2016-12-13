@@ -116,22 +116,67 @@ block content
                 each item in feed.reverse()
                   hr
                   .row
-                    .col-xs-3.col-sm-3.col-md-2
+                    .col-xs-3.col-sm-2
                       center
                         if data.avatar
-                          img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
+                          a(href='/profile/#{data.username}')
+                            img(src="/images/uploads/#{data.avatar}" class='img-circle' height='64px' width='64px')
                         else
-                          img(src="/images/user.png" class='img-circle' height='64px' width='64px')
-                    .col-xs-9.col-sm-9.col-md-10
+                          a(href='/profile/#{data.username}')
+                            img(src="/images/user.png" class='img-circle' height='64px' width='64px')
+
+                    .col-xs-9.col-sm-10
                       if (item.desttype == 'Communities')
-                        p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the community #[a(href='/community/#{item.community.id}') #{item.community.name}]
+                        p 
+                          #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] 
+                          small #{item.details} the community: 
+                          br
+                          center
+                            .col-xs-12.col-sm-10.col-md-10
+                              .thumbnail
+                                .caption
+                                  center
+                                    a(href='/community/#{item.community.id}')
+                                      .headertext2 #{item.community.name}
+
                       else if (item.desttype == 'Ideas')
-                        p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the project #[a(href='/idea/#{item.idea.id}') #{item.idea.title}]
+                        p 
+                          #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] 
+                          small #{item.details} the project:
+                          br
+                          center
+                            .col-xs-12.col-sm-10.col-md-10
+                              .thumbnail
+                                .caption
+                                  center
+                                    a(href='/idea/#{item.idea.id}')
+                                      .headertext2 #{item.idea.title}
+
                       else if (item.desttype == 'Tasks')
                         p 
-                          #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the task: #{item.task.title}
+                          #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] 
+                          small #{item.details} the task: 
+                          br
+                          center
+                            .col-xs-12.col-sm-10.col-md-10
+                              .thumbnail
+                                .caption
+                                  center
+                                    h4 #{item.task.title}
+
                       else if (item.desttype == 'Orgs')
-                        p #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] #{item.details} the organization #[a(href='/orgs/#{item.org.id}') #{item.org.title}]
+                        p 
+                          #[a(href='/profile/#{item.user.username}') #{item.user.firstName} #{item.user.lastName}] 
+                          small #{item.details} the organization:
+                          br
+                          center
+                            .col-xs-12.col-sm-10.col-md-10
+                              .thumbnail
+                                .caption
+                                  center
+                                    a(href='/orgs/#{item.org.id}')
+                                      .headertext2 #{item.org.title}
+
                       else
                         p hey
 
