@@ -1,43 +1,13 @@
 {
   "name": "civilink",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "server": "nodemon app/server.js",
+    "client": "cd client && webpack-dev-server"
   },
-  "dependencies": {
-    "better-console": "^0.2.4",
-    "body-parser": "~1.13.2",
-    "cookie-parser": "~1.3.5",
-    "debug": "~2.2.0",
-    "express": "~4.13.1",
-    "extend": "^3.0.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-chmod": "^1.3.0",
-    "gulp-clone": "^1.0.0",
-    "gulp-help": "^1.6.1",
-    "gulp-if": "^2.0.0",
-    "gulp-less": "^3.0.5",
-    "gulp-minify-css": "^1.2.1",
-    "gulp-plumber": "^1.0.1",
-    "gulp-print": "^2.0.1",
-    "jade": "~1.11.0",
-    "mongodb": "~2.0.33",
-    "mongoose": "~4.4",
-    "monk": "~1.0.1",
-    "morgan": "~1.6.1",
-    "multer": "^1.1.0",
-    "passport": "~0.2.0",
-    "passport-local": "~1.0.0",
-    "require-dot-file": "^0.4.0",
-    "serve-favicon": "~2.3.0",
-    "transloadit": "^1.5.3"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.0"
-  },
-  "description": "civilink node app",
-  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/juliuscaesar/civilink.git"
@@ -47,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/juliuscaesar/civilink/issues"
   },
-  "homepage": "https://github.com/juliuscaesar/civilink#readme"
+  "homepage": "https://github.com/juliuscaesar/civilink#readme",
+  "devDependencies": {
+    "concurrently": "^3.1.0"
+  }
 }
