@@ -6,49 +6,44 @@ var Communities = require('../models/Communities.js');
 var Users = require('../models/Users.js');
 var Events = require('../models/Events.js');
 var Memberships = require('../models/Memberships.js');
-var Ideas = require('../models/Ideas.js');
+var Ideas = require('../models/Projects.js');
 var Orgs = require('../models/Orgs.js');
-var Activity = require('../models/Activity.js');
+var Activity = require('../models/Activities.js');
 
-var isAuthenticated = function (req, res, next) {
-	// if user is authenticated in the session, call the next() to call the next request handler 
-	// Passport adds this method to request object. A middleware is allowed to add properties to
-	// request and response objects
-	if (req.isAuthenticated())
-		return next();
-	// if the user is not authenticated then redirect him to the login page
-	res.redirect('/');
-}
 
 /* GET community page. 
    (Where all of the user's communities are listed)
    NOTE: currently passes ALL Community documents, this obviously needs
    to change at some point, but for now it works since there aren't too many.
    */
-router.get('/', isAuthenticated, function(req, res, next) {
+exports.allCommunities = function(req, res, next) {
 	Communities.find({}, function(err, data){
-		res.render('community', { title: 'Communities - ', user: req.user, data: data });
+	    if (err) {
+            res.status(203);
+	    } else {
+	        res.status(200).json({"communities": data})
+	    }
 	})
-});
+}
 
 /* GET Create Community page. */
-router.get('/create', isAuthenticated, function(req, res, next) {
+router.get('/create', function(req, res, next) {
 	res.render('create-community', { title: 'Create Community - ', user: req.user });
 });
 
 /* GET Create Idea page.
-   :id - the id of the community to create an idea(project) for 
+   :id - the id of the community to create an idea(project) for
    */
-router.get('/:id/create-idea', isAuthenticated, function(req, res, next) {
+router.get('/:id/create-idea', function(req, res, next) {
 	Communities.findById(req.params.id, function(err, data){
 		res.render('create-idea', { title: 'Create Idea - ', user: req.user, data: data });
 	})
 });
 
 /* GET Create Organization page.
-   :id - the id of the community to create an Organization for 
+   :id - the id of the community to create an Organization for
    */
-router.get('/:id/create-org', isAuthenticated, function(req, res, next) {
+router.get('/:id/create-org', function(req, res, next) {
 	Communities.findById(req.params.id, function(err, data){
 		res.render('create-org', { title: 'Create Organization - ', user: req.user, data: data });
 	})
@@ -138,7 +133,7 @@ router.post('/:id/leave', exports.update = function ( req, res ){
    		}
 	);
 
-	Memberships.find( { "user" : req.user.id, "community" : req.params.id }).remove().exec();    
+	Memberships.find( { "user" : req.user.id, "community" : req.params.id }).remove().exec();
 
 	// add to activity feed
 	var newActivity = new Activity({
@@ -152,8 +147,6 @@ router.post('/:id/leave', exports.update = function ( req, res ){
     newActivity.save( function ( err, user, count ){
       if (err) return console.log(err);
     });
-    
+
 	res.redirect('/community/' + req.params.id);
 });
-
-module.exports = router;

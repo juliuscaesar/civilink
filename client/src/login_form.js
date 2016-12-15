@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
     // Render the static content
     render(){
         return (
-        	<form action="/login" method="POST" className="form-signin">
+        	<form action="/api/login" method="POST" className="form-signin">
 				<input type="text" name="username" placeholder="Username" required="required" autoFocus="autoFocus" className="form-control"/>
 				<input type="password" name="password" placeholder="Password" required="required" className="form-control"/>
 				<button type="submit" className="btn btn-md btn-primary btn-block">Sign in</button><span className="clearfix"></span>

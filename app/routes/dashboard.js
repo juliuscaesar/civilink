@@ -5,16 +5,15 @@ var Activities = require('../models/Activities.js');
 
 
 /* GET dashboard page. */
-router.get('/dashboard', function(req, res, next) {
+exports.getFeed = function(req, res, next) {
   Activities.find({})
-  .populate('user community project idea task org')
+  .populate('user community')
   .exec(function (err, activityData) {
   	if (err) {
+  	    res.status(203);
   	}
   	else {
   		res.status(200).json({"feed": activityData})
   	}    
   });
-});
-
-module.exports = router;
+}
