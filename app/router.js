@@ -10,6 +10,7 @@ module.exports = function(app) {
   apiRoutes.get('/helloworld', test.helloworld);
   apiRoutes.get('/dashboard', dashboard.getFeed);
   apiRoutes.get('/community', community.allCommunities);
+  apiRoutes.get('/community/:id', community.getCommunity);
   apiRoutes.get('/login', login)
 
   app.use('/api', apiRoutes);
