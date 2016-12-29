@@ -3,7 +3,7 @@ import request from 'superagent';
 import Navbar from './navbar';
 import LoginForm from './login_form';
 
-require('./style.css')
+
 
 /*
  * Component for the landing page that is displayed to users not logged in.

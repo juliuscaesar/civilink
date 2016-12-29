@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import request from 'superagent';
-import Input from './input';
+import Sidebar from './sidebar';
 
 /**
  * Component for the navbar.
@@ -115,11 +115,13 @@ class Community extends React.Component {
 
     displayProjects() {
       var rows = [];
+      var projectUrl = '';
 
       for (var i = 0; i < this.state.projects.length; i++) {
+      projectUrl = "/project/" + this.state.projects[i]._id;
        rows.push(
            <div>
-               <a href="#">{this.state.projects[i].title}</a>
+               <a href={projectUrl}>{this.state.projects[i].title}</a>
                <br></br>
                <p>{this.state.projects[i].desc}</p>
            </div>
@@ -141,7 +143,7 @@ class Community extends React.Component {
                <div className="container-body">
                  <div className="row">
                    <div className="col-sm-2 hidden-xs">
-                     <p>Sidebar</p>
+                     <Sidebar/>
                    </div>
                    <div className="col-sm-10">
                      <div className="row">
@@ -158,7 +160,8 @@ class Community extends React.Component {
                            <hr/>
                            { this.displayMembers() }
                          </div>
-
+                       </div>
+                       <div className="col-sm-8 col-md-8">
                          <div className="content-box">
                            <p className="headertext2">Projects <small>(<a href="">create new</a>)</small></p>
                            <hr/>
@@ -170,6 +173,7 @@ class Community extends React.Component {
                            <hr/>
                            { this.displayActivity() }
                          </div>
+
                        </div>
                      </div>
                    </div>

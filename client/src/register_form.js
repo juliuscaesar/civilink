@@ -21,6 +21,7 @@ class RegisterForm extends React.Component {
         this.confirmPasswordValidation = this.confirmPasswordValidation.bind(this);
         this.getDisabledProperty = this.getDisabledProperty.bind(this);
         this.submitEnabled = this.submitEnabled.bind(this);
+        this.buildBody = this.buildBody.bind(this);
 
         //update the page
 
@@ -197,13 +198,30 @@ class RegisterForm extends React.Component {
     }
 
     /**
+     * builds the body of the api call
+     * @returns {{email: string, password: string, first: string, last: string}}
+     */
+    buildBody() {
+        var body = {
+            username: this.state.username,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            state: this.state.state,
+            city: this.state.city
+        };
+
+        return body
+    }
+
+    /**
      * Submits the information in the form to the api endpoint
      * Renders success message if account creation was successful
      * Renders error message if account creation failed
      */
-    submitAccount(ev) {
-        ev.preventDefault();
-        request.post('/signup')
+    submitAccount() {
+        request.post('/api/signup')
             .send(this.buildBody())
             .end(this.parseResponse);
     }
@@ -211,7 +229,7 @@ class RegisterForm extends React.Component {
     // Render the static content
     render(){
         return (
-            <form onSubmit={this.submitAccount}>
+            <form onSubmit={this.submitAccount()}>
                 <Input label="Username" inputId="username" inputType="text"
                     name="username" save={this.setValue}
                     validation={RegisterForm.usernameValidation}/>

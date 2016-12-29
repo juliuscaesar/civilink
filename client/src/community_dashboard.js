@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import request from 'superagent';
+import Sidebar from './sidebar';
 
 /**
  * Component for Communities dashboard.
@@ -70,11 +71,18 @@ class CommunityDashboard extends React.Component {
             <div>
         	   <Navbar/>
                <div className="container-body">
-                   <div className="content-box">
-                        <p className="headertext">My Communities</p>
-                        <hr></hr>
-                        { this.state.errorMessage }
-                        { this.buildCommunityList() }
+                   <div className="row">
+                       <div className="col-sm-2 hidden-xs">
+                           <Sidebar/>
+                       </div>
+                       <div className="col-sm-10">
+                           <div className="content-box">
+                               <p className="headertext">My Communities</p>
+                               <hr></hr>
+                               { this.state.errorMessage }
+                               { this.buildCommunityList() }
+                           </div>
+                       </div>
                    </div>
                </div>
             </div>

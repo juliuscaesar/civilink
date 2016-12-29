@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import request from 'superagent';
-import Input from './input';
+import Sidebar from './sidebar';
 
 /**
  * Component for the navbar.
@@ -79,15 +79,13 @@ class Dashboard extends React.Component {
           // the row for this activity: user image in left column and activity in the right
           rows.push(
             <div className="row">
-              <div className="col-xs-2 col-sm-2">
+              <div className="col-xs-2 col-sm-1">
                   {this.getUserImage(this.state.feed[i].user)}
               </div>
-              <div className="col-xs-10 col-sm-10">
+              <div className="col-xs-10 col-sm-11">
                 <p>
                   <a href={url}>{this.state.feed[i].user.firstName + " " + this.state.feed[i].user.lastName}</a> 
-                    {" " + this.state.feed[i].details + " the community:"}
-                    <br></br>
-                    <a href={commUrl}>{this.state.feed[i].community.name}</a>
+                    {" " + this.state.feed[i].details + " the community:"} <a href={commUrl}>{this.state.feed[i].community.name}</a>
                 </p>
               </div>
             </div>)
@@ -102,15 +100,13 @@ class Dashboard extends React.Component {
           rows.push(<hr></hr>)
           rows.push(
             <div className="row">
-              <div className="col-xs-2 col-sm-2">
+              <div className="col-xs-2 col-sm-1">
                 {this.getUserImage(this.state.feed[i].user)}
               </div>
-              <div className="col-xs-10 col-sm-10">
+              <div className="col-xs-10 col-sm-11">
                 <p>
                   <a href={url}>{this.state.feed[i].user.firstName + " " + this.state.feed[i].user.lastName}</a> 
-                    {" " + this.state.feed[i].details + " the project:"}
-                    <br></br>
-                    <a href={projectUrl}>{this.state.feed[i].idea.title}</a>
+                    {" " + this.state.feed[i].details + " the project:"} <a href={projectUrl}>{this.state.feed[i].idea.title}</a>
                 </p>
               </div>
             </div>)
@@ -126,10 +122,17 @@ class Dashboard extends React.Component {
             <div>
                <Navbar/>
                <div className="container-body">
-                   <div className="content-box">
-                        <p className="headertext">Activity Feed</p>
-                        { this.errorMessage }
-                        { this.buildBody() }
+                   <div className="row">
+                       <div className="col-sm-2 hidden-xs">
+                           <Sidebar/>
+                       </div>
+                       <div className="col-sm-10">
+                           <div className="content-box">
+                               <p className="headertext">Activity Feed</p>
+                               { this.errorMessage }
+                               { this.buildBody() }
+                          </div>
+                      </div>
                    </div>
                </div>
             </div>
