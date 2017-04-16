@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from '../general/Navbar';
 import request from 'superagent';
-import Sidebar from './sidebar';
+import Sidebar from '../general/Sidebar';
 
 /**
  * Component for the navbar.
@@ -88,10 +88,11 @@ class Community extends React.Component {
      */
     getUserImage(user) {
         if (user.avatar) {
-            return <img src="images/uploads/{user.avatar}" className="img-circle" width="50px" height="50px"></img>;
+            return <img src="images/uploads/{user.avatar}" className="img-circle"
+               role="presentation" width="50px" height="50px"></img>;
         }
         else {
-            return <img src="../user.png" className="img-circle" width="50px" height="50px"></img>;
+            return <img src="../user.png" className="img-circle" width="50px" height="50px" role="presentation"></img>;
         }
     }
 
@@ -99,7 +100,7 @@ class Community extends React.Component {
      * Creates the display that contains the members of this community
      */
     displayMembers() {
-        if (this.state.members.length == 0) {
+        if (this.state.members.length === 0) {
             return "No one has joined this community yet";
         }
         else {

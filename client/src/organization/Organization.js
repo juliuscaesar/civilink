@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from '../general/Navbar';
 import request from 'superagent';
-import Sidebar from './sidebar';
+import Sidebar from '../general/Sidebar';
 
 /**
  * Component for Organizations.
  */
-class Org extends React.Component {
+class Organization extends React.Component {
     constructor(props) {
         super(props);
 
@@ -114,4 +114,4 @@ class Org extends React.Component {
     }
 }
 
-export default Org;
+export default Organization;

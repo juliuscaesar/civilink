@@ -27,7 +27,7 @@ class Input extends React.Component {
     handleChange(event) {
         this.props.save(this.props.name, event.target.value);
         this.setState({value: event.target.value});
-        if(this.props.validation(event.target.value) != '') {
+        if(this.props.validation(event.target.value) !==  '') {
             this.setState({errorVisible : true});
         } else {
             this.setState({errorVisible: false});

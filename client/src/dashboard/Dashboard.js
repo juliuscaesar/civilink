@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from '../general/Navbar';
 import request from 'superagent';
-import Sidebar from './sidebar';
-import Auth from './modules/auth';
+import Sidebar from '../general/Sidebar';
+import Auth from '../modules/Auth';
 
 /**
  * Component for the Dashboard.
@@ -105,10 +105,11 @@ class Dashboard extends React.Component {
      */
     getUserImage(user) {
         if (user.avatar) {
-            return <img src="images/uploads/{user.avatar}" className="img-circle" width="50px" height="50px"></img>;
+            return <img src="images/uploads/{user.avatar}" className="img-circle"
+              role="presentation" width="50px" height="50px"></img>;
         }
         else {
-            return <img src="./user.png" className="img-circle" width="50px" height="50px"></img>;
+            return <img src="./user.png" className="img-circle" width="50px" height="50px" role="presentation"></img>;
         }
     }
 
@@ -152,7 +153,7 @@ class Dashboard extends React.Component {
         var url = "/profile/" + this.state.feed[i].user.username;
 
         //if this activity is regarding a community
-        if (this.state.feed[i].desttype == 'Communities') {
+        if (this.state.feed[i].desttype === 'Communities') {
             // create the url for the community
             var commUrl = "/community/" + this.state.feed[i].community._id;
 
@@ -176,7 +177,7 @@ class Dashboard extends React.Component {
 
         // if this activity is regarding a project
         // note: projects used to be called ideas so including both just in case
-        } else if (this.state.feed[i].desttype == 'Ideas' || this.state.feed[i].desttype == 'Projects') {
+        } else if (this.state.feed[i].desttype === 'Ideas' || this.state.feed[i].desttype === 'Projects') {
             // create the url for the project
             var projectUrl = "/project/" + this.state.feed[i].idea._id;
 
@@ -195,9 +196,9 @@ class Dashboard extends React.Component {
               </div>
             </div>)
         // if this activity is regarding tasks
-        } else if (this.state.feed[i].desttype == 'Tasks') {
+        } else if (this.state.feed[i].desttype === 'Tasks') {
             // create the url for the task
-            var projectUrl = "/idea/" + this.state.feed[i].task._id;
+            //var taskProject = "/project/" + this.state.feed[i].task._id;
 
             // horizontal break
             rows.push(<hr></hr>)

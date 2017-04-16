@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './navbar';
-import LoginForm from './login_form';
+import Navbar from './general/Navbar';
+import LoginForm from './LoginForm';
 
 
 

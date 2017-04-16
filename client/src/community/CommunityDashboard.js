@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from '../general/Navbar';
 import request from 'superagent';
-import Sidebar from './sidebar';
+import Sidebar from '../general/Sidebar';
 
 /**
  * Component for Communities dashboard.

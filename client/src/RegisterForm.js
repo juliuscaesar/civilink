@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
-import Input from './input';
-import Auth from './modules/auth';
+import Auth from './modules/Auth';
+import Input from './general/Input';
 
 /**
  * Component for the Register form.
@@ -37,7 +37,7 @@ class RegisterForm extends React.Component {
      * @returns {String}'' if the value is valid, otherwise returns an appropriate error message
      */
     static firstNameValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "First Name is required"
         } else if (value.length > 18) {
             return "Name too long"
@@ -52,7 +52,7 @@ class RegisterForm extends React.Component {
      * @returns {String}'' if the value is valid, otherwise returns an appropriate error message
      */
     static cityValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "City is required"
         } else {
             return '';
@@ -65,7 +65,7 @@ class RegisterForm extends React.Component {
      * @returns {String}'' if the value is valid, otherwise returns an appropriate error message
      */
     static stateValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "State is required"
         } else {
             return '';
@@ -78,7 +78,7 @@ class RegisterForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     static lastNameValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Last Name is required"
         } else if (value.length > 18) {
             return "Name too long"
@@ -93,7 +93,7 @@ class RegisterForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     static usernameValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Username is required"
         } else if (value.length < 4) {
             return "Username must be at least 4 characters long"
@@ -143,7 +143,7 @@ class RegisterForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     static emailValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Email is required"
         } else {
             // Regular expression from http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
@@ -162,7 +162,7 @@ class RegisterForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     static passwordValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Password is required"
         } else if (value.length < 8) {
             return "Password must be at least 8 characters"
@@ -177,9 +177,9 @@ class RegisterForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     confirmPasswordValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Confirm Password is required"
-        } else if (value != this.state.password) {
+        } else if (value !== this.state.password) {
             return "Passwords do not match";
         } else {
             return '';
@@ -191,14 +191,14 @@ class RegisterForm extends React.Component {
      * @returns {boolean} true if all fields in the form are valid
      */
     submitEnabled() {
-        return RegisterForm.usernameValidation(this.state.username) == '' &&
-                RegisterForm.firstNameValidation(this.state.firstName) == '' &&
-                RegisterForm.lastNameValidation(this.state.lastName) == '' &&
-                RegisterForm.emailValidation(this.state.email) == '' &&
-                RegisterForm.passwordValidation(this.state.password) == '' &&
-                this.confirmPasswordValidation(this.state.confirmPassword) == '' &&
-                RegisterForm.cityValidation(this.state.city) == '' &&
-                RegisterForm.stateValidation(this.state.state) == '';
+        return RegisterForm.usernameValidation(this.state.username) === '' &&
+                RegisterForm.firstNameValidation(this.state.firstName) === '' &&
+                RegisterForm.lastNameValidation(this.state.lastName) === '' &&
+                RegisterForm.emailValidation(this.state.email) === '' &&
+                RegisterForm.passwordValidation(this.state.password) === '' &&
+                this.confirmPasswordValidation(this.state.confirmPassword) === '' &&
+                RegisterForm.cityValidation(this.state.city) === '' &&
+                RegisterForm.stateValidation(this.state.state) === '';
     }
 
     /**

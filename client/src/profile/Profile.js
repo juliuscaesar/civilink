@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from '../general/Navbar';
 import request from 'superagent';
-import Sidebar from './sidebar';
+import Sidebar from '../general/Sidebar';
 
 /**
  * Component for a Profile.
@@ -77,10 +77,11 @@ class Profile extends React.Component {
      */
     getUserImage(size) {
         if (this.state.profile.avatar) {
-            return <img src="images/uploads/{this.state.profile.avatar}" className="img-circle" width="150px" height="150px"></img>;
+            return <img src="images/uploads/{this.state.profile.avatar}"
+              className="img-circle" role="presentation" width="150px" height="150px"></img>;
         }
         else {
-            return <img src="../user.png" className="img-circle" width={size} height={size}></img>;
+            return <img src="../user.png" className="img-circle" width={size} height={size} role="presentation"></img>;
         }
     }
 
@@ -112,7 +113,7 @@ class Profile extends React.Component {
         var url = "/profile/" + this.state.feed[i].user.username;
 
         //if this activity is regarding a community
-        if (this.state.feed[i].desttype == 'Communities') {
+        if (this.state.feed[i].desttype === 'Communities') {
             // create the url for the community
             var commUrl = "/community/" + this.state.feed[i].community._id;
 
@@ -135,7 +136,7 @@ class Profile extends React.Component {
 
         // if this activity is regarding a project
         // note: projects used to be called ideas so including both just in case
-        } else if (this.state.feed[i].desttype == 'Ideas' || this.state.feed[i].desttype == 'Projects') {
+        } else if (this.state.feed[i].desttype === 'Ideas' || this.state.feed[i].desttype === 'Projects') {
             // create the url for the project
             var projectUrl = "/project/" + this.state.feed[i].idea._id;
 

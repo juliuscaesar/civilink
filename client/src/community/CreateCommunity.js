@@ -1,6 +1,7 @@
 import React from 'react';
-import Navbar from './navbar';
-import CreateCommunityForm from './create_community_form';
+import Navbar from '../general/Navbar';
+
+import CreateCommunityForm from './CreateCommunityForm';
 
 /**
  * Component for the navbar.

@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
-import Input from './input';
-import Auth from './modules/auth'
+import Auth from './modules/Auth';
+import Input from './general/Input';
 
 /**
  * Component for the Login form.
@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
      * @returns {Boolean} if the value is valid
      */
     static usernameValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return false;
         } else if (value.length < 4) {
             return false;
@@ -85,7 +85,7 @@ class LoginForm extends React.Component {
      * @returns {Boolean} if the value is valid
      */
     static passwordValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return false;
         } else if (value.length < 8) {
             return false;

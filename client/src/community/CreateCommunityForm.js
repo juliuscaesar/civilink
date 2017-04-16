@@ -1,6 +1,6 @@
 import React from 'react';
 import request from 'superagent';
-import Input from './input';
+import Input from '../general/Input';
 
 /**
  * Component for the navbar.
@@ -63,7 +63,7 @@ class CreateCommunityForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     static nameValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Name is required"
         } else if (value.length < 5) {
             return "Name too short"
@@ -78,7 +78,7 @@ class CreateCommunityForm extends React.Component {
      * @returns {String} '' if the value is valid, otherwise returns an appropriate error message
      */
     static descValidation(value) {
-        if (value == '') {
+        if (value === '') {
             return "Description is required"
         } else {
             return '';
@@ -90,8 +90,8 @@ class CreateCommunityForm extends React.Component {
      * @returns {boolean} true if all fields in the form are valid
      */
     submitEnabled() {
-        return CreateCommunityForm.nameValidation(this.state.title) == '' &&
-                CreateCommunityForm.descValidation(this.state.desc) == '';
+        return CreateCommunityForm.nameValidation(this.state.title) === '' &&
+                CreateCommunityForm.descValidation(this.state.desc) === '';
     }
 
     /**

@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './navbar';
-import RegisterForm from './register_form';
+import Navbar from './general/Navbar';
+import RegisterForm from './RegisterForm';
 
 /**
  * Component for the Sign up page.
