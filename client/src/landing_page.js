@@ -1,5 +1,4 @@
 import React from 'react';
-import request from 'superagent';
 import Navbar from './navbar';
 import LoginForm from './login_form';
 
@@ -33,13 +32,12 @@ class LandingPage extends React.Component {
                         <div className="row">
                           <div className="content-box hidden-xs">
                             <div>
-                              <p className="text-center login-title">Sign in</p>
                               <div className="account-wall">
                                 <LoginForm/>
                               </div>
                               <div id="message"></div>
                               <center><a href="/sign-up" className="text-center">Create an account!</a></center>
-                            
+
                             </div>
                           </div>
                         </div>
@@ -49,7 +47,6 @@ class LandingPage extends React.Component {
                 </div>
                 <div className="content-box hidden-sm hidden-md hidden-lg hidden-xl">
                   <div>
-                    <p className="text-center login-title">Sign in</p>
                     <div className="account-wall">
                       <LoginForm/>
                     </div>

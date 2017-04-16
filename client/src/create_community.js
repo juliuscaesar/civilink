@@ -1,17 +1,11 @@
 import React from 'react';
 import Navbar from './navbar';
-import request from 'superagent';
-import Input from './input';
 import CreateCommunityForm from './create_community_form';
 
 /**
  * Component for the navbar.
  */
 class CreateCommunity extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     // Render the static content
     render(){
         return (

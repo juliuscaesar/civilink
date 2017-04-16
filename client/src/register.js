@@ -1,17 +1,11 @@
 import React from 'react';
 import Navbar from './navbar';
-import request from 'superagent';
-import Input from './input';
 import RegisterForm from './register_form';
 
 /**
- * Component for the navbar.
+ * Component for the Sign up page.
  */
 class Register extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     // Render the static content
     render(){
         return (

@@ -1,7 +1,7 @@
 {
   "name": "civilink",
   "version": "1.0.0",
-  "description": "",
+  "description": "MSD Repo for CS4500 Spring 2017 group 3",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd client && npm start\"",
@@ -20,5 +20,19 @@
   "homepage": "https://github.com/juliuscaesar/civilink#readme",
   "devDependencies": {
     "concurrently": "^3.1.0"
+  },
+  "dependencies": {
+    "0g": "^1.0.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "cors": "2.8.1",
+    "jsonwebtoken": "7.3.0",
+    "express-session": "1.15.1",
+    "connect-flash": "0.1.1",
+    "concurrently": "^3.1.0",
+    "mongoose": "^4.7.2",
+    "passport-jwt": "2.2.1",
+    "body-parser": "~1.13.2",
+    "sanitize-html": "^1.13.0",
+    "express": "~4.13.1"
   }
 }

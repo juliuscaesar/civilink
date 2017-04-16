@@ -1,12 +1,17 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
+  "dependencies": {
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "description": ""
 }

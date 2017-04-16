@@ -4,7 +4,7 @@ import request from 'superagent';
 import Sidebar from './sidebar';
 
 /**
- * Component for the navbar.
+ * Component for Projects.
  */
 class Project extends React.Component {
     constructor(props) {
@@ -72,14 +72,24 @@ class Project extends React.Component {
         }
     }
 
+    /*
+     * Makes a url for the community of this project
+     */
     getCommunityUrl() {
         return "/community/" + this.state.community._id;
     }
 
+    /*
+     * Makes a url for the profile of this project organizer
+     */
     getProfileUrl() {
             return "/profile/" + this.state.organizer.username;
         }
 
+   /*
+    * Builds the tasks for this project
+    * NOTE: buttons dont work right now
+    */
     buildTasks() {
       var rows = [];
 
@@ -122,9 +132,6 @@ class Project extends React.Component {
                    <div className="col-sm-10">
                      <div className="row">
                        <div className="col-sm-4 col-md-4">
-                         <div className="content-box">
-                           <center><a href={this.getCommunityUrl()}>&#171; Back to {this.state.community.name}</a></center>
-                         </div>
 
                          <div className="content-box">
                             <p className="headertext">Progress</p>

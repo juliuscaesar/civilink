@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 var Communities = require('../models/Communities.js');
 
@@ -26,5 +27,13 @@ var userSchema = new Schema({
   communities: [{type: Schema.ObjectId, ref: 'Communities'}],
 });
 
+// Method to compare password for login
+userSchema.methods.comparePassword = function (candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    if (err) { return cb(err); }
+
+    cb(null, isMatch);
+  });
+};
 
 module.exports = mongoose.model('Users', userSchema);

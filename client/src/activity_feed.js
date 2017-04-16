@@ -4,6 +4,8 @@ import request from 'superagent';
 
 /**
  * Component for an Actvity Feed.
+ * Not used but this will replace the obnoxious buildbody stuff
+ * on the Dashboard if fully implemented.
  */
 class ActivityFeed extends React.Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class ActivityFeed extends React.Component {
                    <div className="content-box">
                         <p className="headertext">Activity Feed</p>
                         <hr></hr>
-                        
+
                    </div>
                </div>
             </div>

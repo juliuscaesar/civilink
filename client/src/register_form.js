@@ -1,9 +1,10 @@
 import React from 'react';
 import request from 'superagent';
 import Input from './input';
+import Auth from './modules/auth';
 
 /**
- * Component for the navbar.
+ * Component for the Register form.
  */
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class RegisterForm extends React.Component {
          * Fields in this form are kept as state and initialized as empty
          */
         this.state = {username: '', password: '', confirmPassword: '', email: '', firstName: '',
-            lastName: '', city: '', state: ''};
+            lastName: '', city: '', state: '', errorMessage: "", token: '', displayError: false};
 
         //region bind all methods to this
         this.setValue = this.setValue.bind(this);
@@ -22,6 +23,9 @@ class RegisterForm extends React.Component {
         this.getDisabledProperty = this.getDisabledProperty.bind(this);
         this.submitEnabled = this.submitEnabled.bind(this);
         this.buildBody = this.buildBody.bind(this);
+        this.parseResponse = this.parseResponse.bind(this);
+        this.submitAccount = this.submitAccount.bind(this);
+        this.authorizeUser = this.authorizeUser.bind(this);
 
         //update the page
 
@@ -199,7 +203,6 @@ class RegisterForm extends React.Component {
 
     /**
      * builds the body of the api call
-     * @returns {{email: string, password: string, first: string, last: string}}
      */
     buildBody() {
         var body = {
@@ -220,39 +223,75 @@ class RegisterForm extends React.Component {
      * Renders success message if account creation was successful
      * Renders error message if account creation failed
      */
-    submitAccount() {
-        request.post('/api/signup')
+    submitAccount(ev) {
+        ev.preventDefault();
+        request.post('/api/auth/signup')
             .send(this.buildBody())
             .end(this.parseResponse);
+    }
+
+    /**
+     * Authorizes the user from the token received from register success
+     */
+    authorizeUser() {
+      Auth.authenticateUser(this.state.token);
+    }
+
+    /**
+     * Parse the response to the create account request
+     * @param error any error that occurred when submitting the request
+     * @param response the response returned from the server
+     */
+    parseResponse(error, response) {
+        switch(response.status) {
+            case 201:
+            this.setState({
+                token: response.body.token
+              });
+              this.authorizeUser();
+              window.location = '/dashboard';
+
+              break;
+            case 203:
+                this.setState({
+                    errorMessage: "Could not create account", displayError: true
+                });
+                break;
+            default:
+                this.setState({
+                    errorMessage: "Could not create account", displayError: true
+                });
+        }
     }
 
     // Render the static content
     render(){
         return (
-            <form onSubmit={this.submitAccount()}>
+            <form onSubmit={this.submitAccount}>
+                <p>{ this.errorMessage }</p>
                 <Input label="Username" inputId="username" inputType="text"
-                    name="username" save={this.setValue}
+                    name="username" save={this.setValue} val={this.state.username}
                     validation={RegisterForm.usernameValidation}/>
                 <Input label="First Name" inputId="firstName" inputType="text"
-                    name="firstName" save={this.setValue}
+                    name="firstName" save={this.setValue} val={this.state.firstName}
                     validation={RegisterForm.firstNameValidation}/>
                 <Input label="Last Name" inputId="lastName" inputType="text"
-                    name="lastName" save={this.setValue}
+                    name="lastName" save={this.setValue} val={this.state.lastName}
                     validation={RegisterForm.lastNameValidation}/>
                 <Input label="Email Address" inputId="email" inputType="text"
-                    name="email" save={this.setValue}
+                    name="email" save={this.setValue} val={this.state.email}
                     validation={RegisterForm.emailValidation}/>
                 <Input label="Password" inputId="password" inputType="password"
-                    name="password" save={this.setValue}
+                    name="password" save={this.setValue} val={this.state.password}
                     validation={RegisterForm.passwordValidation}/>
                 <Input label="Confirm Password" inputId="confirm_password" inputType="password"
-                    name="confirmPassword" save={this.setValue}
+                    name="confirmPassword" save={this.setValue} val={this.state.confirmPassword}
                     validation={this.confirmPasswordValidation}/>
                 <Input label="City" inputId="city" inputType="text"
-                    name="city" save={this.setValue}
+                    name="city" save={this.setValue} val={this.state.city}
                     validation={RegisterForm.cityValidation}/>
                 <Input label="State" inputId="state" inputType="text"
-                    name="state" save={this.setValue}
+                    name="state" save={this.setValue} val={this.state.state}
                     validation={RegisterForm.stateValidation}/>
                 <button type="submit" disabled={this.getDisabledProperty()} className={this.getButtonClass()} >Register</button>
             </form>

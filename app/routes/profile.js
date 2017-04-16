@@ -7,7 +7,11 @@ var Follow = require('../models/Follows.js');
 var Memberships = require('../models/Memberships.js');
 var Activity = require('../models/Activities.js');
 
-/* GET /profile/id */
+/*
+ * GET Profile information
+ * Returns: User object, list of followers, list of following
+ *          Community memberships, and activity data 
+ */
 exports.getProfile = function(req, res, next) {
   Users.findOne({ 'username' : req.params.id }, function (err, person) {
     if (err) {
@@ -75,7 +79,7 @@ router.get('/:username', function(req, res, next) {
               Activity.find({ "user" : userId.id})
               .populate('user community idea task org')
               .exec(function (err, activityData) {
-                res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person, 
+                res.render('profile', { title: person.firstName + " " + person.lastName + ' - ', data: person,
                   user: req.user, following: following, followers: followers, feed: activityData, communities: memberships });
               });
             });
@@ -102,6 +106,6 @@ router.post('/:username/follow/:id', exports.update = function ( req, res ){
 /* Handle  POST */
 router.post('/:username/unfollow/:id', exports.update = function ( req, res ){
   Follow.find( { "follower" : req.user.id, "followee" : req.params.id })
-  .remove().exec();    
+  .remove().exec();
   res.redirect('/profile/' + req.params.username);
 });

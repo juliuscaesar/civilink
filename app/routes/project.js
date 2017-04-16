@@ -10,9 +10,10 @@ var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
 var Tasks = require('../models/Tasks.js');
 
-/* GET /project/:id
-   Send to Project page after populating the community field
-  */
+/*
+ * Returns data for a project
+ * including the associated tasks
+*/
 exports.getProject = function(req, res, next) {
     var project = [];
     var tasks = [];

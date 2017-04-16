@@ -4,7 +4,7 @@ import request from 'superagent';
 import Sidebar from './sidebar';
 
 /**
- * Component for the navbar.
+ * Component for a Profile.
  */
 class Profile extends React.Component {
     constructor(props) {
@@ -21,6 +21,7 @@ class Profile extends React.Component {
         this.parseInfoResponse = this.parseInfoResponse.bind(this);
         this.hideDiv = this.hideDiv.bind(this);
         this.getUserImage = this.getUserImage.bind(this);
+        this.communityList = this.communityList.bind(this);
         this.buildBody = this.buildBody.bind(this);
 
 
@@ -40,7 +41,7 @@ class Profile extends React.Component {
         }
     }
     /**
-     * Send the request to get the games
+     * Send the request to get the profile information
      */
     requestInfo() {
         request.get('/api/profile/' + this.props.params.id)
@@ -49,7 +50,7 @@ class Profile extends React.Component {
     }
 
     /**
-     * Parse the response to the get games request
+     * Parse the response to the get profile request
      * @param error any error that occurred when submitting the request
      * @param response the response returned from the server
      */
@@ -61,16 +62,19 @@ class Profile extends React.Component {
                 break;
             case 203:
                 this.setState({
-                    errorMessage: "Could not get project data", displayError: true
+                    errorMessage: "Could not get profile data", displayError: true
                 });
                 break;
             default:
                 this.setState({
-                    errorMessage: "Could not get project data", displayError: true
+                    errorMessage: "Could not get profile data", displayError: true
                 });
         }
     }
 
+    /*
+     * Returns the user image
+     */
     getUserImage(size) {
         if (this.state.profile.avatar) {
             return <img src="images/uploads/{this.state.profile.avatar}" className="img-circle" width="150px" height="150px"></img>;
@@ -80,6 +84,26 @@ class Profile extends React.Component {
         }
     }
 
+    /*
+     * Returns the community list
+     */
+    communityList() {
+        var rows = [];
+        var url = '';
+
+        for (var i = 0; i < this.state.communities.length; i++) {
+            url = "/community/" + this.state.communities[i].community._id;
+            rows.push(
+                <a href={url}>{this.state.communities[i].community.name}</a>
+            )
+        }
+
+        return rows;
+    }
+
+   /*
+    * Builds the activity feed for this user
+    */
     buildBody() {
       var rows = [];
 
@@ -112,8 +136,8 @@ class Profile extends React.Component {
         // if this activity is regarding a project
         // note: projects used to be called ideas so including both just in case
         } else if (this.state.feed[i].desttype == 'Ideas' || this.state.feed[i].desttype == 'Projects') {
-            // create the url for the community
-            var projectUrl = "/idea/" + this.state.feed[i].idea._id;
+            // create the url for the project
+            var projectUrl = "/project/" + this.state.feed[i].idea._id;
 
             // horizontal break
           rows.push(<hr></hr>)
@@ -125,7 +149,7 @@ class Profile extends React.Component {
               <div className="col-xs-9 col-sm-10">
                 <p>
                   <a href={url}>{this.state.feed[i].user.firstName + " " + this.state.feed[i].user.lastName}</a>
-                    {" " + this.state.feed[i].details + " the project:"} <a href={projectUrl}>{this.state.feed[i].idea.title}</a>
+                    {" " + this.state.feed[i].details + " the project:"} <a href={projectUrl}>{this.state.feed[i].project.title}</a>
                 </p>
               </div>
             </div>)
@@ -197,6 +221,7 @@ class Profile extends React.Component {
                          <div className="content-box">
                             <p className="headertext2">Communities <small>({this.state.communities.length})</small></p>
                             <hr></hr>
+                            { this.communityList() }
                          </div>
                        </div>
 

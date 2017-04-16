@@ -26,8 +26,9 @@ class Sidebar extends React.Component {
     render(){
         return (
             <div>
-                <p><a href="/dashboard">Activity Feed</a></p>
-                <p><a href="/community">Communities</a></p>
+                <p><a href="/dashboard">Dashboard</a></p>
+                <p><a href="/communities">Communities</a></p>
+                <p><a href="/organizations">Organizations</a></p>
                 <p><a href="/tasks">My Tasks</a></p>
                 <hr></hr>
                 <p className="grayed">
