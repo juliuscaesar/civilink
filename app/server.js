@@ -30,9 +30,9 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/civilink', function(err) {
     if(err) {
-        console.log('==> 🍊  MongoDB connection error', err);
+        console.log('➜ 🍊  MongoDB connection error', err);
     } else {
-        console.log('==> 🍊  MongoDB connection successful');
+        console.log('➜ 🍊  MongoDB connection successful');
     }
 });
 
@@ -44,4 +44,4 @@ app.use(cors());
 router(app);
 
 app.listen(port);
-console.log('==> 🌎  Back end server is running on port ' + port + '.');
+console.log('➜ 🌎  Back end server is running on port ' + port + '.');
