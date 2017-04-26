@@ -34,18 +34,44 @@ function skipLanding(nextState, replace) {
 }
 
 ReactDOM.render(
-    <ReactRouter.Router history={ReactRouter.browserHistory}>
-        <ReactRouter.Route path="/" component={LandingPage} onEnter={skipLanding}/>
-        <ReactRouter.Route path="/sign-up" component={Register}/>
-        <ReactRouter.Route path="/dashboard" component={Dashboard} onEnter={requireAuth}/>
-        <ReactRouter.Route path="/communities" component={CommunityDashboard} onEnter={requireAuth}/>
-        <ReactRouter.Route path="/community/create" component={CreateCommunity} onEnter={requireAuth}/>
-        <ReactRouter.Route path="/community/:id" component={Community}/>
-        <ReactRouter.Route path="/project/:id" component={Project}/>
-        <ReactRouter.Route path="/profile/:id" component={Profile}/>
-          <ReactRouter.Route path="/organization/:id" component={Organization}/>
-        <ReactRouter.Route path="/logout" component={Logout}/>
-        <ReactRouter.Route path="*" component={LandingPage}/>
-    </ReactRouter.Router>,
-    document.getElementById('root')
+  <ReactRouter.Router history={ReactRouter.browserHistory}>
+    <ReactRouter.Route
+      path="/"
+      component={LandingPage}
+      onEnter={skipLanding}/>
+    <ReactRouter.Route
+      path="/sign-up"
+      component={Register}/>
+    <ReactRouter.Route
+      path="/dashboard"
+      component={Dashboard}
+      onEnter={requireAuth}/>
+    <ReactRouter.Route
+      path="/communities"
+      component={CommunityDashboard}
+      onEnter={requireAuth}/>
+    <ReactRouter.Route
+      path="/community/create"
+      component={CreateCommunity}
+      onEnter={requireAuth}/>
+    <ReactRouter.Route
+      path="/community/:id"
+      component={Community}/>
+    <ReactRouter.Route
+      path="/project/:id"
+      component={Project}/>
+    <ReactRouter.Route
+      path="/profile/:id"
+      component={Profile}/>
+    <ReactRouter.Route
+      path="/organization/:id"
+      component={Organization}/>
+    <ReactRouter.Route
+      path="/logout"
+      component={Logout}/>
+    <ReactRouter.Route
+      path="*"
+      component={LandingPage}/>
+  </ReactRouter.Router>,
+  document.getElementById('root')
 );
