@@ -3,6 +3,7 @@ import Navbar from '../general/Navbar';
 import request from 'superagent';
 import Sidebar from '../general/Sidebar';
 import CommunityCard from './CommunityCard';
+import { Card, Grid } from 'semantic-ui-react'
 
 /**
 * Component for Communities dashboard.
@@ -56,18 +57,16 @@ class CommunityDashboard extends React.Component {
   }
 
   /**
-   * Build the list of communities
-   */
+  * Build the list of communities
+  */
   buildCommunityList() {
     var rows = [];
 
     for (var i = 0; i < this.state.communities.length; i++) {
       rows.push(
-        <div className="col-md-4 col-sm-6">
-          <CommunityCard
-            community = {this.state.communities[i]}
+        <CommunityCard
+          community={this.state.communities[i]}
           />
-        </div>
       );
     }
 
@@ -78,27 +77,24 @@ class CommunityDashboard extends React.Component {
   render(){
     return (
       <div>
-
         <Navbar/>
         <div className="container-body">
-          <div className="row">
-            <div className="col-sm-2 hidden-xs">
-              <Sidebar/>
-            </div>
-            <div className="col-sm-10">
-              <div className="content-box">
-                <p className="headertext">
-                  My Communities
-                </p>
+          <Grid stackable>
+            <Grid.Row>
+              <Grid.Column width={3}>
+                <Sidebar/>
+              </Grid.Column>
+              <Grid.Column width={13}>
+                <h3>My Communities</h3>
                 <hr>
                 </hr>
                 { this.state.errorMessage }
-                <div className="row">
-                    { this.buildCommunityList() }
-                </div>
-              </div>
-            </div>
-          </div>
+                <Card.Group itemsPerRow={2}>
+                  { this.buildCommunityList() }
+                </Card.Group>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </div>
       </div>
     );

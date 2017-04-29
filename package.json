@@ -24,15 +24,22 @@
   "dependencies": {
     "0g": "^1.0.2",
     "bcrypt-nodejs": "^0.0.3",
-    "cors": "2.8.1",
-    "jsonwebtoken": "7.3.0",
-    "express-session": "1.15.1",
-    "connect-flash": "0.1.1",
+    "body-parser": "~1.13.2",
     "concurrently": "^3.1.0",
+    "connect-flash": "0.1.1",
+    "cors": "2.8.1",
+    "express": "~4.13.1",
+    "express-session": "1.15.1",
+    "jsonwebtoken": "7.3.0",
     "mongoose": "^4.7.2",
     "passport-jwt": "2.2.1",
-    "body-parser": "~1.13.2",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.2",
+    "superagent": "^3.4.1",
     "sanitize-html": "^1.13.0",
-    "express": "~4.13.1"
+    "semantic-ui-popup": "^2.2.10",
+    "semantic-ui-react": "^0.68.2",
+    "semantic-ui-transition": "^2.2.10"
   }
 }

@@ -6,6 +6,7 @@ import Dashboard from './dashboard/Dashboard';
 import CommunityDashboard from './community/CommunityDashboard';
 import Community from './community/Community';
 import CreateCommunity from './community/CreateCommunity';
+import TaskDashboard from './task/TaskDashboard';
 import Project from './project/Project';
 import Profile from './profile/Profile';
 import Auth from './modules/Auth';
@@ -49,6 +50,10 @@ ReactDOM.render(
     <ReactRouter.Route
       path="/communities"
       component={CommunityDashboard}
+      onEnter={requireAuth}/>
+    <ReactRouter.Route
+      path="/tasks"
+      component={TaskDashboard}
       onEnter={requireAuth}/>
     <ReactRouter.Route
       path="/community/create"

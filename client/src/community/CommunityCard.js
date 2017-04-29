@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Icon, Image } from 'semantic-ui-react'
 
 /**
 * Component for the Community Card on dashboard.
@@ -16,23 +17,37 @@ class CommunityCard extends React.Component {
   }
 
   /**
-   * Creates the url for the community
-   */
-   makeUrl() {
-     return "/" + this.props.community.url;
-   }
+  * Creates the url for the community
+  */
+  makeUrl() {
+    return "/" + this.props.community.url;
+  }
 
   render() {
     return (
-      <div className="card">
-        <div className="card-block">
-          <a href={this.makeUrl()}>
-            <h3 className="card-title">{this.props.community.name}</h3>
+      <Card>
+        <Card.Content>
+          <Card.Header>
+            <a href={this.makeUrl()}>
+              {this.props.community.name}
+            </a>
+          </Card.Header>
+          <Card.Meta>
+            <span className='date'>
+              {this.props.community.desc}
+            </span>
+          </Card.Meta>
+          <Card.Description>
+
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <a>
+            <Icon name='user' />
+            22 Friends
           </a>
-          <p className="card-text">Some quick example text to build on the card
-          title and make up the bulk of the cards content.</p>
-        </div>
-      </div>
+        </Card.Content>
+      </Card>
     );
   }
 }

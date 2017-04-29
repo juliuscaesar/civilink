@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'semantic-ui-react'
 
 /**
 * Component for the navbar.
@@ -27,16 +28,18 @@ class Sidebar extends React.Component {
     return (
       <div>
         <p>
-          <a href="/dashboard">Dashboard</a>
+          <a href="/dashboard">
+            <Icon name='home' />
+            Dashboard</a>
         </p>
         <p>
-          <a href="/communities">Communities</a>
-        </p>
-        <p>
-          <a href="/organizations">Organizations</a>
+          <a href="/communities">
+            <Icon name='users' />
+            Communities</a>
         </p>
         <p>
           <a href="/tasks">
+            <Icon name='check square' />
             My Tasks
           </a>
         </p>

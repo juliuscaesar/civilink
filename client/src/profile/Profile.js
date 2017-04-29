@@ -74,13 +74,13 @@ class Profile extends React.Component {
           break;
         case 203:
           this.setState({
-            errorMessage: "Could not get profile data",
+            errorMessage: "Could not get user data",
             displayError: true
           });
           break;
         default:
           this.setState({
-            errorMessage: "Could not get profile data",
+            errorMessage: "Could not get user data",
             displayError: true
           });
         }
@@ -137,7 +137,7 @@ class Profile extends React.Component {
 
         for (var i = 0; i < this.state.feed.length; i++) {
           // create the url to be used for a user's profile
-          var url = "/profile/" + this.state.feed[i].user.username;
+          var url = "/user/" + this.state.feed[i].user.username;
 
           //if this activity is regarding a community
           if (this.state.feed[i].desttype === 'Communities') {
