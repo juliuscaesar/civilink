@@ -118,7 +118,7 @@ class Profile extends React.Component {
         var url = '';
 
         for (var i = 0; i < this.state.communities.length; i++) {
-          url = "/community/" + this.state.communities[i].community._id;
+          url = "/" + this.state.communities[i].community.url;
           rows.push(
             <a href={url}>
               {this.state.communities[i].community.name}

@@ -41,7 +41,7 @@ exports.getCommunity = function(req, res, next) {
     var projects = [];
 		var organizations = [];
 
-	Communities.findById(req.params.id)
+	Communities.find({"url": req.params.id})
     .exec(function (err, commun) {
         if (err) {
             res.status(203);

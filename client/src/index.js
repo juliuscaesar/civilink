@@ -55,9 +55,6 @@ ReactDOM.render(
       component={CreateCommunity}
       onEnter={requireAuth}/>
     <ReactRouter.Route
-      path="/community/:id"
-      component={Community}/>
-    <ReactRouter.Route
       path="/project/:id"
       component={Project}/>
     <ReactRouter.Route
@@ -69,6 +66,9 @@ ReactDOM.render(
     <ReactRouter.Route
       path="/logout"
       component={Logout}/>
+    <ReactRouter.Route
+      path="/:id"
+      component={Community}/>
     <ReactRouter.Route
       path="*"
       component={LandingPage}/>
