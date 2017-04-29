@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../general/Navbar';
 import request from 'superagent';
 import Sidebar from '../general/Sidebar';
+import CommunityCard from './CommunityCard';
 
 /**
 * Component for Communities dashboard.
@@ -28,7 +29,7 @@ class CommunityDashboard extends React.Component {
   }
 
   /**
-  * Send the request to get the games
+  * Send the request to get the communities
   */
   requestInfo() {
     request.get('/api/community')
@@ -54,19 +55,20 @@ class CommunityDashboard extends React.Component {
     }
   }
 
+  /**
+   * Build the list of communities
+   */
   buildCommunityList() {
     var rows = [];
 
     for (var i = 0; i < this.state.communities.length; i++) {
-      // create the url for this community
-      var commUrl = "/community/" + this.state.communities[i]._id;
       rows.push(
-        <a
-          key={this.state.communities[i]._id}
-          href={commUrl}>
-          {this.state.communities[i].name}
-        </a>
-      )
+        <div className="col-md-4 col-sm-6">
+          <CommunityCard
+            community = {this.state.communities[i]}
+          />
+        </div>
+      );
     }
 
     return rows;
@@ -91,7 +93,9 @@ class CommunityDashboard extends React.Component {
                 <hr>
                 </hr>
                 { this.state.errorMessage }
-                { this.buildCommunityList() }
+                <div className="row">
+                    { this.buildCommunityList() }
+                </div>
               </div>
             </div>
           </div>
