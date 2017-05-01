@@ -26,6 +26,7 @@ class CommunityCard extends React.Component {
   render() {
     return (
       <Card>
+        <Image src="http://4vector.com/i/free-vector-city-skyline_100975_city_skyline.png" />
         <Card.Content>
           <Card.Header>
             <a href={this.makeUrl()}>

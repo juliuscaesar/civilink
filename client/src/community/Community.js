@@ -2,7 +2,8 @@ import React from 'react';
 import Navbar from '../general/Navbar';
 import request from 'superagent';
 import Sidebar from '../general/Sidebar';
-import { Grid, Segment } from 'semantic-ui-react'
+import { browserHistory } from 'react-router';
+import { Grid, Segment, Card, Icon, Image, Message } from 'semantic-ui-react'
 
 /**
 * Component for the navbar.
@@ -29,6 +30,7 @@ class Community extends React.Component {
     this.hideDiv = this.hideDiv.bind(this);
     this.communityInfo = this.communityInfo.bind(this);
     this.issues = this.issues.bind(this);
+    this.getImageUrl = this.getImageUrl.bind(this);
 
     // update page by calling the API call
     this.requestInfo();
@@ -68,15 +70,12 @@ class Community extends React.Component {
           projects: response.body.projects,
           organizations: response.body.organizations});
           break;
-      case 203:
-        this.setState({
-          errorMessage: "Could not get community data",
-          displayError: true
-        });
+      case 404:
+        browserHistory.push('/');
         break;
       default:
         this.setState({
-          errorMessage: "Could not get community data",
+          errorMessage: response.body.errorMessage,
           displayError: true
         });
       }
@@ -86,9 +85,7 @@ class Community extends React.Component {
     * Displays the header for the community
     */
     communityInfo() {
-      for (var i = 0; i < this.state.community.length; i++) {
-        return <h1>{this.state.community[i].name}</h1>
-      }
+      return <h1>{this.state.community.name}</h1>
     }
 
     /*
@@ -98,6 +95,12 @@ class Community extends React.Component {
       return <h3>Housing</h3>
     }
 
+    /*
+    * Placeholder for image
+    */
+    getImageUrl() {
+      return "http://4vector.com/i/free-vector-city-skyline_100975_city_skyline.png";
+    }
     // Render the static content
     render(){
       return (
@@ -110,10 +113,21 @@ class Community extends React.Component {
                   <Sidebar/>
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  { this.state.errorMessage }
-                  <Segment>
-                    { this.communityInfo() }
-                  </Segment>
+                  <Message color='red' style={this.hideDiv()}>
+                    Error: { this.state.errorMessage }
+                  </Message>
+                  <Card fluid>
+                    <Image src={this.getImageUrl()}/>
+                    <Card.Content>
+                      <Card.Header>
+                        {this.communityInfo()}
+                      </Card.Header>
+
+                      <Card.Description>
+                        <p>What goes here lol</p>
+                      </Card.Description>
+                    </Card.Content>
+                  </Card>
 
                   <Segment>
                     { this.issues() }

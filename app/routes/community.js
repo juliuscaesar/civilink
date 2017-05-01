@@ -41,48 +41,46 @@ exports.getCommunity = function(req, res, next) {
     var projects = [];
 		var organizations = [];
 
-	Communities.find({"url": req.params.id})
+	Communities.findOne({"url": req.params.id})
     .exec(function (err, commun) {
         if (err) {
-            res.status(203);
+            return res.status(500).json({"errorMessage": "Could not find that community"});
         }
         else if (commun == null) {
-            res.status(203);
+            return res.status(404).json({"errorMessage": "Could not find that community"});
             // should go back to dashboard
         }
         else {
             community = commun;
-
-
         }
 
-        Memberships.find({ "community" : req.params.id })
+        Memberships.find({ "community" : commun.id })
             .populate('user')
             .exec(function (err, memberships) {
 
             if (err) {
-               //
+               res.status(500).json({"errorMessage": "Could not find memberships"});
             }
             else {
                 members = memberships;
             }
 
-        Projects.find({ "community" : req.params.id })
+        Projects.find({ "community" : commun.id.id })
             .populate('user')
             .exec(function (err, projects) {
 
             if (err) {
-                //
+                res.status(500).json({"errorMessage": "Could not find projects"});
             }
             else {
                 projects = projects;
             }
 
-						Orgs.find({ "community" : req.params.id })
+						Orgs.find({ "community" : commun.id })
 		            .exec(function (err, orgs) {
 
 		            if (err) {
-		                //
+		                res.status(500).json({"errorMessage": "Could not find organizations"});
 		            }
 		            else {
 		                organizations = orgs;
