@@ -63,7 +63,7 @@ ReactDOM.render(
       path="/project/:id"
       component={Project}/>
     <ReactRouter.Route
-      path="/profile/:id"
+      path="/user/:id"
       component={Profile}/>
     <ReactRouter.Route
       path="/organization/:id"
