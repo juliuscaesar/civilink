@@ -1,7 +1,10 @@
 import React from 'react';
 import Navbar from '../general/Navbar';
 import request from 'superagent';
+import CauseTag from '../community/CauseTag';
+import UserTag from '../profile/UserTag';
 import Sidebar from '../general/Sidebar';
+import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label } from 'semantic-ui-react'
 
 /**
 * Component for Projects.
@@ -19,7 +22,8 @@ class Project extends React.Component {
       project: [],
       tasks: [],
       community: [],
-      organizer: []
+      organizer: [],
+      causes: []
     };
 
       //region bind all methods to this
@@ -28,7 +32,8 @@ class Project extends React.Component {
       this.hideDiv = this.hideDiv.bind(this);
       this.getCommunityUrl = this.getCommunityUrl.bind(this);
       this.getProfileUrl = this.getProfileUrl.bind(this);
-      this.buildTasks = this.buildTasks.bind(this);
+      this.getProfileTag = this.getProfileTag.bind(this);
+      this.displayCauses = this.displayCauses.bind(this);
 
 
       // update page
@@ -46,6 +51,7 @@ class Project extends React.Component {
         return {display: "none"};
       }
     }
+
     /**
     * Send the request to get the games
     */
@@ -67,7 +73,8 @@ class Project extends React.Component {
             project: response.body.project,
             tasks: response.body.tasks,
             community: response.body.project.community,
-            organizer: response.body.project.user
+            organizer: response.body.project.user,
+            causes: response.body.project.causes
           });
           break;
         case 203:
@@ -88,57 +95,39 @@ class Project extends React.Component {
       * Makes a url for the community of this project
       */
       getCommunityUrl() {
-        return "/community/" + this.state.community._id;
+        return "/" + this.state.community.url;
+      }
+
+      /*
+      * Placeholder for image
+      */
+      getImageUrl() {
+        return "http://4vector.com/i/free-vector-city-skyline_100975_city_skyline.png";
       }
 
       /*
       * Makes a url for the profile of this project organizer
       */
       getProfileUrl() {
-        return "/profile/" + this.state.organizer.username;
+        return "/user/" + this.state.organizer.username;
       }
 
       /*
-      * Builds the tasks for this project
-      * NOTE: buttons dont work right now
+      * Display the causes of this project
       */
-      buildTasks() {
+      displayCauses() {
         var rows = [];
-
-        for (var i = 0; i < this.state.tasks.length; i++) {
-          rows.push(
-            <div>
-              <hr>
-              </hr>
-              <div className="row">
-                <div className="col-xs-8 col-sm-9">
-                  <h4>
-                    {this.state.tasks[i].title}
-                  </h4>
-                </div>
-                <div className="col-xs-4 col-sm-3">
-                  <a href="" className="btn btn-success">
-                    Assign me
-                  </a>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-xs-12">
-                  <p>
-                    {this.state.tasks[i].desc}
-                  </p>
-                  <p>
-                    Users assigned: {this.state.tasks[i].assigned.length}/
-                    {this.state.tasks[i].needed}
-                    · Points offered: {this.state.tasks[i].points}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )
+        for (var i = 0; i < this.state.causes.length; i++) {
+          rows.push(<CauseTag cause={this.state.causes[i]} size='mini' />);
         }
-
         return rows;
+      }
+
+      /*
+      * Display the tag for the organizer of this project
+      */
+      getProfileTag() {
+          return <UserTag profile={this.state.organizer} />;
       }
 
       // Render the static content
@@ -147,50 +136,57 @@ class Project extends React.Component {
           <div>
             <Navbar/>
             <div className="container-body">
-              <div className="row">
-                <div className="col-sm-2 hidden-xs">
-                  <Sidebar/>
-                </div>
-                <div className="col-sm-10">
-                  <div className="row">
-                    <div className="col-sm-4 col-md-4">
+              <Grid stackable>
+                <Grid.Row>
+                  <Grid.Column width={3}>
+                    <Sidebar/>
+                  </Grid.Column>
+                  <Grid.Column width={13}>
+                    <Message color='red' style={this.hideDiv()}>
+                      Error: { this.state.errorMessage }
+                    </Message>
 
-                      <div className="content-box">
-                        <p className="headertext">Progress</p>
-                        <hr>
-                        </hr>
-                      </div>
-                    </div>
+                    <Card fluid>
+                      <Image src={this.getImageUrl()}/>
+                      <Card.Content>
+                        <Card.Header>
+                          <h2>
+                            <a href={ this.getCommunityUrl() }>
+                              <Icon name='left arrow' />
+                              {this.state.community.name}
+                            </a>
+                          </h2>
+                        </Card.Header>
+                      </Card.Content>
+                    </Card>
 
-                    <div className="col-sm-8 col-md-8">
-                      <div className="content-box">
-                        <p className="headertext">
-                          {this.state.project.title}
-                        </p>
-                        <hr>
-                        </hr>
-                        <p>
-                          {this.state.project.desc}
-                        </p>
-                        <p>
-                          Organizer: <a href={this.getProfileUrl()}>
-                          {this.state.organizer.firstName}
-                          {this.state.organizer.lastName}
-                        </a>
-                      </p>
-                    </div>
-
-
-                    <div className="content-box">
-                      <p className="headertext">Tasks</p>
-                      { this.buildTasks() }
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    <Card fluid>
+                      <Card.Content>
+                        <Card.Header>
+                          <h2>{this.state.project.title}</h2>
+                        </Card.Header>
+                        <Card.Description>
+                          <p>
+                            <a href={this.getProfileUrl()}>
+                              {this.getProfileTag() }
+                            </a>
+                          </p>
+                          <p>
+                            {this.state.project.desc}
+                          </p>
+                        </Card.Description>
+                      </Card.Content>
+                      <Card.Content extra>
+                        <Label.Group>
+                          { this.displayCauses() }
+                        </Label.Group>
+                      </Card.Content>
+                    </Card>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </div>
           </div>
-        </div>
       );
     }
   }
