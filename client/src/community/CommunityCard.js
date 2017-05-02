@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Statistic } from 'semantic-ui-react'
 
 /**
 * Component for the Community Card on dashboard.
@@ -41,12 +41,6 @@ class CommunityCard extends React.Component {
           <Card.Description>
 
           </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon name='user' />
-            22 Friends
-          </a>
         </Card.Content>
       </Card>
     );
