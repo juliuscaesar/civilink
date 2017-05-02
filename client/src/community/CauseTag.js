@@ -13,7 +13,9 @@ class CauseTag extends React.Component {
     */
     this.state = {
       education: {"color": "teal", "icon": "student"},
-      environment: {"color": "green", "icon": "tree"}
+      environment: {"color": "green", "icon": "tree"},
+      lgbt: {"color": "purple", "icon": "lesbian"},
+      housing: {"color": "brown", "icon": "home"}
     };
 
     this.getIcon = this.getIcon.bind(this);
@@ -30,6 +32,12 @@ class CauseTag extends React.Component {
       case "Environment":
         return this.state.environment.icon;
         break;
+      case "LGBT Rights":
+        return this.state.lgbt.icon;
+        break;
+      case "Housing & Homelessness":
+        return this.state.housing.icon;
+        break;
     }
   }
 
@@ -44,6 +52,12 @@ class CauseTag extends React.Component {
       case "Environment":
         return this.state.environment.color;
         break;
+      case "LGBT Rights":
+        return this.state.lgbt.color;
+        break;
+      case "Housing & Homelessness":
+        return this.state.housing.color;
+        break;
     }
   }
 
@@ -54,7 +68,7 @@ class CauseTag extends React.Component {
         content={this.props.cause}
         icon={this.getIcon()}
         color={this.getColor()}
-        size='big'
+        size='large'
       />
     );
   }

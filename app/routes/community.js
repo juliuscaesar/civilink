@@ -44,10 +44,12 @@ exports.getCommunity = function(req, res, next) {
 	Communities.findOne({"url": req.params.id})
     .exec(function (err, commun) {
         if (err) {
-            return res.status(500).json({"errorMessage": "Could not find that community"});
+            return res.status(500).json({
+							"errorMessage": "Could not find that community"});
         }
         else if (commun == null) {
-            return res.status(404).json({"errorMessage": "Could not find that community"});
+            return res.status(404).json({
+							"errorMessage": "Could not find that community"});
             // should go back to dashboard
         }
         else {
@@ -59,7 +61,8 @@ exports.getCommunity = function(req, res, next) {
             .exec(function (err, memberships) {
 
             if (err) {
-               res.status(500).json({"errorMessage": "Could not find memberships"});
+               res.status(500).json({
+								"errorMessage": "Could not find memberships"});
             }
             else {
                 members = memberships;
@@ -70,7 +73,8 @@ exports.getCommunity = function(req, res, next) {
             .exec(function (err, projects) {
 
             if (err) {
-                res.status(500).json({"errorMessage": "Could not find projects"});
+                res.status(500).json({
+									"errorMessage": "Could not find projects"});
             }
             else {
                 projects = projects;
@@ -80,15 +84,19 @@ exports.getCommunity = function(req, res, next) {
 		            .exec(function (err, orgs) {
 
 		            if (err) {
-		                res.status(500).json({"errorMessage": "Could not find organizations"});
+		                res.status(500).json({
+											"errorMessage": "Could not find organizations"});
 		            }
 		            else {
 		                organizations = orgs;
 		            }
 
 		            // send data
-		            res.status(200).json({"community": community, "members": members,
-								"projects": projects, "organizations": organizations});
+		            res.status(200).json({
+									"community": community,
+									"members": members,
+									"projects": projects,
+									"organizations": organizations});
 		            })
             })
         })

@@ -12,6 +12,7 @@ class Activity extends React.Component {
     super(props);
 
     this.buildDescription = this.buildDescription.bind(this);
+    this.getUserUrl = this.getUserUrl.bind(this);
   }
 
  /**
@@ -58,6 +59,13 @@ class Activity extends React.Component {
      }
    }
 
+ /**
+  * Return the user's profile link
+  */
+  getUserUrl() {
+    return "/user/" + this.props.activity.user.username;
+  }
+
   // Render the static content
   render(){
     return (
@@ -70,7 +78,9 @@ class Activity extends React.Component {
       <Feed.Content>
         <Feed.Summary>
           <Feed.User>
-            {this.props.activity.user.firstName} {this.props.activity.user.lastName}
+            <a href={this.getUserUrl()}>
+              {this.props.activity.user.firstName} {this.props.activity.user.lastName}
+            </a>
           </Feed.User> {this.buildDescription()} {this.displayLink()}
           <Feed.Date>1 Hour Ago</Feed.Date>
         </Feed.Summary>

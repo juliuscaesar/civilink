@@ -3,7 +3,8 @@ import Navbar from '../general/Navbar';
 import request from 'superagent';
 import Sidebar from '../general/Sidebar';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Card, Icon, Image, Message } from 'semantic-ui-react'
+import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label } from 'semantic-ui-react'
+import CauseTag from './CauseTag';
 
 /**
 * Component for the navbar.
@@ -29,7 +30,7 @@ class Community extends React.Component {
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
     this.hideDiv = this.hideDiv.bind(this);
     this.communityInfo = this.communityInfo.bind(this);
-    this.issues = this.issues.bind(this);
+    this.displayCauses = this.displayCauses.bind(this);
     this.getImageUrl = this.getImageUrl.bind(this);
 
     // update page by calling the API call
@@ -89,10 +90,21 @@ class Community extends React.Component {
     }
 
     /*
-    * Placeholder for issues
+    * Placeholder for causes
     */
-    issues() {
-      return <h3>Housing</h3>
+    displayCauses() {
+      const causes = [
+        'Education',
+        'Environment',
+        'LGBT Rights',
+        'Housing & Homelessness'
+      ];
+
+      var rows = [];
+      for (var i = 0; i < causes.length; i++) {
+        rows.push(<CauseTag cause={causes[i]}/>);
+      }
+      return rows;
     }
 
     /*
@@ -101,6 +113,19 @@ class Community extends React.Component {
     getImageUrl() {
       return "http://4vector.com/i/free-vector-city-skyline_100975_city_skyline.png";
     }
+
+
+      /**
+       * Return the stats to be displayed for this user
+       */
+  getStats() {
+    return [
+      { label: "members" , value: this.state.members.length },
+      { label: "projects", value: this.state.projects.length },
+      { label: "organizations", value: this.state.organizations.length }
+      ]
+    }
+
     // Render the static content
     render(){
       return (
@@ -120,17 +145,32 @@ class Community extends React.Component {
                     <Image src={this.getImageUrl()}/>
                     <Card.Content>
                       <Card.Header>
+                        <Grid>
+                        <Grid.Row>
+                        <Grid.Column width={4}>
                         {this.communityInfo()}
-                      </Card.Header>
+                        </Grid.Column>
 
-                      <Card.Description>
-                        <p>What goes here lol</p>
-                      </Card.Description>
+                      <Grid.Column width={12}>
+                        <Statistic.Group
+                          items={this.getStats()}
+                          color='blue'
+                          size='mini'
+                          widths='4'
+                        />
+                        </Grid.Column>
+                        </Grid.Row>
+                        </Grid>
+                      </Card.Header>
                     </Card.Content>
                   </Card>
 
                   <Segment>
-                    { this.issues() }
+                    <h3>Pick a cause</h3>
+                    <hr />
+                    <Label.Group>
+                      { this.displayCauses() }
+                    </Label.Group>
                   </Segment>
                 </Grid.Column>
               </Grid.Row>

@@ -124,6 +124,9 @@ class Profile extends React.Component {
     return rows;
   }
 
+  /**
+   * Return the stats to be displayed for this user
+   */
   getStats() {
     return [
       { label: "points" , value: this.state.profile.points },
@@ -174,6 +177,7 @@ class Profile extends React.Component {
                     <Grid.Column width={11}>
                       <Segment>
                         <h3>Activity Feed</h3>
+                        <hr />
                         <Feed>
                           {this.buildActivityFeed()}
                         </Feed>
