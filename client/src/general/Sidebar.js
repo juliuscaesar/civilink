@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from '../modules/Auth'
 import { Icon } from 'semantic-ui-react'
 
 /**
@@ -7,13 +8,10 @@ import { Icon } from 'semantic-ui-react'
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
 
-    //region bind all methods to this
-
-
-    //update the page
-
+    this.loggedin = this.loggedin.bind(this);
+    this.guest = this.guest.bind(this);
+    this.displayInfo = this.displayInfo.bind(this);
   }
   //<div className="row">
   //  <div className="col-xs-6">
@@ -24,7 +22,12 @@ class Sidebar extends React.Component {
   //  </div>
   //</div>
   //           </div>
-  render(){
+
+
+  /**
+   * Returns the links for an authenticated user
+   */
+  loggedin() {
     return (
       <div>
         <p>
@@ -45,15 +48,63 @@ class Sidebar extends React.Component {
         </p>
         <hr>
         </hr>
-        <p className="grayed">
-          © 2016 CiviLink
+        <small>
+          <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
           <br>
           </br>
           <a href="/about" className="grayed">About</a>
           &nbsp;&nbsp;&nbsp;
           <a href="/donate" className="grayed">Donate</a>
-        </p>
+        </small>
       </div>
+    );
+  }
+
+  /**
+   * Returns the links for an unauthenticated guest
+   */
+  guest() {
+    return (
+      <div>
+        <p>
+          <a href="/dashboard">
+            <Icon name='user' />
+            Sign in</a>
+        </p>
+        <p>
+          <a href="/sign-up">
+            <Icon name='check square' />
+            Register</a>
+        </p>
+        <hr>
+        </hr>
+        <small>
+          <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
+          <br>
+          </br>
+          <a href="/about" className="grayed">About</a>
+          &nbsp;&nbsp;&nbsp;
+          <a href="/donate" className="grayed">Donate</a>
+        </small>
+      </div>
+    );
+  }
+
+  /**
+   * Displays the sidebar links for the appropriate user
+   */
+  displayInfo() {
+    if (Auth.isUserAuthenticated()) {
+      return this.loggedin();
+    }
+    else {
+      return this.guest();
+    }
+  }
+
+  render(){
+    return (
+      this.displayInfo()
     );
   }
 }
