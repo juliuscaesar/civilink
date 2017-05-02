@@ -68,7 +68,7 @@ exports.getCommunity = function(req, res, next) {
                 members = memberships;
             }
 
-        Projects.find({ "community" : commun.id.id })
+        Projects.find({ "community" : commun.id })
             .populate('user')
             .exec(function (err, projects) {
 

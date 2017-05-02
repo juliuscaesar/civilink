@@ -9,7 +9,7 @@ var projectSchema = new Schema({
   points: { type: Number, default: 0 },
   supporters: [{type: Schema.ObjectId, ref: 'Users'}],
   volunteers: [{type: Schema.ObjectId, ref: 'Users'}],
-  goals: [String],
+  causes: [String],
   updates: [String]
 });
 

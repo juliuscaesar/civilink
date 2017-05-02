@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../general/Navbar';
 import request from 'superagent';
 import Sidebar from '../general/Sidebar';
+import ProjectCard from '../project/ProjectCard';
 import { browserHistory } from 'react-router';
 import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
@@ -30,6 +31,7 @@ class Community extends React.Component {
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
     this.hideDiv = this.hideDiv.bind(this);
     this.communityInfo = this.communityInfo.bind(this);
+    this.buildProjectList = this.buildProjectList.bind(this);
     this.displayCauses = this.displayCauses.bind(this);
     this.getImageUrl = this.getImageUrl.bind(this);
 
@@ -97,12 +99,15 @@ class Community extends React.Component {
         'Education',
         'Environment',
         'LGBT Rights',
-        'Housing & Homelessness'
+        'Housing & Homelessness',
+        'Economy & Jobs',
+        'Public Health',
+        'Justice & Equality'
       ];
 
       var rows = [];
       for (var i = 0; i < causes.length; i++) {
-        rows.push(<CauseTag cause={causes[i]}/>);
+        rows.push(<CauseTag cause={causes[i]} size='large' />);
       }
       return rows;
     }
@@ -114,6 +119,26 @@ class Community extends React.Component {
       return "http://4vector.com/i/free-vector-city-skyline_100975_city_skyline.png";
     }
 
+    /**
+    * Build the list of projects
+    */
+    buildProjectList() {
+      var rows = [];
+
+      for (var i = 0; i < this.state.projects.length; i++) {
+        rows.push(
+          <ProjectCard
+            project={this.state.projects[i]}
+            />
+        );
+      }
+
+      if (this.state.projects.length == 0 ) {
+        return <h4>There are currently no projects in this community</h4>
+      }
+
+      return rows;
+    }
 
       /**
        * Return the stats to be displayed for this user
@@ -166,19 +191,25 @@ class Community extends React.Component {
                   </Card>
 
                   <Segment>
-                    <h3>Pick a cause</h3>
+                    <h2>Filter by cause</h2>
                     <hr />
                     <Label.Group>
                       { this.displayCauses() }
                     </Label.Group>
                   </Segment>
+
+                  <h2>Projects</h2>
+                  <hr />
+                  <Card.Group itemsPerRow={2}>
+                    { this.buildProjectList() }
+                  </Card.Group>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
           </div>
         </div>
-  );
-}
+    );
+  }
 }
 
 export default Community;
