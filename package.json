@@ -36,10 +36,11 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.2",
-    "superagent": "^3.4.1",
     "sanitize-html": "^1.13.0",
+    "semantic-ui-css": "^2.2.10",
     "semantic-ui-popup": "^2.2.10",
     "semantic-ui-react": "^0.68.2",
-    "semantic-ui-transition": "^2.2.10"
+    "semantic-ui-transition": "^2.2.10",
+    "superagent": "^3.4.1"
   }
 }

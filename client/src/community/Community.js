@@ -2,10 +2,12 @@ import React from 'react';
 import Navbar from '../general/Navbar';
 import request from 'superagent';
 import Sidebar from '../general/Sidebar';
+import Auth from '../modules/Auth';
 import ProjectCard from '../project/ProjectCard';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label } from 'semantic-ui-react'
+import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
+import CreateProjectForm from '../project/CreateProjectForm';
 
 /**
 * Component for the navbar.
@@ -23,17 +25,20 @@ class Community extends React.Component {
       community: [],
       members: [],
       projects: [],
-      organizations: []
+      organizations: [],
+      createProject: false
     };
 
     //region bind all methods to this
     this.requestInfo = this.requestInfo.bind(this);
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
     this.hideDiv = this.hideDiv.bind(this);
+    this.hideButton = this.hideButton.bind(this);
     this.communityInfo = this.communityInfo.bind(this);
     this.buildProjectList = this.buildProjectList.bind(this);
     this.displayCauses = this.displayCauses.bind(this);
     this.getImageUrl = this.getImageUrl.bind(this);
+    this.clickProjectButton = this.clickProjectButton.bind(this);
 
     // update page by calling the API call
     this.requestInfo();
@@ -50,6 +55,19 @@ class Community extends React.Component {
       return {display: "none"};
     }
   }
+
+  /**
+  * Returns the style attribute for the create project button
+  * @returns {*} {display: "none"} if the button should be hidden or {} otherwise
+  */
+  hideButton() {
+    if (Auth.isUserAuthenticated()) {
+      return {};
+    } else {
+      return {display: "none"};
+    }
+  }
+
   /**
   * Send the request to get the community information
   */
@@ -76,9 +94,15 @@ class Community extends React.Component {
       case 404:
         browserHistory.push('/');
         break;
-      default:
+      case 500:
         this.setState({
           errorMessage: response.body.errorMessage,
+          displayError: true
+        });
+        break;
+      default:
+        this.setState({
+          errorMessage: "Could not get community data",
           displayError: true
         });
       }
@@ -151,6 +175,14 @@ class Community extends React.Component {
       ]
     }
 
+    /**
+     * Handle the create project button click
+     */
+    clickProjectButton(ev) {
+      ev.preventDefault();
+      this.setState({createProject: true});
+    }
+
     // Render the static content
     render(){
       return (
@@ -190,19 +222,28 @@ class Community extends React.Component {
                     </Card.Content>
                   </Card>
 
-                  <Segment>
-                    <h2>Filter by cause</h2>
-                    <hr />
-                    <Label.Group>
-                      { this.displayCauses() }
-                    </Label.Group>
-                  </Segment>
 
-                  <h2>Projects</h2>
-                  <hr />
-                  <Card.Group itemsPerRow={2}>
-                    { this.buildProjectList() }
-                  </Card.Group>
+                    <Segment>
+                      <h2>Filter by cause</h2>
+                      <hr />
+                      <Label.Group>
+                        { this.displayCauses() }
+                      </Label.Group>
+                    </Segment>
+                    <h2>Projects</h2>
+
+                    <hr />
+                    <Card.Group itemsPerRow={2}>
+                      { this.buildProjectList() }
+                    </Card.Group>
+
+                    <Modal
+                      size='small'
+                      trigger={<Button floated='right' color='blue' style={this.hideButton()}>Create a project</Button>}>
+                      <CreateProjectForm
+                        community={this.state.community._id}/>
+                    </Modal>
+
                 </Grid.Column>
               </Grid.Row>
             </Grid>

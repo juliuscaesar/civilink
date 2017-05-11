@@ -4,7 +4,7 @@ import request from 'superagent';
 import Sidebar from '../general/Sidebar';
 import Auth from '../modules/Auth';
 import Activity from './Activity';
-import { Grid, Segment, Feed } from 'semantic-ui-react'
+import { Grid, Segment, Feed, Message } from 'semantic-ui-react'
 
 /**
 * Component for the Dashboard.
@@ -25,6 +25,7 @@ class Dashboard extends React.Component {
     };
 
     //region bind all methods to this
+    this.hideDiv = this.hideDiv.bind(this);
     this.requestInfo = this.requestInfo.bind(this);
     this.getProjects = this.getProjects.bind(this);
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
@@ -34,6 +35,18 @@ class Dashboard extends React.Component {
     // update page
     this.requestInfo();
     this.getProjects();
+  }
+
+  /**
+  * Returns the style attribute for the error div
+  * @returns {*} {display: "none"} if the error should be hidden or {} otherwise
+  */
+  hideDiv() {
+    if (this.state.displayError) {
+      return {};
+    } else {
+      return {display: "none"};
+    }
   }
 
   /**
@@ -91,18 +104,18 @@ class Dashboard extends React.Component {
   parseProjectResponse(error, response) {
     switch (response.status) {
       case 200:
-      this.setState({projects: response.body.projects});
-      break;
+        this.setState({projects: response.body.projects});
+        break;
       case 203:
-      this.setState({
-        errorMessage: "Could not get projects",
-        displayError: true
-      });
-      break;
+        this.setState({
+          errorMessage: "Could not get projects",
+          displayError: true
+        });
+        break;
       default:
-      this.setState({
-        errorMessage: "Could not get projects",
-        displayError: true
+        this.setState({
+          errorMessage: "Could not get projects",
+          displayError: true
       });
     }
   }
@@ -139,7 +152,9 @@ class Dashboard extends React.Component {
                 <h3>Activity Feed</h3>
                 <hr>
                 </hr>
-                { this.state.errorMessage }
+                <Message color='red' style={this.hideDiv()}>
+                  Error: { this.state.errorMessage }
+                </Message>
 
                 <Segment>
                   {this.errorMessage}

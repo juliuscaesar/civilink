@@ -57,6 +57,7 @@ module.exports = function(app) {
   //= =======================================
   //      PROJECT CALLS
   //= =======================================
+  apiRoutes.post('/project/create', project.createProject);
   apiRoutes.get('/project/:id', project.getProject);
 
   //= =======================================
