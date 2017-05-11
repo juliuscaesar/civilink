@@ -4,7 +4,7 @@ import request from 'superagent';
 import CauseTag from '../community/CauseTag';
 import UserTag from '../profile/UserTag';
 import Sidebar from '../general/Sidebar';
-import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label } from 'semantic-ui-react'
+import { Grid, Card, Icon, Image, Message, Label } from 'semantic-ui-react'
 
 /**
 * Component for Projects.

@@ -1,6 +1,5 @@
 import React from 'react';
-import UserImage from './UserImage'
-import { Card, Icon, Image, Label } from 'semantic-ui-react'
+import { Label } from 'semantic-ui-react'
 
 /**
 * Component for the Issue tag
@@ -29,7 +28,7 @@ class UserTag extends React.Component {
       image = "../user.png"
     }
 
-    return <img src={image} />
+    return <img src={image} role="presentation" />
   }
 
   render() {

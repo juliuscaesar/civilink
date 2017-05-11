@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image, Label } from 'semantic-ui-react'
+import { Label } from 'semantic-ui-react'
 
 /**
 * Component for the Issue tag
@@ -31,25 +31,20 @@ class CauseTag extends React.Component {
     switch (this.props.cause) {
       case "Education":
         return this.state.education.icon;
-        break;
       case "Environment":
         return this.state.environment.icon;
-        break;
       case "LGBT Rights":
         return this.state.lgbt.icon;
-        break;
       case "Housing & Homelessness":
         return this.state.housing.icon;
-        break;
       case "Justice & Equality":
         return this.state.justice.icon;
-        break;
       case "Public Health":
         return this.state.health.icon;
-        break;
       case "Economy & Jobs":
         return this.state.economy.icon;
-        break;
+      default:
+        return "";
     }
   }
 
@@ -60,25 +55,20 @@ class CauseTag extends React.Component {
     switch (this.props.cause) {
       case "Education":
         return this.state.education.color;
-        break;
       case "Environment":
         return this.state.environment.color;
-        break;
       case "LGBT Rights":
         return this.state.lgbt.color;
-        break;
       case "Housing & Homelessness":
         return this.state.housing.color;
-        break;
       case "Justice & Equality":
         return this.state.justice.color;
-        break;
       case "Public Health":
         return this.state.health.color;
-        break;
       case "Economy & Jobs":
         return this.state.economy.color;
-        break;
+      default:
+        return "";
     }
   }
 

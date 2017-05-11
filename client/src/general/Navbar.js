@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import { Menu, Button } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 /**
 * Component for the navbar.
@@ -15,7 +15,7 @@ class Navbar extends React.Component {
 
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  //handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   showLogout() {
     if (Auth.isUserAuthenticated()) {
@@ -26,7 +26,7 @@ class Navbar extends React.Component {
   }
 
   render(){
-    const { activeItem } = this.state
+    //const { activeItem } = this.state
     return (
       <Menu size={'large'} color={'blue'} inverted stackable>
         <Menu.Item>

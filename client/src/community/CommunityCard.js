@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image, Statistic } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 /**
 * Component for the Community Card on dashboard.

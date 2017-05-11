@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image, Label } from 'semantic-ui-react'
+import { Card, Label } from 'semantic-ui-react'
 import CauseTag from '../community/CauseTag';
 
 /**

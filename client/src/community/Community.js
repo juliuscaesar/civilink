@@ -5,7 +5,7 @@ import Sidebar from '../general/Sidebar';
 import Auth from '../modules/Auth';
 import ProjectCard from '../project/ProjectCard';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Card, Icon, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
+import { Grid, Segment, Card, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
 import CreateProjectForm from '../project/CreateProjectForm';
 
@@ -157,7 +157,7 @@ class Community extends React.Component {
         );
       }
 
-      if (this.state.projects.length == 0 ) {
+      if (this.state.projects.length === 0 ) {
         return <h4>There are currently no projects in this community</h4>
       }
 

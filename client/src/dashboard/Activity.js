@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '../general/Navbar';
-import request from 'superagent';
 import UserImage from '../profile/UserImage';
 import { Feed, Icon } from 'semantic-ui-react'
 
@@ -40,21 +38,22 @@ class Activity extends React.Component {
    * Build the link for the activity
    */
    displayLink() {
+       var url;
      if (this.props.activity.desttype === "Communities") {
-       var url = "/" + this.props.activity.community.url;
+      url = "/" + this.props.activity.community.url;
        return <a href={url}>
                 {this.props.activity.community.name}
               </a>;
      }
      else if (this.props.activity.desttype === "Projects") {
-      var url = "/project/"  + this.props.activity.project._id;
+      url = "/project/"  + this.props.activity.project._id;
        return <a href={url}>{this.props.activity.project.title}</a>;
      }
      else if (this.props.activity.desttype === "Tasks") {
        return this.props.activity.task.title;
      }
      else if (this.props.activity.desttype === "Orgs") {
-        var url = "/org/" + this.props.activity.org._id;
+       url = "/org/" + this.props.activity.org._id;
        return <a href={url}>{this.props.activity.org.name}</a>;
      }
    }
