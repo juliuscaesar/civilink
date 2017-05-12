@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 /**
 * Component for the navbar.
@@ -28,14 +28,18 @@ class Navbar extends React.Component {
   render(){
     //const { activeItem } = this.state
     return (
-      <Menu size={'large'} color={'blue'} inverted stackable>
+      <Menu size={'small'} color={'blue'} inverted tiered>
+        <div className="ui container">
         <Menu.Item>
-          <a href="/">CiviLink</a>
+          <a href="/">
+            <h2><Icon name="linkify"/></h2>
+          </a>
         </Menu.Item>
 
         <Menu.Item position='right'>
           {this.showLogout()}
         </Menu.Item>
+        </div>
       </Menu>
     );
   }

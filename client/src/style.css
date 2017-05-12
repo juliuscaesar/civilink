@@ -62,25 +62,15 @@
   color: red;
 }
 
-.navbar-nav > li > a, .navbar-brand {
-    padding-top:10px !important;
-    padding-bottom:0 !important;
-    height: 36px;
-}
-
-.navbar-default .navbar-brand {
+.navbar-brand {
   color: #ffffff;
-  font-size: 32px;
-  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
   font-weight: bold;
 }
 
-.navbar {min-height:36px !important;}
-
-.navbar-default .navbar-brand:hover {
+.navbar-brand:hover {
   color: #ffffff;
-  font-size: 32px;
-  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -196,6 +186,10 @@ body {
   max-width: 950px; /* or 950px */
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.container-nav {
+  max-width: 950px !important; /* or 950px */
 }
 
 .mobile-header {
