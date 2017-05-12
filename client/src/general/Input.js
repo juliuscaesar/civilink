@@ -44,9 +44,9 @@ class Input extends React.Component {
   * @returns {string} classes for the form group
   */
   getClassName() {
-    var className = "form-group";
+    var className = "ui input fluid";
     if (this.state.errorVisible) {
-      className += " has-error";
+      className += " error";
     }
     return className;
   }
@@ -74,21 +74,23 @@ class Input extends React.Component {
   */
   render(){
     return (
-      <div className={this.getClassName()}>
+      <div className="field">
         <label
           id={this.props.inputId + "_label"}
           htmlFor={this.props.inputId}>
-          {this.props.label}
+          <b>{this.props.label}</b>
         </label>
+      <div className={this.getClassName()}>
         <input
           type={this.props.inputType}
           id={this.props.inputId}
-          className="form-control"
+          className="ui input-control"
           onChange={this.handleChange}>
         </input>
-        <div style={this.displayError(this.state.firstName)} >
-          {this.props.validation(this.state.value)}
-        </div>
+      </div>
+      <div style={this.displayError()} >
+        <p>{this.props.validation(this.state.value)}</p>
+      </div>
       </div>
     );
   }

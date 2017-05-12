@@ -5,7 +5,7 @@ import Sidebar from '../general/Sidebar';
 import Auth from '../modules/Auth';
 import ProjectCard from '../project/ProjectCard';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Card, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
+import { Grid, Segment, Card, Container, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
 import CreateProjectForm from '../project/CreateProjectForm';
 
@@ -230,20 +230,22 @@ class Community extends React.Component {
                         { this.displayCauses() }
                       </Label.Group>
                     </Segment>
-                    <h2>Projects</h2>
 
+                    <h2>Projects</h2>
                     <hr />
                     <Card.Group itemsPerRow={2}>
                       { this.buildProjectList() }
                     </Card.Group>
-
+                    <hr />
                     <Modal
+                      floated='right'
                       size='small'
-                      trigger={<Button floated='right' color='blue' style={this.hideButton()}>Create a project</Button>}>
-                      <CreateProjectForm
-                        community={this.state.community._id}/>
+                      trigger={<Button color='blue' style={this.hideButton()}>Create a project</Button>}>
+                      <div className="header">Create Project</div>
+                      <div className="content">
+                        <CreateProjectForm community={this.state.community._id}/>
+                      </div>
                     </Modal>
-
                 </Grid.Column>
               </Grid.Row>
             </Grid>

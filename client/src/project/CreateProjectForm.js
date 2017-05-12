@@ -53,9 +53,9 @@ class CreateProjectForm extends React.Component {
   * @returns {string} classes for the submit button
   */
   getButtonClass() {
-    var className = "btn btn-lg btn-primary btn-block";
+    var className = "ui button green fluid";
     if(!this.submitEnabled()) {
-      className += " btn-disabled  disabled";
+      className += " disabled";
     }
     return className;
   }
@@ -130,7 +130,9 @@ class CreateProjectForm extends React.Component {
   // Render the static content
   render(){
     return (
-      <form onSubmit={this.submitForm}>
+      <form className="ui form" onSubmit={this.submitForm}>
+        <div className="description">
+        <div className="content">
         <Input
           label="Name"
           inputId="title"
@@ -149,12 +151,14 @@ class CreateProjectForm extends React.Component {
           type="hidden"
           name="community"
           value={this.props.community}/>
+        </div>
         <button
           type="submit"
           disabled={this.getDisabledProperty()}
           className={this.getButtonClass()} >
           Create Project
         </button>
+        </div>
       </form>
     );
   }
