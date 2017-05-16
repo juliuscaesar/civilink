@@ -22,6 +22,7 @@ class CreateProjectForm extends React.Component {
     this.buildBody = this.buildBody.bind(this);
     this.submitEnabled = this.submitEnabled.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.parseResponse = this.parseResponse.bind(this);
 
     //update the page
 
@@ -125,6 +126,28 @@ class CreateProjectForm extends React.Component {
     .set('token', Auth.getToken())
     .send(this.buildBody())
     .end(this.parseResponse);
+  }
+
+  /**
+  * Parse the response to the create project request
+  * @param error any error that occurred when submitting the request
+  * @param response the response returned from the server
+  */
+  parseResponse(error, response) {
+    switch(response.status) {
+      case 201:
+      window.location = '/project/' + response.body.project._id;
+      break;
+      case 500:
+      this.setState({
+        errorMessage: "Could not create project", displayError: true
+      });
+      break;
+      default:
+      this.setState({
+        errorMessage: "Could not create project", displayError: true
+      });
+    }
   }
 
   // Render the static content

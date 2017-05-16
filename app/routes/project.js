@@ -65,7 +65,7 @@ exports.createProject = function(req, res, next) {
     // save the project
     newProject.save(function(err) {
       if (err){
-        throw err;
+        res.status(500).json({"error": "Could not create project"});
       }
     });
 
