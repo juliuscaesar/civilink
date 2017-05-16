@@ -4,7 +4,7 @@ import request from 'superagent';
 import Sidebar from '../general/Sidebar';
 import UserImage from './UserImage';
 import Activity from '../dashboard/Activity';
-import { Grid, Segment, Feed, Statistic } from 'semantic-ui-react';
+import { Grid, Segment, Feed, Statistic, List } from 'semantic-ui-react';
 
 /**
 * Component for a Profile.
@@ -135,6 +135,18 @@ class Profile extends React.Component {
       ]
   }
 
+  displayUserDetails() {
+    const details = [];
+    const location = this.state.profile.city + ", " + this.state.profile.state;
+    details.push(
+      <List>
+        <List.Item icon='marker' content={location} />
+      </List>
+    );
+
+    return details;
+  }
+
   // Render the static content
   render(){
     return (
@@ -159,11 +171,8 @@ class Profile extends React.Component {
                         <UserImage profile={this.state.profile} size='150px' />
                         {this.state.profile.desc}
                         <hr />
-                        <p>
-                          {this.state.profile.city}, {this.state.profile.state}
-                          <br />
-                          {this.state.profile.occ} at {this.state.profile.occPlace}
-                        </p>
+
+                        { this.displayUserDetails() }
                         <hr />
                         <Statistic.Group
                           items={this.getStats()}
