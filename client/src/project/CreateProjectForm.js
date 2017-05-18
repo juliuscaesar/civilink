@@ -2,6 +2,7 @@ import React from 'react';
 import request from 'superagent';
 import Input from '../general/Input';
 import Auth from '../modules/Auth';
+import { Message } from 'semantic-ui-react';
 
 /**
 * Component for the navbar.
@@ -13,9 +14,15 @@ class CreateProjectForm extends React.Component {
     /**
     * Fields in this form are kept as state and initialized as empty
     */
-    this.state = {title: '', desc: ''};
+    this.state = {
+      errorMessage: '',
+      displayError: false,
+      title: '',
+      desc: ''
+    };
 
     //region bind all methods to this
+    this.hideDiv = this.hideDiv.bind(this);
     this.setValue = this.setValue.bind(this);
     this.getButtonClass = this.getButtonClass.bind(this);
     this.getDisabledProperty = this.getDisabledProperty.bind(this);
@@ -26,6 +33,18 @@ class CreateProjectForm extends React.Component {
 
     //update the page
 
+  }
+
+  /**
+  * Returns the style attribute for the error div
+  * @returns {*} {display: "none"} if the error should be hidden or {} otherwise
+  */
+  hideDiv() {
+    if (this.state.displayError) {
+      return {};
+    } else {
+      return {display: "none"};
+    }
   }
 
   /**
@@ -155,28 +174,31 @@ class CreateProjectForm extends React.Component {
     return (
       <form className="ui form" onSubmit={this.submitForm}>
         <div className="description">
-        <div className="content">
-        <Input
-          label="Name"
-          inputId="title"
-          inputType="text"
-          name="title"
-          save={this.setValue}
-          validation={CreateProjectForm.nameValidation}/>
-        <Input
-          label="Description"
-          inputId="desc"
-          inputType="text"
-          name="desc"
-          save={this.setValue}
-          validation={CreateProjectForm.descValidation}/>
-        </div>
-        <button
-          type="submit"
-          disabled={this.getDisabledProperty()}
-          className={this.getButtonClass()} >
-          Create Project
-        </button>
+          <Message color='red' style={this.hideDiv()}>
+            Error: { this.state.errorMessage }
+          </Message>
+          <div className="content">
+            <Input
+              label="Name"
+              inputId="title"
+              inputType="text"
+              name="title"
+              save={this.setValue}
+              validation={CreateProjectForm.nameValidation}/>
+            <Input
+              label="Description"
+              inputId="desc"
+              inputType="text"
+              name="desc"
+              save={this.setValue}
+              validation={CreateProjectForm.descValidation}/>
+          </div>
+          <button
+            type="submit"
+            disabled={this.getDisabledProperty()}
+            className={this.getButtonClass()} >
+            Create Project
+          </button>
         </div>
       </form>
     );
