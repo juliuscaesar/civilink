@@ -189,7 +189,11 @@ body {
 }
 
 .container-nav {
-  max-width: 950px !important; /* or 950px */
+  height: 70px;
+}
+
+.ui.container {
+  max-width: 950px !important;
 }
 
 .mobile-header {
@@ -211,6 +215,13 @@ body {
   margin-right: auto;
   margin-left: auto;
   max-width: 950px; /* or 950px */
+}
+
+.nav-title {
+  margin-left: -18px;
+  font-size: 3.1rem;
+  font-family: Lato;
+  color: white;
 }
 
 .container-shrink {

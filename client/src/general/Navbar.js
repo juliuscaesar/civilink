@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   showLogout() {
     if (Auth.isUserAuthenticated()) {
       return (
-        <a href="/logout">Logout</a>
+        <a className="link text" href="/logout">Logout</a>
       );
     }
   }
@@ -28,12 +28,10 @@ class Navbar extends React.Component {
   render(){
     //const { activeItem } = this.state
     return (
-      <Menu size={'small'} color={'blue'} inverted>
-        <div className="ui container">
-        <Menu.Item>
-          <a href="/">
-            <h2><Icon name="linkify"/></h2>
-          </a>
+      <Menu size={'small'} color={'blue'} inverted attached secondary>
+        <div className="ui container container-nav">
+        <Menu.Item text>
+          <a href="/" className="nav-title">CiviLink</a>
         </Menu.Item>
 
         <Menu.Item position='right'>
