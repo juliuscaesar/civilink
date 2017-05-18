@@ -5,7 +5,7 @@ import Sidebar from '../general/Sidebar';
 import Auth from '../modules/Auth';
 import ProjectCard from '../project/ProjectCard';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Card, Container, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
+import { Grid, Segment, Card, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
 import CreateProjectForm from '../project/CreateProjectForm';
 
