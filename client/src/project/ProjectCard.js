@@ -22,7 +22,7 @@ class ProjectCard extends React.Component {
   * Creates the url for the project
   */
   makeUrl() {
-    return "/project/" + this.props.project._id;
+    return "/project/" + this.props.project.url;
   }
 
   /*

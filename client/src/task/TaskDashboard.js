@@ -5,7 +5,7 @@ import Sidebar from '../general/Sidebar';
 import { Grid } from 'semantic-ui-react'
 
 /**
-* Component for Communities dashboard.
+* Component for Tasks dashboard.
 */
 class TaskDashboard extends React.Component {
   constructor(props) {

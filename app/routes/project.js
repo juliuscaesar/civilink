@@ -18,7 +18,7 @@ exports.getProject = function(req, res, next) {
   var project = [];
   var tasks = [];
 
-  Projects.findById(req.params.id)
+  Projects.findOne({"url": req.params.id})
   .populate('community user')
   .exec(function (err, proj) {
     if (err) {
@@ -31,7 +31,7 @@ exports.getProject = function(req, res, next) {
     else {
       project = proj;
     }
-    Tasks.find({ "project" : req.params.id })
+    Tasks.find({ "project" : proj.id })
     .populate('assigned creator')
     .exec(function(err, tasks) {
       if (err) {
@@ -56,11 +56,12 @@ exports.createProject = function(req, res, next) {
   var user = Authenticate.getLoggedinUser(req.headers.token);
   Users.findOne({ "username" : user }, {_id:1})
   .exec(function (err, foundUser) {
-    newProject.title = req.body.title;
-    newProject.desc = req.body.desc;
+    newProject.title = sanitizeHtml(req.body.title);
+    newProject.desc = sanitizeHtml(req.body.desc);
     newProject.causes = ["Education", "Environment"];
     newProject.community = req.body.community;
     newProject.user = foundUser;
+    newProject.url = sanitizeHtml(req.body.title).toLowerCase().split(" ").join("-");
 
     // save the project
     newProject.save(function(err) {

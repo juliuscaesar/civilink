@@ -28,7 +28,7 @@ class Navbar extends React.Component {
   render(){
     //const { activeItem } = this.state
     return (
-      <Menu size={'small'} color={'blue'} inverted tiered>
+      <Menu size={'small'} color={'blue'} inverted>
         <div className="ui container">
         <Menu.Item>
           <a href="/">
