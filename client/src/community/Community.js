@@ -84,22 +84,22 @@ class Community extends React.Component {
   parseInfoResponse(error, response) {
     switch(response.status) {
       case 200:
-        this.setState({
-          community: response.body.community,
-          members: response.body.members,
-          projects: response.body.projects,
-          organizations: response.body.organizations});
-          break;
-      case 404:
+      this.setState({
+        community: response.body.community,
+        members: response.body.members,
+        projects: response.body.projects,
+        organizations: response.body.organizations});
+        break;
+        case 404:
         browserHistory.push('/');
         break;
-      case 500:
+        case 500:
         this.setState({
           errorMessage: response.body.errorMessage,
           displayError: true
         });
         break;
-      default:
+        default:
         this.setState({
           errorMessage: "Could not get community data",
           displayError: true
@@ -163,14 +163,14 @@ class Community extends React.Component {
       return rows;
     }
 
-      /**
-       * Return the stats to be displayed for this user
-       */
-  getStats() {
-    return [
-      { label: "members" , value: this.state.members.length },
-      { label: "projects", value: this.state.projects.length },
-      { label: "organizations", value: this.state.organizations.length }
+    /**
+    * Return the stats to be displayed for this user
+    */
+    getStats() {
+      return [
+        { label: "members" , value: this.state.members.length },
+        { label: "projects", value: this.state.projects.length },
+        { label: "organizations", value: this.state.organizations.length }
       ]
     }
 
@@ -194,56 +194,47 @@ class Community extends React.Component {
                     <Card.Content>
                       <Card.Header>
                         <Grid>
-                        <Grid.Row>
-                        <Grid.Column width={4}>
-                        {this.communityInfo()}
-                        </Grid.Column>
+                          <Grid.Row>
+                            <Grid.Column width={4}>
+                              {this.communityInfo()}
+                            </Grid.Column>
 
-                      <Grid.Column width={12}>
-                        <Statistic.Group
-                          items={this.getStats()}
-                          color='blue'
-                          size='mini'
-                          widths='3'
-                        />
-                        </Grid.Column>
-                        </Grid.Row>
+                            <Grid.Column width={12}>
+                              <Statistic.Group
+                                items={this.getStats()}
+                                color='blue'
+                                size='mini'
+                                widths='3'
+                                />
+                            </Grid.Column>
+                          </Grid.Row>
                         </Grid>
                       </Card.Header>
                     </Card.Content>
                   </Card>
 
-
-                    <Segment>
-                      <h3 className="header">Filter by cause</h3>
-                      <hr />
-                      <Label.Group>
-                        { this.displayCauses() }
-                      </Label.Group>
-                    </Segment>
-
-                    <h3 className="header">Projects</h3>
-                    <hr />
-                    <Card.Group itemsPerRow={2}>
-                      { this.buildProjectList() }
-                    </Card.Group>
-                    <hr />
-                    <Modal
-                      floated='right'
-                      size='small'
-                      trigger={<Button color='blue' style={this.hideButton()}>Create a project</Button>}>
-                      <div className="header">Create Project</div>
-                      <div className="content">
-                        <CreateProjectForm community={this.state.community._id}/>
-                      </div>
-                    </Modal>
+                  <h3 className="header">Projects</h3>
+                  <hr />
+                  <Card.Group itemsPerRow={2}>
+                    { this.buildProjectList() }
+                  </Card.Group>
+                  <hr />
+                  <Modal
+                    floated='right'
+                    size='small'
+                    trigger={<Button color='blue' style={this.hideButton()}>Create a project</Button>}>
+                    <div className="header">Create Project</div>
+                    <div className="content">
+                      <CreateProjectForm community={this.state.community._id}/>
+                    </div>
+                  </Modal>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
           </div>
         </div>
-    );
+      );
+    }
   }
-}
 
-export default Community;
+  export default Community;
