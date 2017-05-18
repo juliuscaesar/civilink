@@ -5,13 +5,18 @@ import CauseTag from '../community/CauseTag';
 import UserTag from '../profile/UserTag';
 import Task from '../task/Task';
 import Sidebar from '../general/Sidebar';
+import Auth from '../modules/Auth';
+import CreateTaskForm from '../task/CreateTaskForm';
 import {
   Grid,
   Card,
   Icon,
   Image,
   Message,
-  Label
+  Modal,
+  Label,
+  List,
+  Button
 } from 'semantic-ui-react'
 
 /**
@@ -38,9 +43,8 @@ class Project extends React.Component {
     this.requestInfo = this.requestInfo.bind(this);
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
     this.hideDiv = this.hideDiv.bind(this);
-    this.getCommunityUrl = this.getCommunityUrl.bind(this);
-    this.getProfileUrl = this.getProfileUrl.bind(this);
-    this.getProfileTag = this.getProfileTag.bind(this);
+    this.hideButton = this.hideButton.bind(this);
+    this.getProjectDetails = this.getProjectDetails.bind(this);
     this.displayCauses = this.displayCauses.bind(this);
     this.buildTaskList = this.buildTaskList.bind(this);
 
@@ -54,6 +58,18 @@ class Project extends React.Component {
   */
   hideDiv() {
     if (this.state.displayError) {
+      return {};
+    } else {
+      return {display: "none"};
+    }
+  }
+
+  /**
+  * Returns the style attribute for the create project button
+  * @returns {*} {display: "none"} if the button should be hidden or {} otherwise
+  */
+  hideButton() {
+    if (Auth.isUserAuthenticated()) {
       return {};
     } else {
       return {display: "none"};
@@ -77,25 +93,22 @@ class Project extends React.Component {
   parseInfoResponse(error, response) {
     switch (response.status) {
       case 200:
-      this.setState({
-        project: response.body.project,
-        tasks: response.body.tasks,
-        community: response.body.project.community,
-        organizer: response.body.project.user,
-        causes: response.body.project.causes
-      });
-      break;
-      case 203:
-      this.setState({
-        errorMessage: "Could not get project data",
-        displayError: true
-      });
-      break;
+        this.setState({
+          project: response.body.project,
+          tasks: response.body.tasks,
+          community: response.body.project.community,
+          organizer: response.body.project.user,
+          causes: response.body.project.causes
+        });
+        break;
+      case 404:
+        window.location = '/';
+        break;
       default:
-      this.setState({
-        errorMessage: "Could not get project data",
-        displayError: true
-      });
+        this.setState({
+          errorMessage: response.body.errorMessage,
+          displayError: true
+        });
     }
   }
 
@@ -114,13 +127,6 @@ class Project extends React.Component {
   }
 
   /*
-  * Makes a url for the profile of this project organizer
-  */
-  getProfileUrl() {
-    return "/user/" + this.state.organizer.username;
-  }
-
-  /*
   * Display the causes of this project
   */
   displayCauses() {
@@ -134,8 +140,29 @@ class Project extends React.Component {
   /*
   * Display the tag for the organizer of this project
   */
-  getProfileTag() {
-    return <UserTag profile={this.state.organizer}/>;
+  getProjectDetails() {
+    const details = [];
+    const organizerFullName = this.state.organizer.firstName + " " + this.state.organizer.lastName;
+    const organizerUrl = "/user/" + this.state.organizer.username;
+    const communityUrl = "/" + this.state.community.url;
+
+    details.push(
+      <List>
+        <List.Item>
+          <List.Icon name='user' />
+          <List.Content>
+            Organized by <a href={organizerUrl}>{organizerFullName}</a>
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Icon name='marker' />
+          <List.Content>
+            <a href={communityUrl}>{this.state.community.name}</a>
+          </List.Content>
+        </List.Item>
+      </List>
+    );
+    return details;
   }
 
   /**
@@ -172,53 +199,49 @@ class Project extends React.Component {
                 </Message>
 
                 <Card fluid>
-                  <Image src={this.getImageUrl()}/>
                   <Card.Content>
                     <Card.Header>
-                      <h3 className="header">
-                        <a href={this.getCommunityUrl()}>
-                          <Icon name='left arrow'/> {this.state.community.name}
-                        </a>
-                      </h3>
-                      </Card.Header>
-                    </Card.Content>
-                  </Card>
+                      <h2 className="header">{this.state.project.title}</h2>
+                    </Card.Header>
+                    <Card.Description>
+                      {this.getProjectDetails()}
+                      <hr />
+                      <p>
+                        {this.state.project.desc}
+                      </p>
+                    </Card.Description>
+                  </Card.Content>
+                  <Card.Content extra>
+                    <Label.Group>
+                      {this.displayCauses()}
+                    </Label.Group>
+                  </Card.Content>
+                </Card>
 
-                  <Card fluid>
-                    <Card.Content>
-                      <Card.Header>
-                        <h3 className="header">{this.state.project.title}</h3>
-                      </Card.Header>
-                      <Card.Description>
-                        <p>
-                          <a href={this.getProfileUrl()}>
-                            {this.getProfileTag()}
-                          </a>
-                        </p>
-                        <p>
-                          {this.state.project.desc}
-                        </p>
-                      </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <Label.Group>
-                        {this.displayCauses()}
-                      </Label.Group>
-                    </Card.Content>
-                  </Card>
+                <h3 className="header">Tasks</h3>
+                <hr />
+                <Card.Group>
+                  {this.buildTaskList()}
+                </Card.Group>
 
-                  <h3 className="header">Tasks</h3>
-                  <hr />
-                  <Card.Group>
-                    {this.buildTaskList()}
-                  </Card.Group>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </div>
+                <Modal
+                  floated='right'
+                  size='small'
+                  trigger={<Button color='blue' style={this.hideButton()}>Add a task</Button>}>
+                  <div className="header">Create Task</div>
+                  <div className="content">
+                    <CreateTaskForm
+                      projectId={this.state.project._id}
+                      projectUrl={this.state.project.url}/>
+                  </div>
+                </Modal>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </div>
-      );
-    }
+      </div>
+    );
   }
+}
 
-  export default Project;
+export default Project;

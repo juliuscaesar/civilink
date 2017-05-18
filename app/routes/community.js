@@ -45,11 +45,11 @@ exports.getCommunity = function(req, res, next) {
     .exec(function (err, commun) {
         if (err) {
             return res.status(500).json({
-							"errorMessage": "Could not find that community"});
+							"errorMessage": "Could not get community data"});
         }
         else if (commun == null) {
             return res.status(404).json({
-							"errorMessage": "Could not find that community"});
+							"errorMessage": "That community does not exist"});
             // should go back to dashboard
         }
         else {

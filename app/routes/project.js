@@ -22,25 +22,26 @@ exports.getProject = function(req, res, next) {
   .populate('community user')
   .exec(function (err, proj) {
     if (err) {
-      res.status(203);
+      res.status(500).json({"errorMessage":"Could not get project data"});
     }
     else if (proj == null) {
-      res.status(203);
+      res.status(404).json({"errorMessage":"Project does not exist"});
       // should go back to dashboard
     }
     else {
       project = proj;
+
+      Tasks.find({ "project" : proj.id })
+      .populate('assigned creator')
+      .exec(function(err, tasks) {
+        if (err) {
+          res.status(500).json({"errorMessage":"Could not get task data"});
+        }
+        tasks = tasks;
+        // send data
+        res.status(200).json({"project": project, "tasks": tasks});
+      });
     }
-    Tasks.find({ "project" : proj.id })
-    .populate('assigned creator')
-    .exec(function(err, tasks) {
-      if (err) {
-        res.status(203);
-      }
-      tasks = tasks;
-      // send data
-      res.status(200).json({"project": project, "tasks": tasks});
-    });
   })
 }
 

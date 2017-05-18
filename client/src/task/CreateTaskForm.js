@@ -2,20 +2,29 @@ import React from 'react';
 import request from 'superagent';
 import Input from '../general/Input';
 import Auth from '../modules/Auth';
+import { Message } from 'semantic-ui-react';
 
 /**
-* Component for the navbar.
+* Component for the create task form.
 */
-class CreateProjectForm extends React.Component {
+class CreateTaskForm extends React.Component {
   constructor(props) {
     super(props);
 
     /**
     * Fields in this form are kept as state and initialized as empty
     */
-    this.state = {title: '', desc: ''};
+    this.state = {
+      errorMessage: '',
+      displayError: false,
+      title: '',
+      desc: '',
+      needed: 1,
+      points: 10
+    };
 
     //region bind all methods to this
+    this.hideDiv = this.hideDiv.bind(this);
     this.setValue = this.setValue.bind(this);
     this.getButtonClass = this.getButtonClass.bind(this);
     this.getDisabledProperty = this.getDisabledProperty.bind(this);
@@ -26,6 +35,18 @@ class CreateProjectForm extends React.Component {
 
     //update the page
 
+  }
+
+  /**
+  * Returns the style attribute for the error div
+  * @returns {*} {display: "none"} if the error should be hidden or {} otherwise
+  */
+  hideDiv() {
+    if (this.state.displayError) {
+      return {};
+    } else {
+      return {display: "none"};
+    }
   }
 
   /**
@@ -79,7 +100,7 @@ class CreateProjectForm extends React.Component {
   }
 
   /**
-  * Validation for the password field - passwords cannot be empty and
+  * Validation for the description field - description cannot be empty and
   * must be at least 8 characters
   * @param value the value to be validated
   * @returns {String} '' if the value is valid, otherwise returns an
@@ -98,8 +119,8 @@ class CreateProjectForm extends React.Component {
   * @returns {boolean} true if all fields in the form are valid
   */
   submitEnabled() {
-    return CreateProjectForm.nameValidation(this.state.title) === '' &&
-    CreateProjectForm.descValidation(this.state.desc) === '';
+    return CreateTaskForm.nameValidation(this.state.title) === '' &&
+    CreateTaskForm.descValidation(this.state.desc) === '';
   }
 
   /**
@@ -109,7 +130,9 @@ class CreateProjectForm extends React.Component {
     var body = {
       title: this.state.title,
       desc: this.state.desc,
-      community: this.props.community
+      needed: this.state.needed,
+      points: this.state.points,
+      project: this.props.projectId
     };
 
     return body
@@ -122,7 +145,7 @@ class CreateProjectForm extends React.Component {
   */
   submitForm(ev) {
     ev.preventDefault();
-    request.post('/api/project/create')
+    request.post('/api/task/create')
     .set('token', Auth.getToken())
     .send(this.buildBody())
     .end(this.parseResponse);
@@ -136,16 +159,16 @@ class CreateProjectForm extends React.Component {
   parseResponse(error, response) {
     switch(response.status) {
       case 201:
-      window.location = '/project/' + response.body.project.url;
+      window.location = '/project/' + this.props.projectUrl;
       break;
       case 500:
       this.setState({
-        errorMessage: "Could not create project", displayError: true
+        errorMessage: "Could not create task", displayError: true
       });
       break;
       default:
       this.setState({
-        errorMessage: "Could not create project", displayError: true
+        errorMessage: "Could not create task", displayError: true
       });
     }
   }
@@ -155,27 +178,30 @@ class CreateProjectForm extends React.Component {
     return (
       <form className="ui form" onSubmit={this.submitForm}>
         <div className="description">
+        <Message color='red' style={this.hideDiv()}>
+          Error: { this.state.errorMessage }
+        </Message>
         <div className="content">
         <Input
-          label="Name"
+          label="Title"
           inputId="title"
           inputType="text"
           name="title"
           save={this.setValue}
-          validation={CreateProjectForm.nameValidation}/>
+          validation={CreateTaskForm.nameValidation}/>
         <Input
           label="Description"
           inputId="desc"
           inputType="text"
           name="desc"
           save={this.setValue}
-          validation={CreateProjectForm.descValidation}/>
+          validation={CreateTaskForm.descValidation}/>
         </div>
         <button
           type="submit"
           disabled={this.getDisabledProperty()}
           className={this.getButtonClass()} >
-          Create Project
+          Create Task
         </button>
         </div>
       </form>
@@ -183,4 +209,4 @@ class CreateProjectForm extends React.Component {
   }
 }
 
-export default CreateProjectForm;
+export default CreateTaskForm;

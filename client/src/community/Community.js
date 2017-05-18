@@ -38,7 +38,6 @@ class Community extends React.Component {
     this.buildProjectList = this.buildProjectList.bind(this);
     this.displayCauses = this.displayCauses.bind(this);
     this.getImageUrl = this.getImageUrl.bind(this);
-    this.clickProjectButton = this.clickProjectButton.bind(this);
 
     // update page by calling the API call
     this.requestInfo();
@@ -173,14 +172,6 @@ class Community extends React.Component {
       { label: "projects", value: this.state.projects.length },
       { label: "organizations", value: this.state.organizations.length }
       ]
-    }
-
-    /**
-     * Handle the create project button click
-     */
-    clickProjectButton(ev) {
-      ev.preventDefault();
-      this.setState({createProject: true});
     }
 
     // Render the static content

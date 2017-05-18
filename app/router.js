@@ -6,6 +6,7 @@ const project = require('./routes/project');
 const profile = require('./routes/profile');
 const login = require('./passport/login');
 const org = require('./routes/organizations');
+const task = require('./routes/task');
 
 const Authentication = require('./passport/authentication');
 const passport = require('passport');
@@ -64,6 +65,11 @@ module.exports = function(app) {
   //      PROFILE CALLS
   //= =======================================
   apiRoutes.get('/profile/:id', profile.getProfile);
+
+  //= =======================================
+  //      TASK CALLS
+  //= =======================================
+  apiRoutes.post('/task/create', task.createTask);
 
 
   apiRoutes.get('/helloworld', test.helloworld);
