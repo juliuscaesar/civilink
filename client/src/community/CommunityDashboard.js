@@ -96,7 +96,7 @@ class CommunityDashboard extends React.Component {
     return (
       <div>
         <Navbar/>
-        <div className="container-body">
+        <div className="ui container container-body">
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={3}>
@@ -104,8 +104,7 @@ class CommunityDashboard extends React.Component {
               </Grid.Column>
               <Grid.Column width={13}>
                 <h3>My Communities</h3>
-                <hr>
-                </hr>
+                <hr />
                 <Message color='red' style={this.hideDiv()}>
                   Error: { this.state.errorMessage }
                 </Message>

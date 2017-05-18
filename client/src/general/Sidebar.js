@@ -46,8 +46,7 @@ class Sidebar extends React.Component {
             My Tasks
           </a>
         </p>
-        <hr>
-        </hr>
+        <hr />
         <small>
           <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
           <br>
@@ -65,7 +64,7 @@ class Sidebar extends React.Component {
    */
   guest() {
     return (
-      <div>
+      <div className="ui container">
         <p>
           <a href="/dashboard">
             <Icon name='user' />
@@ -76,8 +75,7 @@ class Sidebar extends React.Component {
             <Icon name='check square' />
             Register</a>
         </p>
-        <hr>
-        </hr>
+        <hr />
         <small>
           <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
           <br>

@@ -30,14 +30,14 @@ class TaskDashboard extends React.Component {
     return (
       <div>
         <Navbar/>
-        <div className="container-body">
+        <div className="ui container container-body">
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={3}>
                 <Sidebar/>
               </Grid.Column>
               <Grid.Column width={13}>
-                <h3>My Tasks</h3>
+                <h3 className="header">My Tasks</h3>
                 <hr>
                 </hr>
                 { this.state.errorMessage }

@@ -142,14 +142,14 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Navbar/>
-        <div className="container-body">
+        <div className="ui container container-body">
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={3}>
                 <Sidebar/>
               </Grid.Column>
               <Grid.Column width={13}>
-                <h3>Activity Feed</h3>
+                <h3 className="header">Activity Feed</h3>
                 <hr>
                 </hr>
                 <Message color='red' style={this.hideDiv()}>

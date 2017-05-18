@@ -12,9 +12,9 @@ class Register extends React.Component {
       <div>
 
         <Navbar/>
-        <div className="container-body">
+        <div className="ui container container-body">
           <div className="content-box">
-            <h2>
+            <h2 className="header">
               Sign up!
             </h2>
             <hr>

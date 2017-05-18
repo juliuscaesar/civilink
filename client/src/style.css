@@ -180,12 +180,8 @@ body {
 
 /* set a max-width for horizontal fluid layout and make it centered */
 .container-body {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 25px;
+  margin-top: 15px;
   max-width: 950px; /* or 950px */
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .container-nav {

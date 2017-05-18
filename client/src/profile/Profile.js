@@ -152,7 +152,7 @@ class Profile extends React.Component {
     return (
       <div>
         <Navbar/>
-        <div className="container-body">
+        <div className="ui container container-body">
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={3}>
@@ -163,7 +163,7 @@ class Profile extends React.Component {
                   <Grid.Row>
                     <Grid.Column width={5}>
                       <Segment>
-                        <h3>
+                        <h3 className="header">
                           {this.state.profile.firstName} {this.state.profile.lastName}
                           <br />
                           <small>@{this.state.profile.username}</small>
@@ -185,7 +185,7 @@ class Profile extends React.Component {
                     </Grid.Column>
                     <Grid.Column width={11}>
                       <Segment>
-                        <h3>Activity Feed</h3>
+                        <h3 className="header">Activity Feed</h3>
                         <hr />
                         <Feed>
                           {this.buildActivityFeed()}

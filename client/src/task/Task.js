@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Label } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 /**
 * Component for Tasks

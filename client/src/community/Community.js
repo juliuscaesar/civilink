@@ -112,7 +112,7 @@ class Community extends React.Component {
     * Displays the header for the community
     */
     communityInfo() {
-      return <h1>{this.state.community.name}</h1>
+      return <h2 className="header">{this.state.community.name}</h2>
     }
 
     /*
@@ -158,7 +158,7 @@ class Community extends React.Component {
       }
 
       if (this.state.projects.length === 0 ) {
-        return <h4>There are currently no projects in this community</h4>
+        return <b>There are currently no projects in this community</b>
       }
 
       return rows;
@@ -188,7 +188,7 @@ class Community extends React.Component {
       return (
         <div>
           <Navbar/>
-          <div className="container-body">
+          <div className="ui container container-body">
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={3}>
@@ -213,7 +213,7 @@ class Community extends React.Component {
                           items={this.getStats()}
                           color='blue'
                           size='mini'
-                          widths='4'
+                          widths='3'
                         />
                         </Grid.Column>
                         </Grid.Row>
@@ -224,14 +224,14 @@ class Community extends React.Component {
 
 
                     <Segment>
-                      <h2>Filter by cause</h2>
+                      <h3 className="header">Filter by cause</h3>
                       <hr />
                       <Label.Group>
                         { this.displayCauses() }
                       </Label.Group>
                     </Segment>
 
-                    <h2>Projects</h2>
+                    <h3 className="header">Projects</h3>
                     <hr />
                     <Card.Group itemsPerRow={2}>
                       { this.buildProjectList() }

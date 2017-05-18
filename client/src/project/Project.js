@@ -160,7 +160,7 @@ class Project extends React.Component {
     return (
       <div>
         <Navbar/>
-        <div className="container-body">
+        <div className="ui container container-body">
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={3}>
@@ -175,11 +175,11 @@ class Project extends React.Component {
                   <Image src={this.getImageUrl()}/>
                   <Card.Content>
                     <Card.Header>
-                      <h2>
+                      <h3 className="header">
                         <a href={this.getCommunityUrl()}>
                           <Icon name='left arrow'/> {this.state.community.name}
                         </a>
-                        </h2>
+                      </h3>
                       </Card.Header>
                     </Card.Content>
                   </Card>
@@ -187,7 +187,7 @@ class Project extends React.Component {
                   <Card fluid>
                     <Card.Content>
                       <Card.Header>
-                        <h2>{this.state.project.title}</h2>
+                        <h3 className="header">{this.state.project.title}</h3>
                       </Card.Header>
                       <Card.Description>
                         <p>
@@ -207,7 +207,7 @@ class Project extends React.Component {
                     </Card.Content>
                   </Card>
 
-                  <h2>Tasks</h2>
+                  <h3 className="header">Tasks</h3>
                   <hr />
                   <Card.Group>
                     {this.buildTaskList()}

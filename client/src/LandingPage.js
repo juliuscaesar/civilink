@@ -79,12 +79,12 @@ class LandingPage extends React.Component {
     return (
       <div>
         <Navbar/>
-            <div className="container-body">
+            <div className="ui container container-body">
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={16}>
-                  <h1>Start making a difference now!</h1>
-                  <h3>Pick your city:</h3>
+                  <h2 className="header">Start making a difference now!</h2>
+                  <h4 className="header">Pick your city:</h4>
                   <hr>
                   </hr>
                   { this.state.errorMessage }
