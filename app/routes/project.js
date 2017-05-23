@@ -57,12 +57,12 @@ exports.createProject = function(req, res, next) {
   var user = Authenticate.getLoggedinUser(req.headers.token);
   Users.findOne({ "username" : user }, {_id:1})
   .exec(function (err, foundUser) {
-    newProject.title = sanitizeHtml(req.body.title);
-    newProject.desc = sanitizeHtml(req.body.desc);
+    newProject.title = sanitizeHtml(req.body.title, { allowedTags: [] });
+    newProject.desc = sanitizeHtml(req.body.desc, { allowedTags: [] });
     newProject.causes = ["Education", "Environment"];
     newProject.community = req.body.community;
     newProject.user = foundUser;
-    newProject.url = sanitizeHtml(req.body.title).toLowerCase().split(" ").join("-");
+    newProject.url = sanitizeHtml(req.body.title, { allowedTags: [] }).toLowerCase().split(" ").join("-");
 
     // save the project
     newProject.save(function(err) {

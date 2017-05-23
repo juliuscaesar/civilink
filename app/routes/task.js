@@ -22,8 +22,8 @@ exports.createTask = function(req, res, next) {
   var user = Authenticate.getLoggedinUser(req.headers.token);
   Users.findOne({ "username" : user }, {_id:1})
   .exec(function (err, foundUser) {
-    newTask.title = sanitizeHtml(req.body.title);
-    newTask.desc = sanitizeHtml(req.body.desc);
+    newTask.title = sanitizeHtml(req.body.title, { allowedTags: [] });
+    newTask.desc = sanitizeHtml(req.body.desc, { allowedTags: [] });
     newTask.needed = req.body.needed;
     newTask.points = req.body.points;
     newTask.project = req.body.project;
