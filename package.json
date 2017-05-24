@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "build": "concurrently \"npm run server\" \"cd client && npm run-script build\"",
     "server": "nodemon app/server.js",
     "client": "cd client && webpack-dev-server"
   },
