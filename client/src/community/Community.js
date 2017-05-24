@@ -5,7 +5,7 @@ import Sidebar from '../general/Sidebar';
 import Auth from '../modules/Auth';
 import ProjectCard from '../project/ProjectCard';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Card, Image, Message, Statistic, Label, Button, Modal } from 'semantic-ui-react'
+import { Grid, Segment, Card, Image, Message, Statistic, Label, Button, Modal, Menu } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
 import CreateProjectForm from '../project/CreateProjectForm';
 
@@ -26,7 +26,8 @@ class Community extends React.Component {
       members: [],
       projects: [],
       organizations: [],
-      createProject: false
+      createProject: false,
+      activeItem: 'projects'
     };
 
     //region bind all methods to this
@@ -174,8 +175,11 @@ class Community extends React.Component {
       ]
     }
 
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
     // Render the static content
     render(){
+      const { activeItem } = this.state;
       return (
         <div>
           <Navbar/>
@@ -209,8 +213,12 @@ class Community extends React.Component {
                     </Card.Content>
                   </Card>
 
-                  <h3 className="header">Projects ({this.state.projects.length})</h3>
-                  <hr />
+                  <Menu pointing secondary>
+                    <Menu.Item name='projects' active={activeItem === 'projects'} onClick={this.handleItemClick} />
+                    <Menu.Item name='organizations' active={activeItem === 'organizations'} onClick={this.handleItemClick} />
+                    <Menu.Item name='activity' active={activeItem === 'activity'} onClick={this.handleItemClick} />
+                  </Menu>
+
                   <Card.Group itemsPerRow={2} stackable>
                     { this.buildProjectList() }
                   </Card.Group>
