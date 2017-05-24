@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import { Menu, Icon } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 /**
 * Component for the navbar.

@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../general/Navbar';
 import request from 'superagent';
 import CauseTag from '../community/CauseTag';
-import UserTag from '../profile/UserTag';
 import Task from '../task/Task';
 import Sidebar from '../general/Sidebar';
 import Auth from '../modules/Auth';
@@ -10,8 +9,6 @@ import CreateTaskForm from '../task/CreateTaskForm';
 import {
   Grid,
   Card,
-  Icon,
-  Image,
   Message,
   Modal,
   Label,
