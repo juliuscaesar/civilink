@@ -25,72 +25,84 @@ class Sidebar extends React.Component {
 
 
   /**
-   * Returns the links for an authenticated user
-   */
+  * Returns the links for an authenticated user
+  */
   loggedin() {
     return (
-      <div>
-        <p>
-          <a href="/dashboard">
-            <Icon name='home' />
-            Dashboard</a>
-        </p>
-        <p>
-          <a href="/communities">
-            <Icon name='users' />
-            Communities</a>
-        </p>
-        <p>
-          <a href="/tasks">
-            <Icon name='check square' />
-            My Tasks
-          </a>
-        </p>
-        <hr />
-        <small>
-          <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
-          <br>
-          </br>
-          <a href="/about" className="grayed">About</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="/donate" className="grayed">Donate</a>
-        </small>
+      <div className="ui grid">
+        <div className="row">
+          <div className="column tablet computer only">
+            <p>
+              <a href="/dashboard">
+                <Icon name='home' />
+                Dashboard
+              </a>
+            </p>
+            <p>
+              <a href="/communities">
+                <Icon name='users' />
+                Communities
+              </a>
+            </p>
+            <p>
+              <a href="/tasks">
+                <Icon name='check square' />
+                My Tasks
+              </a>
+            </p>
+            <hr />
+            <small>
+              <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
+              <br>
+              </br>
+              <a href="/about" className="grayed">About</a>
+              &nbsp;&nbsp;&nbsp;
+              <a href="/donate" className="grayed">Donate</a>
+            </small>
+          </div>
+        </div>
       </div>
     );
   }
 
   /**
-   * Returns the links for an unauthenticated guest
-   */
+  * Returns the links for an unauthenticated guest
+  */
   guest() {
     return (
-      <div className="ui container">
-        <p>
-          <a href="/dashboard">
-            <Icon name='user' />
-            Sign in</a>
-        </p>
-        <p>
-          <a href="/sign-up">
-            <Icon name='check square' />
-            Register</a>
-        </p>
-        <hr />
-        <small>
-          <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
-          <br>
-          </br>
-          <a href="/about" className="grayed">About</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="/donate" className="grayed">Donate</a>
-        </small>
+      <div className="ui grid tablet computer only">
+        <div className="tablet computer only row">
+          <div className="column tablet computer only">
+            <p>
+              <a href="/dashboard">
+                <Icon name='user' />
+                Sign in
+              </a>
+            </p>
+            <p>
+              <a href="/sign-up">
+                <Icon name='check square' />
+                Register
+              </a>
+            </p>
+            <hr />
+            <small>
+              <span style={{color: '#808080'}}>© 2017 CiviLink, Inc.</span>
+              <br>
+              </br>
+              <a href="/about" className="grayed">About</a>
+              &nbsp;&nbsp;&nbsp;
+              <a href="/donate" className="grayed">Donate</a>
+            </small>
+          </div>
+        </div>
       </div>
     );
   }
 
   /**
-   * Displays the sidebar links for the appropriate user
-   */
+  * Displays the sidebar links for the appropriate user
+  */
   displayInfo() {
     if (Auth.isUserAuthenticated()) {
       return this.loggedin();

@@ -188,17 +188,27 @@ body {
   height: 70px;
 }
 
+@media(max-width: 767px) {
+  .container-nav {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media(max-width: 767px) {
+  .container-body {
+    margin-top: 0px;
+  }
+}
+
 .ui.container {
   max-width: 950px !important;
 }
 
 .mobile-header {
-  padding-top: 5px;
   background-color: #4a86e8;
   height: 50px;
   border-color: #234F8E;
-  padding-bottom: 0px;
-  margin-bottom: 10px;
 }
 
 .mobile-header a {

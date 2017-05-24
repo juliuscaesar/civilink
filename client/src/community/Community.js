@@ -30,7 +30,7 @@ class Community extends React.Component {
     };
 
     //region bind all methods to this
-    this.requestInfo = this.requestInfo.bind(this);
+    //this.requestInfo = this.requestInfo.bind(this);
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
     this.hideDiv = this.hideDiv.bind(this);
     this.hideButton = this.hideButton.bind(this);
@@ -193,41 +193,29 @@ class Community extends React.Component {
                     <Image src={this.getImageUrl()}/>
                     <Card.Content>
                       <Card.Header>
-                        <Grid>
-                          <Grid.Row>
-                            <Grid.Column width={4}>
-                              {this.communityInfo()}
-                            </Grid.Column>
-
-                            <Grid.Column width={12}>
-                              <Statistic.Group
-                                items={this.getStats()}
-                                color='blue'
-                                size='mini'
-                                widths='3'
-                                />
-                            </Grid.Column>
-                          </Grid.Row>
-                        </Grid>
+                        {this.communityInfo()}
                       </Card.Header>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <a href="#" className="ui button green tiny" style={this.hideButton()}>Join Community</a>
+                      <Modal
+                        floated='right'
+                        size='tiny'
+                        trigger={<Button color='blue' size='tiny' style={this.hideButton()}>Create a project</Button>}>
+                        <div className="header">Create Project</div>
+                        <div className="content">
+                          <CreateProjectForm community={this.state.community._id}/>
+                        </div>
+                      </Modal>
                     </Card.Content>
                   </Card>
 
                   <h3 className="header">Projects</h3>
                   <hr />
-                  <Card.Group itemsPerRow={2}>
+                  <Card.Group itemsPerRow={2} stackable>
                     { this.buildProjectList() }
                   </Card.Group>
                   <hr />
-                  <Modal
-                    floated='right'
-                    size='small'
-                    trigger={<Button color='blue' style={this.hideButton()}>Create a project</Button>}>
-                    <div className="header">Create Project</div>
-                    <div className="content">
-                      <CreateProjectForm community={this.state.community._id}/>
-                    </div>
-                  </Modal>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

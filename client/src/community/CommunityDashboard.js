@@ -108,7 +108,7 @@ class CommunityDashboard extends React.Component {
                 <Message color='red' style={this.hideDiv()}>
                   Error: { this.state.errorMessage }
                 </Message>
-                <Card.Group itemsPerRow={2}>
+                <Card.Group itemsPerRow={2} stackable>
                   { this.buildCommunityList() }
                 </Card.Group>
               </Grid.Column>

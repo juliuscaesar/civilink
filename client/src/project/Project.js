@@ -212,9 +212,20 @@ class Project extends React.Component {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
-                    <Label.Group>
+                    <Label.Group floated='left'>
                       {this.displayCauses()}
                     </Label.Group>
+                    <Modal
+                      floated='right'
+                      size='tiny'
+                      trigger={<Button color='blue' floated='right' size='tiny' style={this.hideButton()}>Add a task</Button>}>
+                      <div className="header">Create Task</div>
+                      <div className="content">
+                        <CreateTaskForm
+                          projectId={this.state.project._id}
+                          projectUrl={this.state.project.url}/>
+                      </div>
+                    </Modal>
                   </Card.Content>
                 </Card>
 
@@ -223,18 +234,6 @@ class Project extends React.Component {
                 <Card.Group>
                   {this.buildTaskList()}
                 </Card.Group>
-
-                <Modal
-                  floated='right'
-                  size='small'
-                  trigger={<Button color='blue' style={this.hideButton()}>Add a task</Button>}>
-                  <div className="header">Create Task</div>
-                  <div className="content">
-                    <CreateTaskForm
-                      projectId={this.state.project._id}
-                      projectUrl={this.state.project.url}/>
-                  </div>
-                </Modal>
               </Grid.Column>
             </Grid.Row>
           </Grid>
