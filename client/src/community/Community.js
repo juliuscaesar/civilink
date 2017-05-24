@@ -30,7 +30,7 @@ class Community extends React.Component {
     };
 
     //region bind all methods to this
-    //this.requestInfo = this.requestInfo.bind(this);
+    this.requestInfo = this.requestInfo.bind(this);
     this.parseInfoResponse = this.parseInfoResponse.bind(this);
     this.hideDiv = this.hideDiv.bind(this);
     this.hideButton = this.hideButton.bind(this);
