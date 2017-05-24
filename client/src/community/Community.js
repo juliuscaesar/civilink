@@ -197,7 +197,6 @@ class Community extends React.Component {
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-                      <a href="#" className="ui button green tiny" style={this.hideButton()}>Join Community</a>
                       <Modal
                         floated='right'
                         size='tiny'
@@ -210,7 +209,7 @@ class Community extends React.Component {
                     </Card.Content>
                   </Card>
 
-                  <h3 className="header">Projects</h3>
+                  <h3 className="header">Projects ({this.state.projects.length})</h3>
                   <hr />
                   <Card.Group itemsPerRow={2} stackable>
                     { this.buildProjectList() }
