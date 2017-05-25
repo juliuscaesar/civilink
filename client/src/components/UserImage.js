@@ -23,7 +23,7 @@ class UserImage extends React.Component {
     }
     else {
       return <Image
-      src="../user.png"
+      src="../images/user.png"
       centered
       className="img-circle"
       width={this.props.size}

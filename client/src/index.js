@@ -14,7 +14,7 @@ import Organization from './components/Organization';
 import Logout from './components/Logout';
 
 
-require('./style.css')
+require('./style/style.css')
 
 var ReactRouter = require('react-router');
 
