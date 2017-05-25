@@ -59,7 +59,7 @@ exports.createProject = function(req, res, next) {
   .exec(function (err, foundUser) {
     newProject.title = sanitizeHtml(req.body.title, { allowedTags: [] });
     newProject.desc = sanitizeHtml(req.body.desc, { allowedTags: [] });
-    newProject.causes = ["Education", "Environment"];
+    newProject.causes = req.body.causes;
     newProject.community = req.body.community;
     newProject.user = foundUser;
     newProject.url = sanitizeHtml(req.body.title, { allowedTags: [] }).toLowerCase().split(" ").join("-");
