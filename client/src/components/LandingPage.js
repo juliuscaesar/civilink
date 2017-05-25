@@ -77,29 +77,24 @@ class LandingPage extends React.Component {
   // Render the static content
   render(){
     return (
-      <div>
-        <Navbar/>
-            <div className="ui container container-body">
-            <Grid stackable>
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <h2 className="header">Start making a difference now!</h2>
-                  <h4 className="header">Pick your city:</h4>
-                  <hr>
-                  </hr>
-                  { this.state.errorMessage }
-                  <Card.Group itemsPerRow={2}>
-                    { this.buildCommunityList() }
-                  </Card.Group>
+      <Grid stackable>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <h2 className="header">Start making a difference now!</h2>
+            <h4 className="header">Pick your city:</h4>
+            <hr>
+            </hr>
+            { this.state.errorMessage }
+            <Card.Group itemsPerRow={2}>
+              { this.buildCommunityList() }
+            </Card.Group>
 
-                </Grid.Column>
-                <Grid.Column width={16}>
-                  <LoginForm/>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </div>
-      </div>
+          </Grid.Column>
+          <Grid.Column width={16}>
+            <LoginForm/>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

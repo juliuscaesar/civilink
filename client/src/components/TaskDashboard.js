@@ -29,23 +29,10 @@ class TaskDashboard extends React.Component {
   render(){
     return (
       <div>
-        <Navbar/>
-        <div className="ui container container-body">
-          <Grid stackable>
-            <Grid.Row>
-              <Grid.Column width={3}>
-                <Sidebar/>
-              </Grid.Column>
-              <Grid.Column width={13}>
-                <h3 className="header">My Tasks</h3>
-                <hr>
-                </hr>
-                { this.state.errorMessage }
-
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </div>
+        <h3 className="header">My Tasks</h3>
+        <hr>
+        </hr>
+        { this.state.errorMessage }
       </div>
     );
   }

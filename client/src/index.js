@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
-import Dashboard from './components/Dashboard';
-import CommunityDashboard from './components/CommunityDashboard';
-import Community from './components/Community';
-import CreateCommunity from './components/CreateCommunity';
+import DashboardContainer from './containers/DashboardContainer';
+import CommunityDashboardContainer from './containers/CommunityDashboardContainer';
+import CommunityContainer from './containers/CommunityContainer';
 import TaskDashboard from './components/TaskDashboard';
-import Project from './components/Project';
-import Profile from './components/Profile';
+import ProjectContainer from './containers/ProjectContainer';
+import ProfileContainer from './containers/ProfileContainer';
 import Auth from './components/Auth';
 import Organization from './components/Organization';
 import Logout from './components/Logout';
-
 
 require('./style/style.css')
 
@@ -38,47 +37,45 @@ function skipLanding(nextState, replace) {
 
 ReactDOM.render(
   <ReactRouter.Router history={ReactRouter.browserHistory}>
-    <ReactRouter.Route
-      path="/"
-      component={LandingPage}
-      onEnter={skipLanding}/>
-    <ReactRouter.Route
-      path="/sign-up"
-      component={Register}/>
-    <ReactRouter.Route
-      path="/dashboard"
-      component={Dashboard}
-      onEnter={requireAuth}/>
-    <ReactRouter.Route
-      path="/communities"
-      component={CommunityDashboard}
-      onEnter={requireAuth}/>
-    <ReactRouter.Route
-      path="/tasks"
-      component={TaskDashboard}
-      onEnter={requireAuth}/>
-    <ReactRouter.Route
-      path="/community/create"
-      component={CreateCommunity}
-      onEnter={requireAuth}/>
-    <ReactRouter.Route
-      path="/project/:id"
-      component={Project}/>
-    <ReactRouter.Route
-      path="/user/:id"
-      component={Profile}/>
-    <ReactRouter.Route
-      path="/organization/:id"
-      component={Organization}/>
-    <ReactRouter.Route
-      path="/logout"
-      component={Logout}/>
-    <ReactRouter.Route
-      path="/:id"
-      component={Community}/>
-    <ReactRouter.Route
-      path="*"
-      component={LandingPage}/>
+      <ReactRouter.Route component={App}>
+        <ReactRouter.Route
+          path="/"
+          component={LandingPage}
+          onEnter={skipLanding}/>
+        <ReactRouter.Route
+          path="/dashboard"
+          component={DashboardContainer}
+          onEnter={requireAuth}/>
+        <ReactRouter.Route
+          path="/sign-up"
+          component={Register}/>
+          <ReactRouter.Route
+            path="/communities"
+            component={CommunityDashboardContainer}
+            onEnter={requireAuth}/>
+          <ReactRouter.Route
+            path="/tasks"
+            component={TaskDashboard}
+            onEnter={requireAuth}/>
+          <ReactRouter.Route
+            path="/project/:id"
+            component={ProjectContainer}/>
+          <ReactRouter.Route
+            path="/user/:id"
+            component={ProfileContainer}/>
+          <ReactRouter.Route
+            path="/organization/:id"
+            component={Organization}/>
+          <ReactRouter.Route
+            path="/logout"
+            component={Logout}/>
+          <ReactRouter.Route
+            path="/:id"
+            component={CommunityContainer}/>
+          <ReactRouter.Route
+            path="*"
+            component={LandingPage}/>
+    </ReactRouter.Route>
   </ReactRouter.Router>,
   document.getElementById('root')
 );
