@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from '../general/Navbar';
+import Navbar from './Navbar';
 import request from 'superagent';
-import CauseTag from '../community/CauseTag';
-import Task from '../task/Task';
-import Sidebar from '../general/Sidebar';
-import Auth from '../modules/Auth';
-import CreateTaskForm from '../task/CreateTaskForm';
+import CauseTag from './CauseTag';
+import Task from './Task';
+import Sidebar from './Sidebar';
+import Auth from './Auth';
+import CreateTaskForm from './CreateTaskForm';
 import {
   Grid,
   Card,

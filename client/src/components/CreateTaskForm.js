@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
-import Input from '../general/Input';
-import Auth from '../modules/Auth';
+import Input from './Input';
+import Auth from './Auth';
 import { Message } from 'semantic-ui-react';
 
 /**

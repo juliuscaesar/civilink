@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from './general/Navbar';
+import Navbar from './Navbar';
 import request from 'superagent';
 import LoginForm from './LoginForm';
-import CommunityCard from './community/CommunityCard';
+import CommunityCard from './CommunityCard';
 import { Grid, Card } from 'semantic-ui-react';
 
 

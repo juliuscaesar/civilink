@@ -1,8 +1,9 @@
 import React from 'react';
 import request from 'superagent';
-import Input from '../general/Input';
-import Auth from '../modules/Auth';
-import { Message } from 'semantic-ui-react';
+import Input from './Input';
+import Auth from './Auth';
+import CauseTag from './CauseTag';
+import { Label, Message } from 'semantic-ui-react';
 
 /**
 * Component for the navbar.
@@ -18,12 +19,15 @@ class CreateProjectForm extends React.Component {
       errorMessage: '',
       displayError: false,
       title: '',
-      desc: ''
+      desc: '',
+      causes: ['Public Health', 'Economy & Jobs']
     };
 
     //region bind all methods to this
     this.hideDiv = this.hideDiv.bind(this);
     this.setValue = this.setValue.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.displayCauses = this.displayCauses.bind(this);
     this.getButtonClass = this.getButtonClass.bind(this);
     this.getDisabledProperty = this.getDisabledProperty.bind(this);
     this.buildBody = this.buildBody.bind(this);
@@ -54,6 +58,38 @@ class CreateProjectForm extends React.Component {
   */
   setValue(name, value) {
     this.setState({[name]: value});
+  }
+
+  handleClick(ev, cause) {
+    ev.preventDefault();
+    console.log('The link was clicked.');
+    this.setState({causes: this.state.causes.concat([cause])});
+    return false;
+  }
+
+  displayCauses() {
+    const causes = [
+      'Education',
+      'Environment',
+      'LGBT Rights',
+      'Housing & Homelessness',
+      'Economy & Jobs',
+      'Public Health',
+      'Justice & Equality'
+    ];
+
+    var rows = [];
+    for (var i = 0; i < causes.length; i++) {
+      rows.push(
+        <button
+          onClick={() => this.handleClick(this, causes[i])}
+          name={causes[i]}
+          size='large'>
+          {causes[i]}
+        </button>
+      );
+    }
+    return rows;
   }
 
   /**
@@ -128,7 +164,8 @@ class CreateProjectForm extends React.Component {
     var body = {
       title: this.state.title,
       desc: this.state.desc,
-      community: this.props.community
+      community: this.props.community,
+      causes: this.state.causes
     };
 
     return body
@@ -192,6 +229,8 @@ class CreateProjectForm extends React.Component {
               name="desc"
               save={this.setValue}
               validation={CreateProjectForm.descValidation}/>
+            <label>Causes</label>
+
           </div>
           <button
             type="submit"

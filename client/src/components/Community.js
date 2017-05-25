@@ -1,13 +1,13 @@
 import React from 'react';
-import Navbar from '../general/Navbar';
+import Navbar from './Navbar';
 import request from 'superagent';
-import Sidebar from '../general/Sidebar';
-import Auth from '../modules/Auth';
-import ProjectCard from '../project/ProjectCard';
+import Sidebar from './Sidebar';
+import Auth from './Auth';
+import ProjectCard from './ProjectCard';
 import { browserHistory } from 'react-router';
 import { Grid, Card, Image, Message, Button, Modal, Menu } from 'semantic-ui-react'
 import CauseTag from './CauseTag';
-import CreateProjectForm from '../project/CreateProjectForm';
+import CreateProjectForm from './CreateProjectForm';
 
 /**
 * Component for the navbar.

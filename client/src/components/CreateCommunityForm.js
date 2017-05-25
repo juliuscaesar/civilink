@@ -1,6 +1,6 @@
 import React from 'react';
 import request from 'superagent';
-import Input from '../general/Input';
+import Input from './Input';
 
 /**
 * Component for the navbar.

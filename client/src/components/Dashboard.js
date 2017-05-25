@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '../general/Navbar';
+import Navbar from './Navbar';
 import request from 'superagent';
-import Sidebar from '../general/Sidebar';
-import Auth from '../modules/Auth';
+import Sidebar from './Sidebar';
+import Auth from './Auth';
 import Activity from './Activity';
 import { Grid, Segment, Feed, Message } from 'semantic-ui-react'
 

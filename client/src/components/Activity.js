@@ -1,5 +1,5 @@
 import React from 'react';
-import UserImage from '../profile/UserImage';
+import UserImage from './UserImage';
 import { Feed, Icon } from 'semantic-ui-react'
 
 /**

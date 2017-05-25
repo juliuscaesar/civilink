@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LandingPage from './LandingPage';
-import Register from './Register';
-import Dashboard from './dashboard/Dashboard';
-import CommunityDashboard from './community/CommunityDashboard';
-import Community from './community/Community';
-import CreateCommunity from './community/CreateCommunity';
-import TaskDashboard from './task/TaskDashboard';
-import Project from './project/Project';
-import Profile from './profile/Profile';
-import Auth from './modules/Auth';
-import Organization from './organization/Organization';
-import Logout from './modules/Logout';
+import LandingPage from './components/LandingPage';
+import Register from './components/Register';
+import Dashboard from './components/Dashboard';
+import CommunityDashboard from './components/CommunityDashboard';
+import Community from './components/Community';
+import CreateCommunity from './components/CreateCommunity';
+import TaskDashboard from './components/TaskDashboard';
+import Project from './components/Project';
+import Profile from './components/Profile';
+import Auth from './components/Auth';
+import Organization from './components/Organization';
+import Logout from './components/Logout';
 
 
 require('./style.css')

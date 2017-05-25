@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../general/Navbar';
+import Navbar from './Navbar';
 //import request from 'superagent';
-import Sidebar from '../general/Sidebar';
+import Sidebar from './Sidebar';
 import { Grid } from 'semantic-ui-react'
 
 /**

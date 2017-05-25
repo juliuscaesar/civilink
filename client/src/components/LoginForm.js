@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
-import Auth from './modules/Auth';
-import Input from './general/Input';
+import Auth from './Auth';
+import Input from './Input';
 
 /**
 * Component for the Login form.

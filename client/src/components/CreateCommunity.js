@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../general/Navbar';
+import Navbar from './Navbar';
 
 import CreateCommunityForm from './CreateCommunityForm';
 
