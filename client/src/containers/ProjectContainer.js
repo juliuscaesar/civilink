@@ -1,7 +1,6 @@
 import React from 'react';
 import request from 'superagent';
 import Project from '../components/Project';
-import { Grid, Card, Message, Modal, Label, List, Button } from 'semantic-ui-react'
 
 class ProjectContainer extends React.Component {
   constructor(props) {

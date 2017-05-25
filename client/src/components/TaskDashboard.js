@@ -1,8 +1,4 @@
 import React from 'react';
-import Navbar from './Navbar';
-//import request from 'superagent';
-import Sidebar from './Sidebar';
-import { Grid } from 'semantic-ui-react'
 
 /**
 * Component for Tasks dashboard.

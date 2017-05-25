@@ -4,7 +4,6 @@ import Task from './Task';
 import Auth from './Auth';
 import CreateTaskForm from './CreateTaskForm';
 import {
-  Grid,
   Card,
   Message,
   Modal,
@@ -36,13 +35,6 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
     } else {
       return {display: "none"};
     }
-  }
-
-  /*
-  * Makes a url for the community of this project
-  */
-  const getCommunityUrl = () => {
-    return "/" + community.url;
   }
 
   /*

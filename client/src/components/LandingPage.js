@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './Navbar';
 import request from 'superagent';
 import LoginForm from './LoginForm';
 import CommunityCard from './CommunityCard';

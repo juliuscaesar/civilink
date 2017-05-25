@@ -1,7 +1,7 @@
 import React from 'react';
 import UserImage from './UserImage';
 import Activity from './Activity';
-import { Grid, Segment, Feed, Statistic, List } from 'semantic-ui-react';
+import { Grid, Segment, Feed, Statistic, List, Message } from 'semantic-ui-react';
 
 const Profile = ({errorMessage, displayError, profile, following, followers, communities, feed}) => {
   /**
@@ -56,6 +56,10 @@ const Profile = ({errorMessage, displayError, profile, following, followers, com
 
   return (
     <div>
+      <Message color='red' style={hideDiv()}>
+        Error: {errorMessage}
+      </Message>
+      
       <Grid stackable>
         <Grid.Row>
           <Grid.Column width={5}>

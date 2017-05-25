@@ -1,7 +1,6 @@
 import React from 'react';
 import request from 'superagent';
 import CommunityDashboard from '../components/CommunityDashboard';
-import { Card, Grid, Message } from 'semantic-ui-react'
 
 /**
 * Component for Communities dashboard.

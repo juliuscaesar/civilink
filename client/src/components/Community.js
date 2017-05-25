@@ -1,8 +1,7 @@
 import React from 'react';
 import Auth from './Auth';
 import ProjectCard from './ProjectCard';
-import { Grid, Card, Image, Message, Button, Modal, Menu } from 'semantic-ui-react'
-import CauseTag from './CauseTag';
+import { Card, Image, Message, Button, Modal, Menu } from 'semantic-ui-react'
 import CreateProjectForm from './CreateProjectForm';
 
 const Community = ({errorMessage, displayError, community, members, projects, organizations}) => {
@@ -40,27 +39,6 @@ const Community = ({errorMessage, displayError, community, members, projects, or
   }
 
   /*
-  * Placeholder for causes
-  */
-  const displayCauses = () => {
-    const causes = [
-      'Education',
-      'Environment',
-      'LGBT Rights',
-      'Housing & Homelessness',
-      'Economy & Jobs',
-      'Public Health',
-      'Justice & Equality'
-    ];
-
-    var rows = [];
-    for (var i = 0; i < causes.length; i++) {
-      rows.push(<CauseTag cause={causes[i]} size='large' />);
-    }
-    return rows;
-  }
-
-  /*
   * Placeholder for image
   */
   const getImageUrl = () => {
@@ -86,17 +64,6 @@ const Community = ({errorMessage, displayError, community, members, projects, or
     }
 
     return rows;
-  }
-
-  /**
-  * Return the stats to be displayed for this user
-  */
-  const getStats = () => {
-    return [
-      { label: "members" , value: members.length },
-      { label: "projects", value: projects.length },
-      { label: "organizations", value: organizations.length }
-    ]
   }
 
   //const handleItemClick = (e, { name }) => setState({ activeItem: name })

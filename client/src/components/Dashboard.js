@@ -1,6 +1,6 @@
 import React from 'react';
 import Activity from './Activity';
-import { Grid, Segment, Feed, Message } from 'semantic-ui-react'
+import { Segment, Feed, Message } from 'semantic-ui-react'
 
 const Dashboard = ({displayError, errorMessage, feed, projects, user}) => {
   /**

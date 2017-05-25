@@ -1,7 +1,6 @@
 import React from 'react';
 import request from 'superagent';
 import { browserHistory } from 'react-router';
-import { Grid, Card, Image, Message, Button, Modal, Menu } from 'semantic-ui-react'
 import Community from '../components/Community'
 
 class CommunityContainer extends React.Component {
