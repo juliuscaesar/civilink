@@ -31,7 +31,7 @@ class Navbar extends React.Component {
     return (
       <Menu size={'small'} color={'blue'} inverted attached secondary>
         <div className="ui container container-nav">
-        <Menu.Item text>
+        <Menu.Item>
           <a href="/" className="nav-title">CiviLink</a>
         </Menu.Item>
 

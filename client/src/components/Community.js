@@ -48,23 +48,8 @@ const Community = (props) => {
   /**
   * Build the list of projects
   */
-  const buildProjectList = () => {
-    var rows = [];
-
-    for (var i = 0; i < props.projects.length; i++) {
-      rows.push(
-        <ProjectCard
-          project={props.projects[i]}
-          />
-      );
-    }
-
-    if (props.projects.length === 0 ) {
-      return <b>There are currently no projects in this community</b>
-    }
-
-    return rows;
-  }
+  const buildProjectList = props.projects.map((project) =>
+    <ProjectCard key={project._id} project={project} />);
 
   //const handleItemClick = (e, { name }) => setprops({ activeItem: name })
 
@@ -85,8 +70,12 @@ const Community = (props) => {
         <Card.Content extra>
           <Modal
             floated='right'
-            size='tiny'
-            trigger={<Button color='blue' size='tiny' style={hideButton()}>Create a project</Button>}>
+            trigger={<Button
+                      color='blue'
+                      size='tiny'
+                      style={hideButton()}>
+                        Create a project
+                      </Button>}>
             <div className="header">Create Project</div>
             <div className="content">
               <CreateProjectForm community={props.community._id}/>
@@ -102,7 +91,7 @@ const Community = (props) => {
       </Menu>
 
       <Card.Group itemsPerRow={2} stackable>
-        { buildProjectList() }
+        { buildProjectList }
       </Card.Group>
     </div>
   );

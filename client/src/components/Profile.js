@@ -20,16 +20,10 @@ const Profile = (props) => {
   /*
   * Builds the activity feed
   */
-  const buildActivityFeed = () => {
-    var rows = [];
-    for (var i = 0; i < props.feed.length; i++) {
-      rows.push(
-        <Activity
-          activity={props.feed[i]} />
-      );
-    }
-    return rows;
-  }
+  const buildActivityFeed = props.feed.map((activity) =>
+    <Activity key={activity._id} activity={activity} />
+  );
+
 
   /**
    * Return the stats to be displayed for this user
@@ -46,7 +40,7 @@ const Profile = (props) => {
     const details = [];
     const location = props.profile.city + ", " + props.profile.state;
     details.push(
-      <List>
+      <List key="1">
         <List.Item icon='marker' content={location} />
       </List>
     );
@@ -88,7 +82,7 @@ const Profile = (props) => {
               <h3 className="header">Activity Feed</h3>
               <hr />
               <Feed>
-                {buildActivityFeed()}
+                { buildActivityFeed }
               </Feed>
             </Segment>
           </Grid.Column>

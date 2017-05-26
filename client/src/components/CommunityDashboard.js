@@ -18,18 +18,8 @@ const CommunityDashboard = (props) => {
   /**
   * Build the list of communities
   */
-  const buildCommunityList = () => {
-    var rows = [];
-
-    for (var i = 0; i < props.communities.length; i++) {
-      rows.push(
-        <CommunityCard
-          community={props.communities[i]}
-          />
-      );
-    }
-    return rows;
-  }
+  const buildCommunityList = props.communities.map((community) =>
+    <CommunityCard key={community._id} community={community} />);
 
   return (
     <div>
@@ -39,7 +29,7 @@ const CommunityDashboard = (props) => {
         Error: { props.errorMessage }
       </Message>
       <Card.Group itemsPerRow={2} stackable>
-        { buildCommunityList() }
+        { buildCommunityList }
       </Card.Group>
 
     </div>

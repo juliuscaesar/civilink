@@ -31,7 +31,7 @@ class ProjectCard extends React.Component {
   displayCauses() {
     var rows = [];
     for (var i = 0; i < this.props.project.causes.length; i++) {
-      rows.push(<CauseTag cause={this.props.project.causes[i]} size='mini' />);
+      rows.push(<CauseTag key={this.props.project.causes[i].toString()} cause={this.props.project.causes[i]} size='mini' />);
     }
     return rows;
   }

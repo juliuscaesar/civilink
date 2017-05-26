@@ -18,18 +18,8 @@ const Dashboard = (props) => {
   /**
   * Builds the activity feed
   */
-  const buildActivityFeed = () => {
-    var rows = [];
-
-    for (var i = 0; i < props.feed.length; i++) {
-      rows.push(
-        <Activity
-          activity={props.feed[i]}
-          />
-      );
-    }
-    return rows;
-  }
+  const buildActivityFeed = props.feed.map((activity) =>
+    <Activity activity={activity} />);
 
   return (
     <div>
@@ -41,7 +31,7 @@ const Dashboard = (props) => {
       </hr>
       <Segment>
         <Feed>
-          {buildActivityFeed()}
+          { buildActivityFeed }
         </Feed>
       </Segment>
     </div>

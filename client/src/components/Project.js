@@ -40,16 +40,10 @@ const Project = (props) => {
   /*
   * Display the causes of this project
   */
-  const displayCauses = () => {
-    var rows = [];
-    for (var i = 0; i < props.causes.length; i++) {
-      rows.push(<CauseTag cause={props.causes[i]} size='mini'/>);
-    }
-    return rows;
-  }
+  const displayCauses = props.causes.map((cause) => <CauseTag key={cause.toString()} cause={cause} size='mini'/>);
 
   /*
-  * Display the tag for the organizer of this project
+  * Display the organizer and community of this project
   */
   const getProjectDetails = () => {
     const details = [];
@@ -58,7 +52,7 @@ const Project = (props) => {
     const communityUrl = "/" + props.community.url;
 
     details.push(
-      <List>
+      <List key="1">
         <List.Item>
           <List.Icon name='user' />
           <List.Content>
@@ -79,19 +73,8 @@ const Project = (props) => {
   /**
   * Build the list of tasks
   */
-  const buildTaskList = () => {
-    var rows = [];
+  const buildTaskList = props.tasks.map((task) => <Task key={task._id} task={task}/>);
 
-    for (var i = 0; i < props.tasks.length; i++) {
-      rows.push(<Task task={props.tasks[i]}/>);
-    }
-
-    if (props.tasks.length === 0) {
-      return <h4>There are currently no tasks for this project.</h4>
-    }
-
-    return rows;
-  }
 
   return (
     <div>
@@ -113,13 +96,18 @@ const Project = (props) => {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Label.Group floated='left'>
-            {displayCauses()}
+          <Label.Group>
+            { displayCauses }
           </Label.Group>
           <Modal
             floated='right'
-            size='tiny'
-            trigger={<Button color='blue' floated='right' size='tiny' style={hideButton()}>Add a task</Button>}>
+            trigger={<Button
+                      color='blue'
+                      floated='right'
+                      size='tiny'
+                      style={hideButton()}>
+                        Add a task
+                      </Button>}>
             <div className="header">Create Task</div>
             <div className="content">
               <CreateTaskForm
@@ -133,7 +121,7 @@ const Project = (props) => {
       <h3 className="header">Tasks</h3>
       <hr />
       <Card.Group>
-        {buildTaskList()}
+        { buildTaskList }
       </Card.Group>
     </div>
   );
