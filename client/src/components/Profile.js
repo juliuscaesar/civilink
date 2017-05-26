@@ -3,14 +3,14 @@ import UserImage from './UserImage';
 import Activity from './Activity';
 import { Grid, Segment, Feed, Statistic, List, Message } from 'semantic-ui-react';
 
-const Profile = ({errorMessage, displayError, profile, following, followers, communities, feed}) => {
+const Profile = (props) => {
   /**
   * Returns the style attribute for the error div
   * @returns {*} {display: "none"} if the error should be
   * hidden or {} otherwise
   */
   const hideDiv = () => {
-    if (displayError) {
+    if (props.displayError) {
       return {};
     } else {
       return {display: "none"};
@@ -22,10 +22,10 @@ const Profile = ({errorMessage, displayError, profile, following, followers, com
   */
   const buildActivityFeed = () => {
     var rows = [];
-    for (var i = 0; i < feed.length; i++) {
+    for (var i = 0; i < props.feed.length; i++) {
       rows.push(
         <Activity
-          activity={feed[i]} />
+          activity={props.feed[i]} />
       );
     }
     return rows;
@@ -36,15 +36,15 @@ const Profile = ({errorMessage, displayError, profile, following, followers, com
    */
   const getStats = () => {
     return [
-      { label: "points" , value: profile.points },
-      { label: "followers", value: followers.length },
-      { label: "following", value: following.length }
+      { label: "points" , value: props.profile.points },
+      { label: "followers", value: props.followers.length },
+      { label: "following", value: props.following.length }
       ]
   }
 
   const displayUserDetails = () => {
     const details = [];
-    const location = profile.city + ", " + profile.state;
+    const location = props.profile.city + ", " + props.profile.state;
     details.push(
       <List>
         <List.Item icon='marker' content={location} />
@@ -57,20 +57,20 @@ const Profile = ({errorMessage, displayError, profile, following, followers, com
   return (
     <div>
       <Message color='red' style={hideDiv()}>
-        Error: {errorMessage}
+        Error: {props.errorMessage}
       </Message>
-      
+
       <Grid stackable>
         <Grid.Row>
           <Grid.Column width={5}>
             <Segment>
               <h3 className="header">
-                {profile.firstName} {profile.lastName}
+                {props.profile.firstName} {props.profile.lastName}
                 <br />
-                <small>@{profile.username}</small>
+                <small>@{props.profile.username}</small>
               </h3>
-              <UserImage profile={profile} size='150px' />
-              {profile.desc}
+              <UserImage profile={props.profile} size='150px' />
+              {props.profile.desc}
               <hr />
               { displayUserDetails() }
               <hr />

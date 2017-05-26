@@ -12,13 +12,13 @@ import {
   Button
 } from 'semantic-ui-react'
 
-const Project = ({project, displayError, errorMessage, tasks, community, organizer, causes}) => {
+const Project = (props) => {
   /**
   * Returns the style attribute for the error div
   * @returns {*} {display: "none"} if the error should be hidden or {}
   */
   const hideDiv = () => {
-    if (displayError) {
+    if (props.displayError) {
       return {};
     } else {
       return {display: "none"};
@@ -42,8 +42,8 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
   */
   const displayCauses = () => {
     var rows = [];
-    for (var i = 0; i < causes.length; i++) {
-      rows.push(<CauseTag cause={causes[i]} size='mini'/>);
+    for (var i = 0; i < props.causes.length; i++) {
+      rows.push(<CauseTag cause={props.causes[i]} size='mini'/>);
     }
     return rows;
   }
@@ -53,9 +53,9 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
   */
   const getProjectDetails = () => {
     const details = [];
-    const organizerFullName = organizer.firstName + " " + organizer.lastName;
-    const organizerUrl = "/user/" + organizer.username;
-    const communityUrl = "/" + community.url;
+    const organizerFullName = props.organizer.firstName + " " + props.organizer.lastName;
+    const organizerUrl = "/user/" + props.organizer.username;
+    const communityUrl = "/" + props.community.url;
 
     details.push(
       <List>
@@ -68,7 +68,7 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
         <List.Item>
           <List.Icon name='marker' />
           <List.Content>
-            <a href={communityUrl}>{community.name}</a>
+            <a href={communityUrl}>{props.community.name}</a>
           </List.Content>
         </List.Item>
       </List>
@@ -82,11 +82,11 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
   const buildTaskList = () => {
     var rows = [];
 
-    for (var i = 0; i < tasks.length; i++) {
-      rows.push(<Task task={tasks[i]}/>);
+    for (var i = 0; i < props.tasks.length; i++) {
+      rows.push(<Task task={props.tasks[i]}/>);
     }
 
-    if (tasks.length === 0) {
+    if (props.tasks.length === 0) {
       return <h4>There are currently no tasks for this project.</h4>
     }
 
@@ -96,19 +96,19 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
   return (
     <div>
       <Message color='red' style={hideDiv()}>
-        Error: {errorMessage}
+        Error: {props.errorMessage}
       </Message>
 
       <Card fluid>
         <Card.Content>
           <Card.Header>
-            <h2 className="header">{project.title}</h2>
+            <h2 className="header">{props.project.title}</h2>
           </Card.Header>
           <Card.Description>
             {getProjectDetails()}
             <hr />
             <p>
-              {project.desc}
+              {props.project.desc}
             </p>
           </Card.Description>
         </Card.Content>
@@ -123,8 +123,8 @@ const Project = ({project, displayError, errorMessage, tasks, community, organiz
             <div className="header">Create Task</div>
             <div className="content">
               <CreateTaskForm
-                projectId={project._id}
-                projectUrl={project.url}/>
+                projectId={props.project._id}
+                projectUrl={props.project.url}/>
             </div>
           </Modal>
         </Card.Content>

@@ -61,13 +61,7 @@ class ProfileContainer extends React.Component {
   render(){
     return (
       <Profile
-        errorMessage={this.state.errorMessage}
-        displayError={this.state.displayError}
-        profile={this.state.profile}
-        following={this.state.following}
-        followers={this.state.followers}
-        communities={this.state.communities}
-        feed={this.state.feed} />
+        {...this.state} />
     );
   }
 }

@@ -59,12 +59,7 @@ class CommunityContainer extends React.Component {
     render(){
       return (
         <Community
-        errorMessage={this.state.errorMessage}
-        displayError={this.state.displayError}
-        community={this.state.community}
-        members={this.state.members}
-        projects={this.state.projects}
-        organizations={this.state.organizations} />
+          {...this.state } />
       );
     }
   }

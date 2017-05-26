@@ -2,13 +2,13 @@ import React from 'react';
 import Activity from './Activity';
 import { Segment, Feed, Message } from 'semantic-ui-react'
 
-const Dashboard = ({displayError, errorMessage, feed, projects, user}) => {
+const Dashboard = (props) => {
   /**
   * Returns the style attribute for the error div
   * @returns {*} {display: "none"}  or {}
   */
   const hideDiv = () => {
-    if (displayError) {
+    if (props.displayError) {
       return {};
     } else {
       return {display: "none"};
@@ -21,10 +21,10 @@ const Dashboard = ({displayError, errorMessage, feed, projects, user}) => {
   const buildActivityFeed = () => {
     var rows = [];
 
-    for (var i = 0; i < feed.length; i++) {
+    for (var i = 0; i < props.feed.length; i++) {
       rows.push(
         <Activity
-          activity={feed[i]}
+          activity={props.feed[i]}
           />
       );
     }
@@ -33,15 +33,13 @@ const Dashboard = ({displayError, errorMessage, feed, projects, user}) => {
 
   return (
     <div>
+      <Message color='red' style={hideDiv()}>
+        Error: { props.errorMessage }
+      </Message>
       <h3 className="header">Activity Feed</h3>
       <hr>
       </hr>
-      <Message color='red' style={hideDiv()}>
-        Error: { errorMessage }
-      </Message>
-
       <Segment>
-        {errorMessage}
         <Feed>
           {buildActivityFeed()}
         </Feed>

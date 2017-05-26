@@ -4,15 +4,15 @@ import ProjectCard from './ProjectCard';
 import { Card, Image, Message, Button, Modal, Menu } from 'semantic-ui-react'
 import CreateProjectForm from './CreateProjectForm';
 
-const Community = ({errorMessage, displayError, community, members, projects, organizations}) => {
-  //state = { activeItem: 'projects' };
+const Community = (props) => {
+  //props = { activeItem: 'projects' };
 
   /**
   * Returns the style attribute for the error div
   * @returns {*} {display: "none"} if the error should be hidden or {} otherwise
   */
   const hideDiv = () => {
-    if (displayError) {
+    if (props.displayError) {
       return {};
     } else {
       return {display: "none"};
@@ -35,7 +35,7 @@ const Community = ({errorMessage, displayError, community, members, projects, or
   * Displays the header for the community
   */
   const communityInfo = () => {
-    return <h2 className="header">{community.name}</h2>
+    return <h2 className="header">{props.community.name}</h2>
   }
 
   /*
@@ -51,29 +51,29 @@ const Community = ({errorMessage, displayError, community, members, projects, or
   const buildProjectList = () => {
     var rows = [];
 
-    for (var i = 0; i < projects.length; i++) {
+    for (var i = 0; i < props.projects.length; i++) {
       rows.push(
         <ProjectCard
-          project={projects[i]}
+          project={props.projects[i]}
           />
       );
     }
 
-    if (projects.length === 0 ) {
+    if (props.projects.length === 0 ) {
       return <b>There are currently no projects in this community</b>
     }
 
     return rows;
   }
 
-  //const handleItemClick = (e, { name }) => setState({ activeItem: name })
+  //const handleItemClick = (e, { name }) => setprops({ activeItem: name })
 
-  //const { activeItem } = state;
+  //const { activeItem } = props;
 
   return (
     <div>
       <Message color='red' style={hideDiv()}>
-        Error: { errorMessage }
+        Error: { props.errorMessage }
       </Message>
       <Card fluid>
         <Image src={getImageUrl()}/>
@@ -89,7 +89,7 @@ const Community = ({errorMessage, displayError, community, members, projects, or
             trigger={<Button color='blue' size='tiny' style={hideButton()}>Create a project</Button>}>
             <div className="header">Create Project</div>
             <div className="content">
-              <CreateProjectForm community={community._id}/>
+              <CreateProjectForm community={props.community._id}/>
             </div>
           </Modal>
         </Card.Content>

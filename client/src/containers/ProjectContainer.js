@@ -55,13 +55,7 @@ class ProjectContainer extends React.Component {
   render() {
     return (
       <Project
-        errorMessage={this.state.errorMessage}
-        displayError={this.state.displayError}
-        project={this.state.project}
-        tasks={this.state.tasks}
-        community={this.state.community}
-        organizer={this.state.organizer}
-        causes={this.state.causes} />
+        {...this.state} />
     );
   }
 }

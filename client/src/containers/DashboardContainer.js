@@ -87,11 +87,7 @@ class DashboardContainer extends React.Component {
   render() {
     return (
       <Dashboard
-        feed={this.state.feed}
-        user={this.state.user}
-        projects={this.state.projects}
-        errorMessage={this.state.errorMessage}
-        displayError={this.state.displayError} />
+        {...this.state} />
 
     );
   }

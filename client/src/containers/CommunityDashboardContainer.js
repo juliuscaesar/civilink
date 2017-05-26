@@ -52,9 +52,7 @@ class CommunityDashboardContainer extends React.Component {
   render(){
     return (
       <CommunityDashboard
-        communities={this.state.communities}
-        errorMessage={this.state.errorMessage}
-        displayError={this.state.displayError} />
+        {...this.state} />
     );
   }
 }
