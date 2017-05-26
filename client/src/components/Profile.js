@@ -1,6 +1,6 @@
 import React from 'react';
 import UserImage from './UserImage';
-import Activity from './Activity';
+import ActivityFeed from './ActivityFeed';
 import { Grid, Segment, Feed, Statistic, List, Message } from 'semantic-ui-react';
 
 const Profile = (props) => {
@@ -16,14 +16,6 @@ const Profile = (props) => {
       return {display: "none"};
     }
   }
-
-  /*
-  * Builds the activity feed
-  */
-  const buildActivityFeed = props.feed.map((activity) =>
-    <Activity key={activity._id} activity={activity} />
-  );
-
 
   /**
    * Return the stats to be displayed for this user
@@ -44,7 +36,6 @@ const Profile = (props) => {
         <List.Item icon='marker' content={location} />
       </List>
     );
-
     return details;
   }
 
@@ -78,13 +69,8 @@ const Profile = (props) => {
             </Segment>
           </Grid.Column>
           <Grid.Column width={11}>
-            <Segment>
-              <h3 className="header">Activity Feed</h3>
-              <hr />
-              <Feed>
-                { buildActivityFeed }
-              </Feed>
-            </Segment>
+            <ActivityFeed
+              feed={props.feed} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

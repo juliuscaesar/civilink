@@ -38,7 +38,7 @@ class Activity extends React.Component {
    * Build the link for the activity
    */
    displayLink() {
-       var url;
+    var url;
      if (this.props.activity.desttype === "Communities") {
       url = "/" + this.props.activity.community.url;
        return <a href={url}>
@@ -83,12 +83,6 @@ class Activity extends React.Component {
           </Feed.User> {this.buildDescription()} {this.displayLink()}
           <Feed.Date>1 Hour Ago</Feed.Date>
         </Feed.Summary>
-        <Feed.Meta>
-          <Feed.Like>
-            <Icon name='like' />
-            4 Likes
-          </Feed.Like>
-        </Feed.Meta>
       </Feed.Content>
     </Feed.Event>
     );

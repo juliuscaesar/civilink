@@ -10,7 +10,7 @@ var Activity = require('../models/Activities.js');
 /*
  * GET Profile information
  * Returns: User object, list of followers, list of following
- *          Community memberships, and activity data 
+ *          Community memberships, and activity data
  */
 exports.getProfile = function(req, res, next) {
   Users.findOne({ 'username' : req.params.id }, function (err, person) {
@@ -34,7 +34,7 @@ exports.getProfile = function(req, res, next) {
             .exec(function (err, memberships) {
 
               Activity.find({ "user" : userId.id})
-              .populate('user community idea task org')
+              .populate('user community project task org')
               .exec(function (err, activityData) {
 
                 res.status(200).json({ "profile": person, "following": following, "followers": followers,

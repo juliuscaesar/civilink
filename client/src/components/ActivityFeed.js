@@ -2,7 +2,7 @@ import React from 'react';
 import Activity from './Activity';
 import { Segment, Feed, Message } from 'semantic-ui-react'
 
-const Dashboard = (props) => {
+const ActivityFeed = (props) => {
   /**
   * Returns the style attribute for the error div
   * @returns {*} {display: "none"}  or {}
@@ -23,12 +23,12 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      <Message color='red' style={hideDiv()}>
-        Error: { props.errorMessage }
-      </Message>
       <h3 className="header">Activity Feed</h3>
       <hr>
       </hr>
+      <Message color='red' style={hideDiv()}>
+        Error: { props.errorMessage }
+      </Message>
       <Segment>
         <Feed>
           { buildActivityFeed }
@@ -38,4 +38,4 @@ const Dashboard = (props) => {
   );
 }
 
-export default Dashboard;
+export default ActivityFeed;

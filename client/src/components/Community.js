@@ -9,7 +9,7 @@ const Community = (props) => {
 
   /**
   * Returns the style attribute for the error div
-  * @returns {*} {display: "none"} if the error should be hidden or {} otherwise
+  * @returns {*} {display: "none"} or {} 
   */
   const hideDiv = () => {
     if (props.displayError) {
@@ -21,7 +21,7 @@ const Community = (props) => {
 
   /**
   * Returns the style attribute for the create project button
-  * @returns {*} {display: "none"} if the button should be hidden or {} otherwise
+  * @returns {*} {display: "none"} or {}
   */
   const hideButton = () => {
     if (Auth.isUserAuthenticated()) {
@@ -69,7 +69,6 @@ const Community = (props) => {
         </Card.Content>
         <Card.Content extra>
           <Modal
-            floated='right'
             trigger={<Button
                       color='blue'
                       size='tiny'

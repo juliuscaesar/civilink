@@ -1,6 +1,6 @@
 import React from 'react';
 import request from 'superagent';
-import Dashboard from '../components/Dashboard';
+import ActivityFeed from '../components/ActivityFeed';
 import Auth from '../components/Auth';
 
 class DashboardContainer extends React.Component {
@@ -86,7 +86,7 @@ class DashboardContainer extends React.Component {
 
   render() {
     return (
-      <Dashboard
+      <ActivityFeed
         {...this.state} />
 
     );

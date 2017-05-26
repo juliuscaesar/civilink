@@ -27,7 +27,7 @@ const Project = (props) => {
 
   /**
   * Returns the style attribute for the create project button
-  * @returns {*} {display: "none"} if the button should be hidden or {} otherwise
+  * @returns {*} {display: "none"} or {}
   */
   const hideButton = () => {
     if (Auth.isUserAuthenticated()) {
@@ -40,14 +40,16 @@ const Project = (props) => {
   /*
   * Display the causes of this project
   */
-  const displayCauses = props.causes.map((cause) => <CauseTag key={cause.toString()} cause={cause} size='mini'/>);
+  const displayCauses = props.causes.map((cause) =>
+    <CauseTag key={cause.toString()} cause={cause} size='mini'/>);
 
   /*
   * Display the organizer and community of this project
   */
   const getProjectDetails = () => {
     const details = [];
-    const organizerFullName = props.organizer.firstName + " " + props.organizer.lastName;
+    const organizerFullName = props.organizer.firstName + " " +
+      props.organizer.lastName;
     const organizerUrl = "/user/" + props.organizer.username;
     const communityUrl = "/" + props.community.url;
 
@@ -73,7 +75,8 @@ const Project = (props) => {
   /**
   * Build the list of tasks
   */
-  const buildTaskList = props.tasks.map((task) => <Task key={task._id} task={task}/>);
+  const buildTaskList = props.tasks.map((task) =>
+    <Task key={task._id} task={task}/>);
 
 
   return (
@@ -100,7 +103,6 @@ const Project = (props) => {
             { displayCauses }
           </Label.Group>
           <Modal
-            floated='right'
             trigger={<Button
                       color='blue'
                       floated='right'

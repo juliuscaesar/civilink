@@ -9,6 +9,7 @@ var Projects = require('../models/Projects.js');
 var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
 var Tasks = require('../models/Tasks.js');
+var Activities = require('../models/Activities.js');
 
 /*
 * Returns data for a project
@@ -69,6 +70,16 @@ exports.createProject = function(req, res, next) {
       if (err){
         res.status(500).json({"error": "Could not create project"});
       }
+    });
+
+    var newActivity = new Activities();
+    newActivity.user = foundUser;
+    newActivity.details = "created";
+    newActivity.desttype = "Projects";
+    newActivity.project = newProject;
+
+    newActivity.save(function(err) {
+
     });
 
     res.status(201).json({

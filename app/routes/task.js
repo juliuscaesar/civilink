@@ -9,6 +9,7 @@ var Projects = require('../models/Projects.js');
 var Users = require('../models/Users.js');
 var Communities = require('../models/Communities.js');
 var Tasks = require('../models/Tasks.js');
+var Activities = require('../models/Activities.js');
 
 /*
 * Creates a task
@@ -36,6 +37,16 @@ exports.createTask = function(req, res, next) {
         res.status(500).json({"error": "Could not create task"});
       }
       else {
+        var newActivity = new Activities();
+        newActivity.user = foundUser;
+        newActivity.details = "created";
+        newActivity.desttype = "Tasks";
+        newActivity.task = newTask;
+
+        newActivity.save(function(err) {
+
+        });
+
         res.status(201).json({
           task: newTask
         });
