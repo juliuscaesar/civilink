@@ -1,6 +1,6 @@
 import React from 'react';
 import UserImage from './UserImage';
-import { Feed, Icon } from 'semantic-ui-react'
+import { Feed } from 'semantic-ui-react'
 
 /**
 * Component to display an individual activity update
@@ -46,7 +46,7 @@ class Activity extends React.Component {
               </a>;
      }
      else if (this.props.activity.desttype === "Projects") {
-      url = "/project/"  + this.props.activity.project._id;
+      url = "/project/"  + this.props.activity.project.url;
        return <a href={url}>{this.props.activity.project.title}</a>;
      }
      else if (this.props.activity.desttype === "Tasks") {

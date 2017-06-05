@@ -1,7 +1,7 @@
 import React from 'react';
 import UserImage from './UserImage';
 import ActivityFeed from './ActivityFeed';
-import { Grid, Segment, Feed, Statistic, List, Message } from 'semantic-ui-react';
+import { Grid, Segment, Statistic, List, Message } from 'semantic-ui-react';
 
 const Profile = (props) => {
   /**

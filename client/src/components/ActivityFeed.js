@@ -19,7 +19,7 @@ const ActivityFeed = (props) => {
   * Builds the activity feed
   */
   const buildActivityFeed = props.feed.map((activity) =>
-    <Activity activity={activity} />);
+    <Activity key={activity._id} activity={activity} />);
 
   return (
     <div>
