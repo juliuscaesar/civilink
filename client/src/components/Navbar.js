@@ -10,12 +10,16 @@ const Navbar = (props) => {
   */
   const showUserImage = () => {
     if (Auth.isUserAuthenticated()) {
-      const url = "/user/" + props.user.firstName;
-      return (
-        <a href={url}>
-          <UserImage profile={props.user} size="32px"/>
-        </a>
-      );
+      const rows = [];
+      for (var i = 0; i < props.user.length; i++) {
+        const url = "/user/" + props.user[i].username;
+        rows.push(
+          <a href={url}>
+            <UserImage profile={props.user} size="32px"/>
+          </a>
+        );
+      }
+      return rows;
     }
   }
 
