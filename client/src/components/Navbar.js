@@ -3,45 +3,35 @@ import Auth from './Auth';
 import UserImage from './UserImage';
 import { Menu } from 'semantic-ui-react'
 
-/**
-* Component for the navbar.
-*/
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-
-    //region bind all methods to this
-    this.showLogout = this.showLogout.bind(this)
-
-  }
-
-  //handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  showLogout() {
+const Navbar = (props) => {
+  /**
+  * Displays the logged in users profile picture
+  * as a link to their profile
+  */
+  const showUserImage = () => {
     if (Auth.isUserAuthenticated()) {
+      const url = "/user/" + props.user.firstName;
       return (
-        <a className="link text" href="/logout">Logout</a>
+        <a href={url}>
+          <UserImage profile={props.user} size="32px"/>
+        </a>
       );
     }
   }
 
-  render(){
-    //const { activeItem } = this.state
-    return (
-      <Menu size={'small'} color={'blue'} inverted attached secondary>
-        <div className="ui container container-nav">
+  return (
+    <Menu size={'small'} color={'blue'} inverted attached secondary>
+      <div className="ui container container-nav">
         <Menu.Item>
           <a href="/" className="nav-title">CiviLink</a>
         </Menu.Item>
 
         <Menu.Item position='right'>
-          {this.showLogout()}
+          { showUserImage() }
         </Menu.Item>
-        </div>
-      </Menu>
-    );
-  }
+      </div>
+    </Menu>
+  );
 }
 
 export default Navbar;

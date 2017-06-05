@@ -15,10 +15,11 @@ var Activity = require('../models/Activities.js');
 exports.getProfile = function(req, res, next) {
   Users.findOne({ 'username' : req.params.id }, function (err, person) {
     if (err) {
-      res.status(203);
+      return res.status(500);
     }
     if (person == null) {
-      res.status(404);
+      return res.status(404).json({
+        "errorMessage": "That profile does not exist"});
     }
     else {
       Users.findOne({ "username" : req.params.id}, function (err, userId) {

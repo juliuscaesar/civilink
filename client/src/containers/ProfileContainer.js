@@ -1,5 +1,6 @@
 import React from 'react';
 import request from 'superagent';
+import { browserHistory } from 'react-router';
 import Profile from '../components/Profile';
 
 /**
@@ -44,7 +45,10 @@ class ProfileContainer extends React.Component {
         feed: response.body.activity
       });
       break;
-      case 203:
+      case 404:
+      browserHistory.push('/');
+      break;
+      case 500:
       this.setState({
         errorMessage: "Could not get user data",
         displayError: true

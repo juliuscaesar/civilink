@@ -41,7 +41,7 @@ class App extends React.Component {
     render() {
       return (
         <div>
-          <Navbar />
+          <Navbar {...this.state}/>
           <div className="ui container container-body">
             <Grid stackable>
               <Grid.Row>
