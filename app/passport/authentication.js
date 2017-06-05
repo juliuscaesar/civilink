@@ -177,21 +177,9 @@ exports.signup = function(req, res, next) {
   * user currently logged in
   */
 exports.getLoggedinUser = function(token) {
-
-  // decode the token using the secret key-phrase
   const decoded = jwt.verify(token, config.secret);
-
   const userId = decoded.username;
   return userId;
-
-  // This would be nice since you dont have to call the unncessary mongo find
-  // in every API call but it doesnt work?
-  // var loggedinUser = [];
-  // User.find({ 'username' :  userId })
-  // .exec(function (err, user) {
-  //   return user.copy();
-  // })
-
 }
 
 /*
@@ -208,7 +196,7 @@ exports.getLoggedinUserObject = function(req, res, next)  {
   var loggedinUser = [];
   User.find({ 'username' :  userId })
   .exec(function (err, user) {
-    return user();
+    res.status(200).json({"user": user})
   })
 
 }

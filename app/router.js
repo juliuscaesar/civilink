@@ -34,7 +34,7 @@ module.exports = function(app) {
   //= =======================================
   authRoutes.post('/login', Authentication.login);
   authRoutes.post('/signup', Authentication.signup);
-  authRoutes.post('/getuser', Authentication.getLoggedinUserObject);
+  authRoutes.get('/getuser', Authentication.getLoggedinUserObject);
 
   //= =======================================
   //      DASHBOARD CALLS
