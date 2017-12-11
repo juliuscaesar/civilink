@@ -1,6 +1,3 @@
-# CiviLink
-Production: [www.civilink.org](http://www.civilink.org)
-
 # Installation
 1. Clone the repo
 2. Run `npm install` in root, app, and client to install dependencies
@@ -11,8 +8,8 @@ Production: [www.civilink.org](http://www.civilink.org)
 [nodemon] to restart at any time, enter `rs`
 [nodemon] watching: *.*
 [nodemon] starting `node app/server.js`
-==> 🌎  Back end server is running on port 3001.
-==> 🍊  MongoDB connection successful
+➜ 🌎  Back end server is running on port 3001.
+➜ 🍊  MongoDB connection successful
 Starting the development server...
 ```
 4. If you get any dependency errors, install them individually by running `npm install <dependency>`
